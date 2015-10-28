@@ -4,15 +4,18 @@ namespace Cabspot.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Cabspot.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Cabspot.Models.CabspotDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<CabspotDB>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            // register mysql code generator
+            SetSqlGenerator("MySql.Data.MySqlClient",  new MySql.Data.Entity.MySqlMigrationSqlGenerator());
         }
 
-        protected override void Seed(Cabspot.Models.CabspotDB context)
+        protected override void Seed(CabspotDB context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -26,6 +29,12 @@ namespace Cabspot.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.bases.AddOrUpdate(
+                p => p.idBase,
+                new bases() { idBase = 1, nombreBase = "Base Prueba"}
+                
+            );
         }
     }
 }

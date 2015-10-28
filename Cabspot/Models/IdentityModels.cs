@@ -20,14 +20,27 @@ namespace Cabspot.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        static ApplicationDbContext()
+        {
+            System.Data.Entity.Database.SetInitializer(new MySqlInitializer());
+
+        }
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+          : base("DefaultConnection")
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+        
     }
 }
+
+
+
+
+
+

@@ -57,7 +57,6 @@
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF5, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
@@ -223,6 +222,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510282015394_InitialTest.cs" />
+    <Compile Include="Migrations\201510282015394_InitialTest.Designer.cs">
+      <DependentUpon>201510282015394_InitialTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -246,6 +249,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\metodopago.cs" />
     <Compile Include="Models\municipios.cs" />
+    <Compile Include="Models\MySQLConfiguration.cs" />
+    <Compile Include="Models\MySqlHistoryContext.cs" />
+    <Compile Include="Models\MySQLInitializer.cs" />
     <Compile Include="Models\personas.cs" />
     <Compile Include="Models\preguntas.cs" />
     <Compile Include="Models\provincias.cs" />
@@ -333,6 +339,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510282015394_InitialTest.resx">
+      <DependentUpon>201510282015394_InitialTest.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
