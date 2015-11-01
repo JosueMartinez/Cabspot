@@ -12,7 +12,7 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public metodopago()
         {
-            solicitudes = new HashSet<solicitudes>();
+            carreras = new HashSet<carreras>();
         }
 
         [Key]
@@ -24,6 +24,6 @@ namespace Cabspot.Models
         public string metodoPago1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<solicitudes> solicitudes { get; set; }
+        public virtual ICollection<carreras> carreras { get; set; }
     }
 }

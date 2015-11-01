@@ -13,6 +13,7 @@ namespace Cabspot.Models
         public taxistas()
         {
             carreras = new HashSet<carreras>();
+            solicitudes = new HashSet<solicitudes>();
             vehiculos = new HashSet<vehiculos>();
         }
 
@@ -34,8 +35,17 @@ namespace Cabspot.Models
 
         public int? registradoPor { get; set; }
 
+        public double? latitudActual { get; set; }
+
+        public double? longitudActual { get; set; }
+
+        public DateTime? ultimaActualizacionPosicion { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carreras> carreras { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<solicitudes> solicitudes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vehiculos> vehiculos { get; set; }

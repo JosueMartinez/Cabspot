@@ -51,11 +51,6 @@ namespace Cabspot.Models
                 .Property(e => e.nombreUsuario)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<clientes>()
-                .HasMany(e => e.solicitudes)
-                .WithOptional(e => e.clientes)
-                .HasForeignKey(e => e.solicitadoPor);
-
             modelBuilder.Entity<comentarios>()
                 .Property(e => e.comentario)
                 .IsUnicode(false);
@@ -163,6 +158,11 @@ namespace Cabspot.Models
                 .Property(e => e.metodoPago1)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<metodopago>()
+                .HasMany(e => e.carreras)
+                .WithRequired(e => e.metodopago)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<municipios>()
                 .Property(e => e.nombreMunicipio)
                 .IsUnicode(false);
@@ -201,22 +201,6 @@ namespace Cabspot.Models
 
             modelBuilder.Entity<roles>()
                 .Property(e => e.rol)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<solicitudes>()
-                .Property(e => e.longitudOrigen)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<solicitudes>()
-                .Property(e => e.latitudOrigen)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<solicitudes>()
-                .Property(e => e.longitudDestino)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<solicitudes>()
-                .Property(e => e.latitudDestino)
                 .IsUnicode(false);
 
             modelBuilder.Entity<sugerencias>()
@@ -266,6 +250,11 @@ namespace Cabspot.Models
             modelBuilder.Entity<viasolicitud>()
                 .Property(e => e.viaSolicitud1)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<viasolicitud>()
+                .HasMany(e => e.carreras)
+                .WithRequired(e => e.viasolicitud)
+                .WillCascadeOnDelete(false);
         }
     }
 }

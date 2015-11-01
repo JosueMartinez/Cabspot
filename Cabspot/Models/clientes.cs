@@ -12,7 +12,7 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public clientes()
         {
-            solicitudes = new HashSet<solicitudes>();
+            carreras = new HashSet<carreras>();
             sugerencias = new HashSet<sugerencias>();
         }
 
@@ -27,10 +27,10 @@ namespace Cabspot.Models
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
 
-        public virtual personas personas { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<solicitudes> solicitudes { get; set; }
+        public virtual ICollection<carreras> carreras { get; set; }
+
+        public virtual personas personas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sugerencias> sugerencias { get; set; }
