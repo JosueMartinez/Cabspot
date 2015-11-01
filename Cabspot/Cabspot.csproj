@@ -217,16 +217,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\basesController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\bases.cs" />
     <Compile Include="Models\CabspotDB.cs" />
     <Compile Include="Models\carreras.cs" />
@@ -244,7 +239,6 @@
     <Compile Include="Models\estadoencuestas.cs" />
     <Compile Include="Models\estadosolicitud.cs" />
     <Compile Include="Models\estadovehiculos.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\metodopago.cs" />
     <Compile Include="Models\municipios.cs" />
     <Compile Include="Models\MySQLConfiguration.cs" />
