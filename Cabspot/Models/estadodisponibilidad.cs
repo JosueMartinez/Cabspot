@@ -15,6 +15,6 @@ namespace Cabspot.Models
         [Column("estadoDisponibilidad")]
         [Required]
         [StringLength(25)]
-        public string estadoDisponibilidad1 { get; set; }
+        public string estadoDisponibilidad { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Cabspot.Models
         [Column("metodoPago")]
         [Required]
         [StringLength(15)]
-        public string metodoPago1 { get; set; }
+        public string metodoPago { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carreras> carreras { get; set; }

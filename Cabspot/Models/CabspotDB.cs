@@ -135,7 +135,7 @@ namespace Cabspot.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<estadodisponibilidad>()
-                .Property(e => e.estadoDisponibilidad1)
+                .Property(e => e.estadoDisponibilidad)
                 .IsUnicode(false);
 
             modelBuilder.Entity<estadoempleados>()
@@ -147,7 +147,7 @@ namespace Cabspot.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<estadosolicitud>()
-                .Property(e => e.estadoSolicitud1)
+                .Property(e => e.estadoSolicitud)
                 .IsUnicode(false);
 
             modelBuilder.Entity<estadovehiculos>()
@@ -155,7 +155,7 @@ namespace Cabspot.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<metodopago>()
-                .Property(e => e.metodoPago1)
+                .Property(e => e.metodoPago)
                 .IsUnicode(false);
 
             modelBuilder.Entity<metodopago>()
@@ -248,7 +248,7 @@ namespace Cabspot.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<viasolicitud>()
-                .Property(e => e.viaSolicitud1)
+                .Property(e => e.viaSolicitud)
                 .IsUnicode(false);
 
             modelBuilder.Entity<viasolicitud>()

@@ -21,7 +21,7 @@ namespace Cabspot.Models
         [Column("viaSolicitud")]
         [Required]
         [StringLength(10)]
-        public string viaSolicitud1 { get; set; }
+        public string viaSolicitud { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carreras> carreras { get; set; }

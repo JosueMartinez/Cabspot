@@ -21,7 +21,7 @@ namespace Cabspot.Models
         [Column("estadoSolicitud")]
         [Required]
         [StringLength(15)]
-        public string estadoSolicitud1 { get; set; }
+        public string estadoSolicitud { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<solicitudes> solicitudes { get; set; }
