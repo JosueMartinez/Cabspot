@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("cabspotdb.municipios")]
     public partial class municipios
@@ -28,5 +29,11 @@ namespace Cabspot.Models
         public virtual ICollection<direcciones> direcciones { get; set; }
 
         public virtual provincias provincias { get; set; }
+
+
+
+        //not mapped properties-------------------------------------------------------------
+
+        
     }
 }

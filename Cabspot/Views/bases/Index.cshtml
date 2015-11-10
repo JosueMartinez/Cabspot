@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Cabspot.Models.bases>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.contactos.telefonoMovil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direcciones.numeroPuerta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreBase)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.contactos.telefonoMovil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direcciones.numeroPuerta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreBase)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idBase }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idBase }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idBase })
+        </td>
+    </tr>
+}
+
+</table>

@@ -13,7 +13,7 @@
     @Styles.Render("~/Content/admin")
     @Scripts.Render("~/bundles/modernizr")
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">    
-
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div id="wrapper">
@@ -47,7 +47,7 @@
                             <a href="#" class="fa fa-map-marker">  Bases<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="@Url.Action("Add", "Site")" class="fa fa-plus"> Añadir Base</a>
+                                    <a href="@Url.Action("Create", "Bases")" class="fa fa-plus"> Añadir Base</a>
                                 </li>
                                 
                             </ul>
@@ -93,7 +93,7 @@
          });
     </script>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/admin")
     @RenderSection("scripts", required: false)

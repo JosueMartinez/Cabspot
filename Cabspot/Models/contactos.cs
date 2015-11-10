@@ -20,27 +20,41 @@ namespace Cabspot.Models
         public int idContacto { get; set; }
 
         [StringLength(10)]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "El formato no es válido")]
+        [Phone]
         public string telefonoMovil { get; set; }
 
         [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        [Phone]
         public string telefonoResidencial { get; set; }
 
         [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        [Phone]
         public string telefonoTrabajo { get; set; }
 
         [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        [Phone]
         public string fax { get; set; }
 
         [Column(TypeName = "text")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(65535)]
+        [EmailAddress]
         public string email { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string emailAlternativo { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
+        [DataType(DataType.Url)]
+        [Url]
         public string paginaWeb { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

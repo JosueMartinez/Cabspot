@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("cabspotdb.direcciones")]
     public partial class direcciones
@@ -46,5 +47,22 @@ namespace Cabspot.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<personas> personas { get; set; }
+
+
+        //not mapped properties-------------------------------------------------------------
+
+        [NotMapped]
+        public SelectList listaProvincias { get; set; }
+
+        [NotMapped]
+        [Required]
+        public int provinciaSeleccionada { get; set; }
+
+        [NotMapped]
+        [Required]
+        public int municipioSeleccionado { get; set; }
+
+        [NotMapped]
+        public SelectList listaMunicipios { get; set; }
     }
 }
