@@ -5,9 +5,13 @@ namespace Cabspot
 {
     public class BundleConfig
     {
+        
+
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.UseCdn = true;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -23,6 +27,21 @@ namespace Cabspot
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            
+            //admin template bundle-------------------------------------------------------------
+            bundles.Add(new StyleBundle("~/Content/admin").Include(
+                    "~/Content/metisMenu.min.css",
+                    "~/Content/sb-admin-2.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                    "~/Scripts/metisMenu.min.js",
+                    "~/Scripts/sb-admin-2.js"
+                ));
+
+            //font-awesome
+            bundles.Add(new StyleBundle("~/Content/fa", @"//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"));
         }
     }
 }

@@ -13,14 +13,19 @@ using Cabspot.Models;
 
 namespace Cabspot.Controllers
 {
-    public class basesController : ApiController
+    public class basesAPIController : ApiController
     {
         private CabspotDB db = new CabspotDB();
 
         // GET: api/bases
         public IEnumerable<bases> Getbases()
         {
-            return db.bases.ToList();
+            if (db.bases.Count() > 0)
+            {
+                return db.bases.ToList();
+            }
+
+            return null;
         }
 
         // GET: api/bases/5
