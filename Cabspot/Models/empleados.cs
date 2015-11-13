@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+using System.Web.Mvc;
 
     [Table("cabspotdb.empleados")]
     public partial class empleados
@@ -12,9 +13,6 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public empleados()
         {
-            empleados1 = new HashSet<empleados>();
-            vehiculos = new HashSet<vehiculos>();
-            vehiculos1 = new HashSet<vehiculos>();
         }
 
         [Key]
@@ -25,11 +23,14 @@ namespace Cabspot.Models
 
         public int? registradoPor { get; set; }
 
-        public int? idEstadoEmpleado { get; set; }
+        public int idEstadoEmpleado { get; set; }
 
-        public int? idBase { get; set; }
+        public int idBase { get; set; }
 
-        public int? idRol { get; set; }
+        public int idRol { get; set; }
+
+        //agregado luego
+        public int idPersona { get; set; }
 
         [Required]
         [StringLength(25)]
@@ -37,6 +38,7 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(20)]
+        [DataType(DataType.Password)]
         public string contrasena { get; set; }
 
         public virtual bases bases { get; set; }
@@ -44,16 +46,26 @@ namespace Cabspot.Models
         public virtual estadoempleados estadoempleados { get; set; }
 
         public virtual roles roles { get; set; }
+        
+        public virtual personas personas { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<empleados> empleados1 { get; set; }
+        //not mapped-----------------------------------------------------
+        [NotMapped]
+        public SelectList listaBases { get; set; }
+        [NotMapped]
+        public string baseSeleccionada { get; set; }
 
-        public virtual empleados empleados2 { get; set; }
+        [NotMapped]
+        public SelectList listaRoles { get; set; }
+        [NotMapped]
+        public string rolSeleccionado { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<vehiculos> vehiculos { get; set; }
+        [NotMapped]
+        [Required]
+        [StringLength(20)]
+        [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("contrasena")]
+        public string confirmarContrasena { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<vehiculos> vehiculos1 { get; set; }
     }
 }

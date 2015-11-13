@@ -22,9 +22,9 @@ namespace Cabspot.Models
         [StringLength(50)]
         public string nombreBase { get; set; }
 
-        public int? idDireccion { get; set; }
+        public int idDireccion { get; set; }
 
-        public int? idContacto { get; set; }
+        public int idContacto { get; set; }
 
         public virtual direcciones direcciones { get; set; }
 

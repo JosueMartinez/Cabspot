@@ -108,13 +108,13 @@ namespace Cabspot.Migrations
                     p => p.pregunta,
                     new preguntas { pregunta = "Condicion Vehiculo" },
                     new preguntas { pregunta = "Cortesia Conductor" },
-                    new preguntas { pregunta = "Manejo Conductor" },
-                    new preguntas { pregunta = "Condicion Vehiculo" }
+                    new preguntas { pregunta = "Manejo Conductor" }
                 );
 
                 //roles
                 context.roles.AddOrUpdate(
                     p => p.rol,
+                    new roles { rol = "Super Admin" },
                     new roles { rol = "Admin" },
                     new roles { rol = "Power User" },
                     new roles { rol = "User" }

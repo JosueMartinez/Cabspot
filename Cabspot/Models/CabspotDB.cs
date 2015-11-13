@@ -115,20 +115,20 @@ namespace Cabspot.Models
                 .Property(e => e.contrasena)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<empleados>()
-                .HasMany(e => e.empleados1)
-                .WithOptional(e => e.empleados2)
-                .HasForeignKey(e => e.registradoPor);
+            //modelBuilder.Entity<empleados>()
+            //    .HasMany(e => e.empleados1)
+            //    .WithOptional(e => e.empleados2)
+            //    .HasForeignKey(e => e.registradoPor);
 
-            modelBuilder.Entity<empleados>()
-                .HasMany(e => e.vehiculos)
-                .WithOptional(e => e.empleados)
-                .HasForeignKey(e => e.registradoPor);
+            //modelBuilder.Entity<empleados>()
+            //    .HasMany(e => e.vehiculos)
+            //    .WithOptional(e => e.empleados)
+            //    .HasForeignKey(e => e.registradoPor);
 
-            modelBuilder.Entity<empleados>()
-                .HasMany(e => e.vehiculos1)
-                .WithOptional(e => e.empleados1)
-                .HasForeignKey(e => e.modificadoPor);
+            //modelBuilder.Entity<empleados>()
+            //    .HasMany(e => e.vehiculos1)
+            //    .WithOptional(e => e.empleados1)
+            //    .HasForeignKey(e => e.modificadoPor);
 
             modelBuilder.Entity<estadocarreras>()
                 .Property(e => e.estadoCarrera)

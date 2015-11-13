@@ -23,7 +23,7 @@ namespace Cabspot.Models
         [StringLength(255)]
         public string nombreMunicipio { get; set; }
 
-        public int? idProvincia { get; set; }
+        public int idProvincia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<direcciones> direcciones { get; set; }

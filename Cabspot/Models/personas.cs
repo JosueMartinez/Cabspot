@@ -13,6 +13,8 @@ namespace Cabspot.Models
         public personas()
         {
             clientes = new HashSet<clientes>();
+            empleados = new HashSet<empleados>();
+            taxistas = new HashSet<taxistas>();
         }
 
         [Key]
@@ -31,6 +33,7 @@ namespace Cabspot.Models
         public string apellidos { get; set; }
 
         [Column(TypeName = "date")]
+        
         public DateTime fechaNacimiento { get; set; }
 
         [Column(TypeName = "char")]
@@ -46,12 +49,18 @@ namespace Cabspot.Models
         [StringLength(50)]
         public string nacionalidad { get; set; }
 
-        public int? idDireccion { get; set; }
+        public int idDireccion { get; set; }
 
-        public int? idContacto { get; set; }
+        public int idContacto { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<clientes> clientes { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<empleados> empleados { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<taxistas> taxistas { get; set; }
 
         public virtual contactos contactos { get; set; }
 

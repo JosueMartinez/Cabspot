@@ -38,7 +38,7 @@ namespace Cabspot.Models
         [StringLength(100)]
         public string ciudad { get; set; }
 
-        public int? idMunicipio { get; set; }
+        public int idMunicipio { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bases> bases { get; set; }

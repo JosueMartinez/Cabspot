@@ -22,11 +22,19 @@ namespace Cabspot
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/bootstrap-datepicker.js",//datepicker
+                      "~/Scripts/jasny-bootstrap.min.js"  //fileinput espanol
+
+                      ));  
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/datepicker.css",   //datepicker
+                      "~/Content/gridmvc.datepicker.min.css",  //datepicker
+                      "~/Content/jasny-bootstrap.min.css"  //fileinput
+                      ));
 
             
             //admin template bundle-------------------------------------------------------------
@@ -42,6 +50,8 @@ namespace Cabspot
 
             //font-awesome
             bundles.Add(new StyleBundle("~/Content/fa", @"//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"));
+
+            
         }
     }
 }

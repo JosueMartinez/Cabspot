@@ -235,18 +235,19 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
+    <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511060402177_Seed.cs" />
-    <Compile Include="Migrations\201511060402177_Seed.Designer.cs">
-      <DependentUpon>201511060402177_Seed.cs</DependentUpon>
+    <Compile Include="Migrations\201511111631355_migration.cs" />
+    <Compile Include="Migrations\201511111631355_migration.Designer.cs">
+      <DependentUpon>201511111631355_migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511061532495_Seed2.cs" />
-    <Compile Include="Migrations\201511061532495_Seed2.Designer.cs">
-      <DependentUpon>201511061532495_Seed2.cs</DependentUpon>
+    <Compile Include="Migrations\201511131958093_Emplados_Persona.cs" />
+    <Compile Include="Migrations\201511131958093_Emplados_Persona.Designer.cs">
+      <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -291,6 +292,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\gridmvc.datepicker.min.css" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sidebar.css" />
@@ -328,12 +333,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <Content Include="Content\jasny-bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\CabspotApi%28Default-SQL-EastUS%29.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -370,20 +379,25 @@
     <Content Include="Views\bases\Details.cshtml" />
     <Content Include="Views\bases\Edit.cshtml" />
     <Content Include="Views\bases\Index.cshtml" />
+    <Content Include="Views\empleados\Create.cshtml" />
+    <Content Include="Views\empleados\Delete.cshtml" />
+    <Content Include="Views\empleados\Details.cshtml" />
+    <Content Include="Views\empleados\Edit.cshtml" />
+    <Content Include="Views\empleados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511060402177_Seed.resx">
-      <DependentUpon>201511060402177_Seed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511111631355_migration.resx">
+      <DependentUpon>201511111631355_migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511061532495_Seed2.resx">
-      <DependentUpon>201511061532495_Seed2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511131958093_Emplados_Persona.resx">
+      <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

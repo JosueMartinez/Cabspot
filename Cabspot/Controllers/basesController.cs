@@ -82,7 +82,7 @@ namespace Cabspot.Controllers
 
                     //redirigiendo a home...tempdata para mensaje de exito
                     TempData["success"] = "Se ha añadido una base exitosamente";
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index","Bases");
                 }
                 catch (Exception e)
                 {
