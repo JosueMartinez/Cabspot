@@ -1,21 +1,20 @@
-﻿@model Cabspot.Models.empleados
+﻿@model Cabspot.Models.taxistas
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create","empleados", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("Create", "taxistas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
+    
+    
     <div class="form-horizontal">
-        <h4>empleados</h4>
+        <h4>taxistas</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -61,7 +60,7 @@
         </div>
         @* fechaNacimiento *@
         <div class="form-group">
-            @Html.LabelFor(model => model.personas.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.personas.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.personas.fechaNacimiento, "{0:dd-MMM-yyyy}", new { htmlAttributes = new { @class = "form-control", id = "fecha" } })
                 @Html.ValidationMessageFor(model => model.personas.fechaNacimiento, "", new { @class = "text-danger" })
@@ -78,7 +77,7 @@
                                                                                     }, "value", "text", 2), new { @class = "form-control", style = "width:100px" })
                 @Html.ValidationMessageFor(m => m.personas.sexo, "", new { @class = "text-danger" })
             </div>
-        </div> 
+        </div>
         @* Nacionalidad *@
         <div class="form-group">
             @Html.LabelFor(model => model.personas.nacionalidad, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,50 +87,26 @@
             </div>
         </div>
         @* FIN INFO BASICA --------------------------------------------------------------------------------------------------------------------------------- *@
+        @* INFO TAXISTA ----------------------------------------------------------------------------------------------------------------------------------- *@
+        @* Base *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.idBase, "idBase", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.baseSeleccionada, Model.listaBases, "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idBase, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        @* INFO EMPLEADO ----------------------------------------------------------------------------------------------------------------------------------- *@
-            @* Base *@
-            <div class="form-group">
-                @Html.LabelFor(model => model.idBase, "idBase", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.baseSeleccionada, Model.listaBases,"",htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.idBase, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.codigoTaxita, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.codigoTaxita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.codigoTaxita, "", new { @class = "text-danger" })
             </div>
-            @* Rol *@
-            <div class="form-group">
-                @Html.LabelFor(model => model.idRol, "idRol", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.rolSeleccionado, Model.listaRoles, "", htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.idRol, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            @* Usuario *@
-            <div class="form-group">
-                @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        </div>
 
-            @* Contrasena *@
-            <div class="form-group">
-                @Html.LabelFor(model => model.contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.contrasena, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            @* confirmarContrasena *@
-            <div class="form-group">
-                @Html.LabelFor(model => model.confirmarContrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.confirmarContrasena, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.confirmarContrasena, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        @* FIN INFO EMPLEADO ----------------------------------------------------------------------------------------------------------------------------------- *@
+        @* FIN INFO taxista ----------------------------------------------------------------------------------------------------------------------------------- *@
+
         @* Direccion -------------------------------------------------------------------------------------------------------------------------------------------------------*@
         <h3>Dirección</h3>
         <div class="form-group">
@@ -246,29 +221,24 @@
         @* Fin Contactos ---------------------------------------------------------------------------------------------------------------------------------------------------- *@
 
 
-            
 
-            
-
-            
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    <script type="text/javascript">
-    // When the document is ready
-    $(document).ready(function () {
-        $('#fecha').datepicker({
-            format: "dd/M/yyyy",
-            autoclose: true,
-            todayBtn: true,
-            todayHighlight: true
-        });
-    });
-    </script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                $('#fecha').datepicker({
+                    format: "dd/M/yyyy",
+                    autoclose: true,
+                    todayBtn: true,
+                    todayHighlight: true
+                });
+            });
+        </script>
+    </div>
 }
 
 <div>

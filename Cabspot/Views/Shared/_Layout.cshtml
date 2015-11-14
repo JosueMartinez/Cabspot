@@ -14,6 +14,36 @@
     @Styles.Render("~/Content/admin")
     @Scripts.Render("~/bundles/modernizr")
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">      
+
+    <script>
+    @* Obteniendo todos los paises via WS *@
+    var uri = '//restcountries.eu/rest/v1/all';
+    $(document).ready(function () {
+        // Send an AJAX request
+        $.getJSON(uri).done(function (data) {
+            var items = '<option value="" selected></option>';
+            $.each(data, function (i, item) {
+                items += "<option value='" + item.translations.es + "'>" + item.translations.es + "</option>";
+            });
+            $('#nacionalidad').html(items);
+        });
+    });
+
+    //Habilitando y poblando campos de municipio
+    $(function (ready) { /* DOM ready */
+        $('#provincia').change(function () {
+            $.getJSON('/Bases/ListaMunicipios/' + $('#provincia').val(), function (data) {
+                var items = '<option value="" selected></option>';
+                $.each(data, function (i, municipio) {
+                    items += "<option value='" + municipio.Value + "'>" + municipio.Text + "</option>";
+                });
+                $('#municipio').html(items);
+            });
+            document.getElementById("municipio").disabled = false;
+        });
+    });
+    </script>
+
 </head>
 <body>
     <div id="wrapper">
@@ -56,7 +86,17 @@
                             <a href="#" class="fa fa-users">  Empleados<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="@Url.Action("Create", "Empleados")" class="fa fa-user-plus"> Añadir Empleado</a>
+                                    <a href="@Url.Action("Create", "Empleados")" class="fa fa-plus"> Añadir Empleado</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        @* TAXISTAS MENU *@
+                        <li>
+                            <a href="#" class="fa fa-taxi">  Taxistas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Create", "Taxistas")" class="fa fa-plus"> Añadir Taxista</a>
                                 </li>
 
                             </ul>
@@ -109,6 +149,8 @@
         $(document).ready(function () {
             $(".complete").select2();
         });
+
+
     </script>
 
     

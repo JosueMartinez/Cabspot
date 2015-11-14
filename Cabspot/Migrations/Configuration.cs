@@ -57,10 +57,9 @@ namespace Cabspot.Migrations
                 ////estadoDisponibilidad
                 context.estadodisponibilidad.AddOrUpdate(
                     p => p.estadoDisponibilidad,
-                    new estadodisponibilidad { estadoDisponibilidad = "En Espera" },
-                    new estadodisponibilidad { estadoDisponibilidad = "Completada" },
-                    new estadodisponibilidad { estadoDisponibilidad = "Cancelada" },
-                    new estadodisponibilidad { estadoDisponibilidad = "En Curso" }
+                    new estadodisponibilidad { estadoDisponibilidad = "Disponible" },
+                    new estadodisponibilidad { estadoDisponibilidad = "Ocupado" },
+                    new estadodisponibilidad { estadoDisponibilidad = "Offline" }
                  );
 
                 //estadoEmpleados

@@ -237,6 +237,7 @@
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\taxistasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -248,6 +249,10 @@
     <Compile Include="Migrations\201511131958093_Emplados_Persona.cs" />
     <Compile Include="Migrations\201511131958093_Emplados_Persona.Designer.cs">
       <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511140134176_mig.cs" />
+    <Compile Include="Migrations\201511140134176_mig.Designer.cs">
+      <DependentUpon>201511140134176_mig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -384,6 +389,11 @@
     <Content Include="Views\empleados\Details.cshtml" />
     <Content Include="Views\empleados\Edit.cshtml" />
     <Content Include="Views\empleados\Index.cshtml" />
+    <Content Include="Views\taxistas\Create.cshtml" />
+    <Content Include="Views\taxistas\Delete.cshtml" />
+    <Content Include="Views\taxistas\Details.cshtml" />
+    <Content Include="Views\taxistas\Edit.cshtml" />
+    <Content Include="Views\taxistas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
@@ -398,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511131958093_Emplados_Persona.resx">
       <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511140134176_mig.resx">
+      <DependentUpon>201511140134176_mig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

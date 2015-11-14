@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("cabspotdb.taxistas")]
     public partial class taxistas
@@ -20,7 +21,7 @@ namespace Cabspot.Models
         [Key]
         public int idTaxista { get; set; }
 
-        public int? idPersona { get; set; }
+        public int idPersona { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -41,6 +42,8 @@ namespace Cabspot.Models
 
         public DateTime? ultimaActualizacionPosicion { get; set; }
 
+        public virtual personas personas { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carreras> carreras { get; set; }
 
@@ -49,5 +52,11 @@ namespace Cabspot.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vehiculos> vehiculos { get; set; }
+
+        //not mapped-----------------------------------------------------
+        [NotMapped]
+        public SelectList listaBases { get; set; }
+        [NotMapped]
+        public string baseSeleccionada { get; set; }
     }
 }
