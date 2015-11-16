@@ -24,7 +24,7 @@ namespace Cabspot.Controllers
 
         // GET: taxistas/Details/5
         public async Task<ActionResult> Details(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,6 +34,11 @@ namespace Cabspot.Controllers
             {
                 return HttpNotFound();
             }
+            vehiculos v = new vehiculos();
+            v.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo");
+            v.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo");
+            v.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo");
+            taxistas.vehiculo = v;
             return View(taxistas);
         }
 
@@ -41,6 +46,7 @@ namespace Cabspot.Controllers
         public ActionResult Create()
         {
             taxistas taxista = new taxistas();
+            vehiculos v = new vehiculos();
             direcciones d = new direcciones();
             personas p = new personas();
             contactos c = new contactos();
@@ -49,6 +55,10 @@ namespace Cabspot.Controllers
             d.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
             p.direcciones = d;
             taxista.personas = p;
+            //v.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo");            
+            //v.listaEstado= new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo");
+            //v.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo");
+            //taxista.vehiculo = v;
 
             return View(taxista);
         }
@@ -58,60 +68,60 @@ namespace Cabspot.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(taxistas taxistas, HttpPostedFileBase foto)
+        public async Task<ActionResult> Create(taxistas taxistas, HttpPostedFileBase foto, string comando)
         {
             //asignando ids
-            try
-            {
-                //base
-                taxistas.idBase = int.Parse(taxistas.baseSeleccionada);
-                //creado como disponible por default
-                var idEstadoDisponibilidad = (from e in db.estadodisponibilidad where e.estadoDisponibilidad.Equals("Disponible") select e.idEstadoDisponibilidad).First();
-                taxistas.idEstadoDisponibilidad = idEstadoDisponibilidad;
-                //direccion
-                taxistas.personas.direcciones.idMunicipio = taxistas.personas.direcciones.municipioSeleccionado;
-
-                //subir foto
-                var filename = Path.GetFileName(foto.FileName);
-                var path = Path.Combine(Server.MapPath(@"~/App_Data/files/"), filename);
-                foto.SaveAs(path);
-                taxistas.personas.foto = path;
-
-
-                //verificar que codigo de taxista no esta asignado
-
-                //model error para identidad reutilizada distintos
-
-                //model error para movil e email distintos
-
-            }
-            catch (Exception e)
-            {
-                taxistas.listaBases = new SelectList(db.bases, "idBase", "nombreBase");
-                taxistas.personas.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
-
-                return View(taxistas);
-            }
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    db.taxistas.Add(taxistas);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    //base
+                    taxistas.idBase = int.Parse(taxistas.baseSeleccionada);
+                    //creado como disponible por default
+                    var idEstadoDisponibilidad = (from e in db.estadodisponibilidad where e.estadoDisponibilidad.Equals("Disponible") select e.idEstadoDisponibilidad).First();
+                    taxistas.idEstadoDisponibilidad = idEstadoDisponibilidad;
+                    //direccion
+                    taxistas.personas.direcciones.idMunicipio = taxistas.personas.direcciones.municipioSeleccionado;
+
+                    //subir foto
+                    var filename = Path.GetFileName(foto.FileName);
+                    var path = Path.Combine(Server.MapPath(@"~/App_Data/files/"), filename);
+                    foto.SaveAs(path);
+                    taxistas.personas.foto = path;
+
+                    //verificar que codigo de taxista no esta asignado
+
+                    //model error para identidad reutilizada distintos
+
+                    //model error para movil e email distintos
+
                 }
                 catch (Exception e)
                 {
-                    TempData["error"] = e.ToString();
-                    return Redirect("~/Shared/Error.cshtml");
+                    taxistas.listaBases = new SelectList(db.bases, "idBase", "nombreBase");
+                    taxistas.personas.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
+
+                    return View(taxistas);
                 }
-            }
 
-            taxistas.listaBases = new SelectList(db.bases, "idBase", "nombreBase");
-            taxistas.personas.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        db.taxistas.Add(taxistas);
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Details", "taxistas", new { id = taxistas.idTaxista });
+                    }
+                    catch (Exception e)
+                    {
+                        TempData["error"] = e.ToString();
+                        return Redirect("~/Shared/Error.cshtml");
+                    }
+                }
 
-            return View(taxistas);
+                taxistas.listaBases = new SelectList(db.bases, "idBase", "nombreBase", taxistas.baseSeleccionada);
+                taxistas.personas.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
+
+                return View(taxistas);
+            
         }
 
         // GET: taxistas/Edit/5
@@ -179,5 +189,36 @@ namespace Cabspot.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //agregar vehiculo al taxista antes de su creacion, agreagar a db junto con el taxista
+        [HttpPost]
+        public async Task<ActionResult> AgregarVehiculo(taxistas taxista)
+        {
+            var idTaxista = Request.Form["idTaxista"];
+            //asignando ids de estados
+            taxista.vehiculo.idCondicionVehiculo = taxista.vehiculo.condicionSeleccionada;
+            taxista.vehiculo.idEstadoVehiculo = taxista.vehiculo.estadoSeleccionado;
+            taxista.vehiculo.idTipoVehiculo = taxista.vehiculo.tipoSeleccionado;
+            taxista.vehiculo.registradoPor = 1;  //meanwhile
+
+            taxistas t = db.taxistas.Find(taxista.idTaxista);
+
+            if (ModelState.IsValid)
+            {
+                db.vehiculos.Add(taxista.vehiculo);
+                await db.SaveChangesAsync();
+                ViewData["mensajeAgregarVehiculo"] = "Se ha agregado un vehículo para este taxista";
+                return View("Details", t);
+            }
+
+            var errors = ViewData.ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
+            taxista.vehiculo.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo", taxista.vehiculo.condicionSeleccionada);
+            taxista.vehiculo.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo", taxista.vehiculo.estadoSeleccionado);
+            taxista.vehiculo.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo", taxista.vehiculo.tipoSeleccionado);
+            ViewData["mensajeAgregarVehiculo"] = "Ha ocurrido un error agregando el vehículo.";
+            return View("Details", taxista);
+        }
+
     }
 }

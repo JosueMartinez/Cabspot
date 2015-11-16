@@ -16,6 +16,7 @@ using System.Web.Mvc;
         }
 
         [Key]
+        [Column("idEmpleado")]
         public int idEmpleado { get; set; }
 
         [Column(TypeName = "date")]

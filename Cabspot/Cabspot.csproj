@@ -49,6 +49,18 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevelopersDo.DataAnnotations, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevelopersDo.DataAnnotations.1.0.1.0\lib\net40\DevelopersDo.DataAnnotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevelopersDo.Validator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevelopersDo.DataAnnotations.1.0.1.0\lib\net40\DevelopersDo.Validator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Azure.AppService.ApiApps.Service, Version=0.9.16.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.AppService.ApiApps.Service.0.9.16\lib\net45\Microsoft.Azure.AppService.ApiApps.Service.dll</HintPath>
       <Private>True</Private>
@@ -255,6 +267,26 @@
     <Compile Include="Migrations\201511140134176_mig.Designer.cs">
       <DependentUpon>201511140134176_mig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511151458281_taxistasVehiculo.cs" />
+    <Compile Include="Migrations\201511151458281_taxistasVehiculo.Designer.cs">
+      <DependentUpon>201511151458281_taxistasVehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511151550186_nc.cs" />
+    <Compile Include="Migrations\201511151550186_nc.Designer.cs">
+      <DependentUpon>201511151550186_nc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511161516496_mig1.cs" />
+    <Compile Include="Migrations\201511161516496_mig1.Designer.cs">
+      <DependentUpon>201511161516496_mig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511161922352_rename_codigoTaxista.cs" />
+    <Compile Include="Migrations\201511161922352_rename_codigoTaxista.Designer.cs">
+      <DependentUpon>201511161922352_rename_codigoTaxista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511162001240_mi.cs" />
+    <Compile Include="Migrations\201511162001240_mi.Designer.cs">
+      <DependentUpon>201511162001240_mi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -299,6 +331,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\gridmvc.datepicker.min.css" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
@@ -345,8 +378,12 @@
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
     <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="Properties\PublishProfiles\CabspotApi%28Default-SQL-EastUS%29.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -395,10 +432,17 @@
     <Content Include="Views\taxistas\Details.cshtml" />
     <Content Include="Views\taxistas\Edit.cshtml" />
     <Content Include="Views\taxistas\Index.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\vehiculos\Create.cshtml" />
+    <Content Include="Views\vehiculos\Delete.cshtml" />
+    <Content Include="Views\vehiculos\Details.cshtml" />
+    <Content Include="Views\vehiculos\Edit.cshtml" />
+    <Content Include="Views\vehiculos\Index.cshtml" />
+    <Content Include="Views\Shared\_AgregarVehiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
-    <Folder Include="Views\vehiculos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -413,6 +457,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511140134176_mig.resx">
       <DependentUpon>201511140134176_mig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511151458281_taxistasVehiculo.resx">
+      <DependentUpon>201511151458281_taxistasVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511151550186_nc.resx">
+      <DependentUpon>201511151550186_nc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511161516496_mig1.resx">
+      <DependentUpon>201511161516496_mig1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511161922352_rename_codigoTaxista.resx">
+      <DependentUpon>201511161922352_rename_codigoTaxista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511162001240_mi.resx">
+      <DependentUpon>201511162001240_mi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

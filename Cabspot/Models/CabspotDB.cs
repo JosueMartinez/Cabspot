@@ -208,7 +208,7 @@ namespace Cabspot.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<taxistas>()
-                .Property(e => e.codigoTaxita)
+                .Property(e => e.codigoTaxista)
                 .IsUnicode(false);
 
             modelBuilder.Entity<tipovehiculos>()

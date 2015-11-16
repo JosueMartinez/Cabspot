@@ -5,8 +5,9 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
-    [Table("cabspotdb.vehiculos")]
+    [Table("cabspotdb.vehiculo")]
     public partial class vehiculos
     {
         [Key]
@@ -55,7 +56,8 @@ namespace Cabspot.Models
 
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
-
+        
+        [ForeignKey("empleados")]
         public int? registradoPor { get; set; }
 
         [Column(TypeName = "date")]
@@ -66,13 +68,26 @@ namespace Cabspot.Models
         public virtual condicionvehiculos condicionvehiculos { get; set; }
 
         public virtual empleados empleados { get; set; }
-
-        public virtual empleados empleados1 { get; set; }
-
+        
         public virtual estadovehiculos estadovehiculos { get; set; }
 
         public virtual taxistas taxistas { get; set; }
 
         public virtual tipovehiculos tipovehiculos { get; set; }
+
+        //Valores no mapeados
+        [NotMapped]
+        public int condicionSeleccionada { get; set; }
+        [NotMapped]
+        public int estadoSeleccionado { get; set; }
+        [NotMapped]
+        public int tipoSeleccionado { get; set; }
+
+        [NotMapped]
+        public SelectList listaCondicion { get; set; }
+        [NotMapped]
+        public SelectList listaEstado { get; set; }
+        [NotMapped]
+        public SelectList listaTipo { get; set; }
     }
 }

@@ -25,7 +25,8 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(10)]
-        public string codigoTaxita { get; set; }
+        [Column("codigoTaxista")]
+        public string codigoTaxista { get; set; }
 
         public int? idEstadoDisponibilidad { get; set; }
 
@@ -44,6 +45,9 @@ namespace Cabspot.Models
 
         public virtual personas personas { get; set; }
 
+        [NotMapped]
+        public virtual vehiculos vehiculo { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<carreras> carreras { get; set; }
 
@@ -58,5 +62,9 @@ namespace Cabspot.Models
         public SelectList listaBases { get; set; }
         [NotMapped]
         public string baseSeleccionada { get; set; }
+
+
+        //[NotMapped]
+        //public List<vehiculos> vehiculosAgregar {get;set;}
     }
 }

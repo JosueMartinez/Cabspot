@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using DevelopersDo.DataAnnotations;
 
     [Table("cabspotdb.personas")]
     public partial class personas
@@ -22,10 +23,12 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(15)]
+        [Cedula]
         public string identificacion { get; set; }
 
         [Required]
         [StringLength(30)]
+        [Display(Name="Nombre Completo")]
         public string nombres { get; set; }
 
         [Required]

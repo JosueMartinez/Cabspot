@@ -1,4 +1,5 @@
 ﻿@model Cabspot.Models.taxistas
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Details";
@@ -7,6 +8,9 @@
 
 <h2>Details</h2>
 
+@* Boton para modal de vehiculos *@
+<button type="button" class="btn btn-primary col-lg-offset-10" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-car"></i>  Vehículos</button>
+@Html.HiddenFor(model => model.idTaxista)
 <div>
     <h4>taxistas</h4>
     <hr />
@@ -20,11 +24,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.codigoTaxita)
+            @Html.DisplayNameFor(model => model.codigoTaxista)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.codigoTaxita)
+            @Html.DisplayFor(model => model.codigoTaxista)
         </dd>
 
         <dt>
@@ -89,3 +93,61 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.idTaxista }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+@* Modal para vehiculos *@
+
+<div class="row col-lg-12">
+
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                @* Header *@
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center"><i class="fa fa-car"></i> Vehículos</h4>
+                </div>
+                @* Body *@
+                <div class="modal-body">
+
+                    @*render partial de agregar vehiculo*@
+                    @Html.Partial("_AgregarVehiculo", Model)
+
+                    @* Tabla de vehiculos agregados *@
+                    @*<div class="table" id="t01" style="margin-top: 20px">
+                        @Html.Grid(Model.vehiculos).Columns(columns =>
+                                {
+                                    //columns.Add(m => m.id).Titled("ID").Filterable(true).Sortable(true);
+                                    columns.Add(m => m.placa).Titled("File Name").Filterable(true).Sortable(true);
+                                    //columns.Add(m => m.fechaSubida).Format("{0:dd-MMM-yyyy}").Titled("Upload Date").Filterable(true).Sortable(true);
+
+                                    columns.Add()
+                                            .Sanitized(false)
+                                            .Encoded(false)
+                                            .RenderValueAs(o => Html.ActionLink(" ", "Delete", "Vehiculos", null, new { @class = "fa fa-trash fa-lg delete text-danger text-center" }).ToHtmlString());
+
+                                }
+                                ).WithPaging(5).Sortable(true)
+                    </div>*@
+                    <script type="text/javascript">
+                        $('.delete').click(function () {
+                            if (confirm("¿Está seguro de querer borrar este vehículo?")) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        });
+                    </script>
+
+                </div>
+                @* Footer *@
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* FIN MODAL ---------------------------------------------------------------------------------------------------------------------------------- *@
