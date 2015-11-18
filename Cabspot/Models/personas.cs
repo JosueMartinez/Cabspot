@@ -7,7 +7,7 @@ namespace Cabspot.Models
     using System.Data.Entity.Spatial;
     using DevelopersDo.DataAnnotations;
 
-    [Table("cabspotdb.personas")]
+    [Table("personas")]
     public partial class personas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

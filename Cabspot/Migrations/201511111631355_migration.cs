@@ -7,64 +7,64 @@ namespace Cabspot.Migrations
     {
         public override void Up()
         {
-            //DropForeignKey("cabspotdb.empleados", "registradoPor", "cabspotdb.empleados");
-            //DropForeignKey("cabspotdb.personas", "idContacto", "cabspotdb.contactos");
-            //DropForeignKey("cabspotdb.personas", "idDireccion", "cabspotdb.direcciones");
-            //DropForeignKey("cabspotdb.vehiculos", "registradoPor", "cabspotdb.empleados");
-            //DropForeignKey("cabspotdb.vehiculos", "modificadoPor", "cabspotdb.empleados");
-            //DropIndex("cabspotdb.personas", new[] { "idDireccion" });
-            //DropIndex("cabspotdb.personas", new[] { "idContacto" });
-            //DropIndex("cabspotdb.vehiculos", new[] { "registradoPor" });
-            //DropIndex("cabspotdb.vehiculos", new[] { "modificadoPor" });
-            //DropIndex("cabspotdb.empleados", new[] { "registradoPor" });
-            //AddColumn("cabspotdb.vehiculos", "empleados_idEmpleado", c => c.Int());
-            //AddColumn("cabspotdb.vehiculos", "empleados1_idEmpleado", c => c.Int());
-            //AddColumn("cabspotdb.empleados", "personas_idPersona", c => c.Int());
-            //AlterColumn("cabspotdb.personas", "idDireccion", c => c.Int(nullable: false));
-            //AlterColumn("cabspotdb.personas", "idContacto", c => c.Int(nullable: false));
-            //CreateIndex("cabspotdb.personas", "idDireccion");
-            //CreateIndex("cabspotdb.personas", "idContacto");
-            //CreateIndex("cabspotdb.taxistas", "idPersona");
-            //CreateIndex("cabspotdb.vehiculos", "empleados_idEmpleado");
-            //CreateIndex("cabspotdb.vehiculos", "empleados1_idEmpleado");
-            //CreateIndex("cabspotdb.empleados", "personas_idPersona");
-            //AddForeignKey("cabspotdb.empleados", "personas_idPersona", "cabspotdb.personas", "idPersona");
-            //AddForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas", "idPersona");
-            //AddForeignKey("cabspotdb.personas", "idContacto", "cabspotdb.contactos", "idContacto", cascadeDelete: true);
-            //AddForeignKey("cabspotdb.personas", "idDireccion", "cabspotdb.direcciones", "idDireccion", cascadeDelete: true);
-            //AddForeignKey("cabspotdb.vehiculos", "empleados_idEmpleado", "cabspotdb.empleados", "idEmpleado");
-            //AddForeignKey("cabspotdb.vehiculos", "empleados1_idEmpleado", "cabspotdb.empleados", "idEmpleado");
+            //DropForeignKey("empleados", "registradoPor", "empleados");
+            //DropForeignKey("personas", "idContacto", "contactos");
+            //DropForeignKey("personas", "idDireccion", "direcciones");
+            //DropForeignKey("vehiculos", "registradoPor", "empleados");
+            //DropForeignKey("vehiculos", "modificadoPor", "empleados");
+            //DropIndex("personas", new[] { "idDireccion" });
+            //DropIndex("personas", new[] { "idContacto" });
+            //DropIndex("vehiculos", new[] { "registradoPor" });
+            //DropIndex("vehiculos", new[] { "modificadoPor" });
+            //DropIndex("empleados", new[] { "registradoPor" });
+            //AddColumn("vehiculos", "empleados_idEmpleado", c => c.Int());
+            //AddColumn("vehiculos", "empleados1_idEmpleado", c => c.Int());
+            //AddColumn("empleados", "personas_idPersona", c => c.Int());
+            //AlterColumn("personas", "idDireccion", c => c.Int(nullable: false));
+            //AlterColumn("personas", "idContacto", c => c.Int(nullable: false));
+            //CreateIndex("personas", "idDireccion");
+            //CreateIndex("personas", "idContacto");
+            //CreateIndex("taxistas", "idPersona");
+            //CreateIndex("vehiculos", "empleados_idEmpleado");
+            //CreateIndex("vehiculos", "empleados1_idEmpleado");
+            //CreateIndex("empleados", "personas_idPersona");
+            //AddForeignKey("empleados", "personas_idPersona", "personas", "idPersona");
+            //AddForeignKey("taxistas", "idPersona", "personas", "idPersona");
+            //AddForeignKey("personas", "idContacto", "contactos", "idContacto", cascadeDelete: true);
+            //AddForeignKey("personas", "idDireccion", "direcciones", "idDireccion", cascadeDelete: true);
+            //AddForeignKey("vehiculos", "empleados_idEmpleado", "empleados", "idEmpleado");
+            //AddForeignKey("vehiculos", "empleados1_idEmpleado", "empleados", "idEmpleado");
         }
         
         public override void Down()
         {
-            //DropForeignKey("cabspotdb.vehiculos", "empleados1_idEmpleado", "cabspotdb.empleados");
-            //DropForeignKey("cabspotdb.vehiculos", "empleados_idEmpleado", "cabspotdb.empleados");
-            //DropForeignKey("cabspotdb.personas", "idDireccion", "cabspotdb.direcciones");
-            //DropForeignKey("cabspotdb.personas", "idContacto", "cabspotdb.contactos");
-            //DropForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas");
-            //DropForeignKey("cabspotdb.empleados", "personas_idPersona", "cabspotdb.personas");
-            //DropIndex("cabspotdb.empleados", new[] { "personas_idPersona" });
-            //DropIndex("cabspotdb.vehiculos", new[] { "empleados1_idEmpleado" });
-            //DropIndex("cabspotdb.vehiculos", new[] { "empleados_idEmpleado" });
-            //DropIndex("cabspotdb.taxistas", new[] { "idPersona" });
-            //DropIndex("cabspotdb.personas", new[] { "idContacto" });
-            //DropIndex("cabspotdb.personas", new[] { "idDireccion" });
-            //AlterColumn("cabspotdb.personas", "idContacto", c => c.Int());
-            //AlterColumn("cabspotdb.personas", "idDireccion", c => c.Int());
-            //DropColumn("cabspotdb.empleados", "personas_idPersona");
-            //DropColumn("cabspotdb.vehiculos", "empleados1_idEmpleado");
-            //DropColumn("cabspotdb.vehiculos", "empleados_idEmpleado");
-            //CreateIndex("cabspotdb.empleados", "registradoPor");
-            //CreateIndex("cabspotdb.vehiculos", "modificadoPor");
-            //CreateIndex("cabspotdb.vehiculos", "registradoPor");
-            //CreateIndex("cabspotdb.personas", "idContacto");
-            //CreateIndex("cabspotdb.personas", "idDireccion");
-            //AddForeignKey("cabspotdb.vehiculos", "modificadoPor", "cabspotdb.empleados", "idEmpleado");
-            //AddForeignKey("cabspotdb.vehiculos", "registradoPor", "cabspotdb.empleados", "idEmpleado");
-            //AddForeignKey("cabspotdb.personas", "idDireccion", "cabspotdb.direcciones", "idDireccion");
-            //AddForeignKey("cabspotdb.personas", "idContacto", "cabspotdb.contactos", "idContacto");
-            //AddForeignKey("cabspotdb.empleados", "registradoPor", "cabspotdb.empleados", "idEmpleado");
+            //DropForeignKey("vehiculos", "empleados1_idEmpleado", "empleados");
+            //DropForeignKey("vehiculos", "empleados_idEmpleado", "empleados");
+            //DropForeignKey("personas", "idDireccion", "direcciones");
+            //DropForeignKey("personas", "idContacto", "contactos");
+            //DropForeignKey("taxistas", "idPersona", "personas");
+            //DropForeignKey("empleados", "personas_idPersona", "personas");
+            //DropIndex("empleados", new[] { "personas_idPersona" });
+            //DropIndex("vehiculos", new[] { "empleados1_idEmpleado" });
+            //DropIndex("vehiculos", new[] { "empleados_idEmpleado" });
+            //DropIndex("taxistas", new[] { "idPersona" });
+            //DropIndex("personas", new[] { "idContacto" });
+            //DropIndex("personas", new[] { "idDireccion" });
+            //AlterColumn("personas", "idContacto", c => c.Int());
+            //AlterColumn("personas", "idDireccion", c => c.Int());
+            //DropColumn("empleados", "personas_idPersona");
+            //DropColumn("vehiculos", "empleados1_idEmpleado");
+            //DropColumn("vehiculos", "empleados_idEmpleado");
+            //CreateIndex("empleados", "registradoPor");
+            //CreateIndex("vehiculos", "modificadoPor");
+            //CreateIndex("vehiculos", "registradoPor");
+            //CreateIndex("personas", "idContacto");
+            //CreateIndex("personas", "idDireccion");
+            //AddForeignKey("vehiculos", "modificadoPor", "empleados", "idEmpleado");
+            //AddForeignKey("vehiculos", "registradoPor", "empleados", "idEmpleado");
+            //AddForeignKey("personas", "idDireccion", "direcciones", "idDireccion");
+            //AddForeignKey("personas", "idContacto", "contactos", "idContacto");
+            //AddForeignKey("empleados", "registradoPor", "empleados", "idEmpleado");
         }
     }
 }

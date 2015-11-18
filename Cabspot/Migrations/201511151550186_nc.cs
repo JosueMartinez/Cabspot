@@ -7,12 +7,12 @@ namespace Cabspot.Migrations
     {
         public override void Up()
         {
-            //RenameTable(name: "cabspotdb.vehiculos", newName: "vehiculo");
+            //RenameTable(name: "vehiculos", newName: "vehiculo");
         }
         
         public override void Down()
         {
-            //RenameTable(name: "cabspotdb.vehiculo", newName: "vehiculos");
+            //RenameTable(name: "vehiculo", newName: "vehiculos");
         }
     }
 }

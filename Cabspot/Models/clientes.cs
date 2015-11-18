@@ -14,6 +14,7 @@ namespace Cabspot.Models
         {
             carreras = new HashSet<carreras>();
             sugerencias = new HashSet<sugerencias>();
+            autenticacionSms = new HashSet<autenticacionSms>();
         }
 
         [Key]
@@ -34,5 +35,8 @@ namespace Cabspot.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sugerencias> sugerencias { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<autenticacionSms> autenticacionSms { get; set; }
     }
 }

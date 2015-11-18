@@ -7,7 +7,7 @@ namespace Cabspot.Models
     using System.Data.Entity.Spatial;
     using System.Web.Mvc;
 
-    [Table("cabspotdb.vehiculo")]
+    [Table("vehiculo")]
     public partial class vehiculos
     {
         [Key]

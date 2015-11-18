@@ -7,20 +7,20 @@ namespace Cabspot.Migrations
     {
         public override void Up()
         {
-            //DropForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas");
-            //DropIndex("cabspotdb.taxistas", new[] { "idPersona" });
-            //AlterColumn("cabspotdb.taxistas", "idPersona", c => c.Int(nullable: false));
-            //CreateIndex("cabspotdb.taxistas", "idPersona");
-            //AddForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas", "idPersona", cascadeDelete: true);
+            //DropForeignKey("taxistas", "idPersona", "personas");
+            //DropIndex("taxistas", new[] { "idPersona" });
+            //AlterColumn("taxistas", "idPersona", c => c.Int(nullable: false));
+            //CreateIndex("taxistas", "idPersona");
+            //AddForeignKey("taxistas", "idPersona", "personas", "idPersona", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            //DropForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas");
-            //DropIndex("cabspotdb.taxistas", new[] { "idPersona" });
-            //AlterColumn("cabspotdb.taxistas", "idPersona", c => c.Int());
-            //CreateIndex("cabspotdb.taxistas", "idPersona");
-            //AddForeignKey("cabspotdb.taxistas", "idPersona", "cabspotdb.personas", "idPersona");
+            //DropForeignKey("taxistas", "idPersona", "personas");
+            //DropIndex("taxistas", new[] { "idPersona" });
+            //AlterColumn("taxistas", "idPersona", c => c.Int());
+            //CreateIndex("taxistas", "idPersona");
+            //AddForeignKey("taxistas", "idPersona", "personas", "idPersona");
         }
     }
 }

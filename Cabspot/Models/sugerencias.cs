@@ -6,7 +6,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("cabspotdb.sugerencias")]
+    [Table("sugerencias")]
     public partial class sugerencias
     {
         [Key]

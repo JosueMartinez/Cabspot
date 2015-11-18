@@ -7,28 +7,28 @@ namespace Cabspot.Migrations
     {
         public override void Up()
         {
-            //DropForeignKey("cabspotdb.taxistas", "vehiculo_idVehiculo", "cabspotdb.vehiculo");
-            //DropIndex("cabspotdb.taxistas", new[] { "vehiculo_idVehiculo" });
-            //DropIndex("cabspotdb.vehiculo", new[] { "taxistas_idTaxista1" });
-            //DropColumn("cabspotdb.vehiculo", "idTaxista");
-            //DropColumn("cabspotdb.vehiculo", "idTaxista");
-            //RenameColumn(table: "cabspotdb.vehiculo", name: "taxistas_idTaxista1", newName: "idTaxista");
-            //RenameColumn(table: "cabspotdb.vehiculo", name: "taxistas_idTaxista", newName: "idTaxista");
-            //RenameIndex(table: "cabspotdb.vehiculo", name: "IX_taxistas_idTaxista", newName: "IX_idTaxista");
-            //DropColumn("cabspotdb.taxistas", "vehiculo_idVehiculo");
+            //DropForeignKey("taxistas", "vehiculo_idVehiculo", "vehiculo");
+            //DropIndex("taxistas", new[] { "vehiculo_idVehiculo" });
+            //DropIndex("vehiculo", new[] { "taxistas_idTaxista1" });
+            //DropColumn("vehiculo", "idTaxista");
+            //DropColumn("vehiculo", "idTaxista");
+            //RenameColumn(table: "vehiculo", name: "taxistas_idTaxista1", newName: "idTaxista");
+            //RenameColumn(table: "vehiculo", name: "taxistas_idTaxista", newName: "idTaxista");
+            //RenameIndex(table: "vehiculo", name: "IX_taxistas_idTaxista", newName: "IX_idTaxista");
+            //DropColumn("taxistas", "vehiculo_idVehiculo");
         }
         
         public override void Down()
         {
-            //AddColumn("cabspotdb.taxistas", "vehiculo_idVehiculo", c => c.Int());
-            //RenameIndex(table: "cabspotdb.vehiculo", name: "IX_idTaxista", newName: "IX_taxistas_idTaxista");
-            //RenameColumn(table: "cabspotdb.vehiculo", name: "idTaxista", newName: "taxistas_idTaxista");
-            //RenameColumn(table: "cabspotdb.vehiculo", name: "idTaxista", newName: "taxistas_idTaxista1");
-            //AddColumn("cabspotdb.vehiculo", "idTaxista", c => c.Int());
-            //AddColumn("cabspotdb.vehiculo", "idTaxista", c => c.Int());
-            //CreateIndex("cabspotdb.vehiculo", "taxistas_idTaxista1");
-            //CreateIndex("cabspotdb.taxistas", "vehiculo_idVehiculo");
-            //AddForeignKey("cabspotdb.taxistas", "vehiculo_idVehiculo", "cabspotdb.vehiculo", "idVehiculo");
+            //AddColumn("taxistas", "vehiculo_idVehiculo", c => c.Int());
+            //RenameIndex(table: "vehiculo", name: "IX_idTaxista", newName: "IX_taxistas_idTaxista");
+            //RenameColumn(table: "vehiculo", name: "idTaxista", newName: "taxistas_idTaxista");
+            //RenameColumn(table: "vehiculo", name: "idTaxista", newName: "taxistas_idTaxista1");
+            //AddColumn("vehiculo", "idTaxista", c => c.Int());
+            //AddColumn("vehiculo", "idTaxista", c => c.Int());
+            //CreateIndex("vehiculo", "taxistas_idTaxista1");
+            //CreateIndex("taxistas", "vehiculo_idVehiculo");
+            //AddForeignKey("taxistas", "vehiculo_idVehiculo", "vehiculo", "idVehiculo");
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Cabspot.Models
     using System.Data.Entity.Spatial;
     using System.Web.Mvc;
 
-    [Table("cabspotdb.municipios")]
+    [Table("municipios")]
     public partial class municipios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

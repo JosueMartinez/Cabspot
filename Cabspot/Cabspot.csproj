@@ -287,9 +287,18 @@
     <Compile Include="Migrations\201511162001240_mi.Designer.cs">
       <DependentUpon>201511162001240_mi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511182120547_autenticacionSms.cs" />
+    <Compile Include="Migrations\201511182120547_autenticacionSms.Designer.cs">
+      <DependentUpon>201511182120547_autenticacionSms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511182130351_migration1.cs" />
+    <Compile Include="Migrations\201511182130351_migration1.Designer.cs">
+      <DependentUpon>201511182130351_migration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\autenticacionSms.cs" />
     <Compile Include="Models\bases.cs" />
     <Compile Include="Models\CabspotDB.cs" />
     <Compile Include="Models\carreras.cs" />
@@ -472,6 +481,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511162001240_mi.resx">
       <DependentUpon>201511162001240_mi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511182120547_autenticacionSms.resx">
+      <DependentUpon>201511182120547_autenticacionSms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511182130351_migration1.resx">
+      <DependentUpon>201511182130351_migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

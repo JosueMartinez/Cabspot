@@ -6,7 +6,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("cabspotdb.encuestaspreguntas")]
+    [Table("encuestaspreguntas")]
     public partial class encuestaspreguntas
     {
         public int? idEncuesta { get; set; }

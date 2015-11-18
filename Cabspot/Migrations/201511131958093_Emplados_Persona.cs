@@ -7,22 +7,22 @@ namespace Cabspot.Migrations
     {
         public override void Up()
         {
-            //DropForeignKey("cabspotdb.empleados", "personas_idPersona", "cabspotdb.personas");
-            //DropIndex("cabspotdb.empleados", new[] { "personas_idPersona" });
-            //RenameColumn(table: "cabspotdb.empleados", name: "personas_idPersona", newName: "idPersona");
-            //AlterColumn("cabspotdb.empleados", "idPersona", c => c.Int(nullable: false));
-            //CreateIndex("cabspotdb.empleados", "idPersona");
-            //AddForeignKey("cabspotdb.empleados", "idPersona", "cabspotdb.personas", "idPersona", cascadeDelete: true);
+            //DropForeignKey("empleados", "personas_idPersona", "personas");
+            //DropIndex("empleados", new[] { "personas_idPersona" });
+            //RenameColumn(table: "empleados", name: "personas_idPersona", newName: "idPersona");
+            //AlterColumn("empleados", "idPersona", c => c.Int(nullable: false));
+            //CreateIndex("empleados", "idPersona");
+            //AddForeignKey("empleados", "idPersona", "personas", "idPersona", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            //DropForeignKey("cabspotdb.empleados", "idPersona", "cabspotdb.personas");
-            //DropIndex("cabspotdb.empleados", new[] { "idPersona" });
-            //AlterColumn("cabspotdb.empleados", "idPersona", c => c.Int());
-            //RenameColumn(table: "cabspotdb.empleados", name: "idPersona", newName: "personas_idPersona");
-            //CreateIndex("cabspotdb.empleados", "personas_idPersona");
-            //AddForeignKey("cabspotdb.empleados", "personas_idPersona", "cabspotdb.personas", "idPersona");
+            //DropForeignKey("empleados", "idPersona", "personas");
+            //DropIndex("empleados", new[] { "idPersona" });
+            //AlterColumn("empleados", "idPersona", c => c.Int());
+            //RenameColumn(table: "empleados", name: "idPersona", newName: "personas_idPersona");
+            //CreateIndex("empleados", "personas_idPersona");
+            //AddForeignKey("empleados", "personas_idPersona", "personas", "idPersona");
         }
     }
 }
