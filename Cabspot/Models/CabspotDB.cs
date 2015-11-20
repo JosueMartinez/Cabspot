@@ -11,7 +11,7 @@ namespace Cabspot.Models
             : base("name=CabspotDB")
         {
         }
-
+        public virtual DbSet<autenticacionSms> autenticacionSms { get; set; }
         public virtual DbSet<bases> bases { get; set; }
         public virtual DbSet<carreras> carreras { get; set; }
         public virtual DbSet<clientes> clientes { get; set; }

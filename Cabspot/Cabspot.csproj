@@ -247,6 +247,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
+    <Compile Include="Controllers\Clases\requestSms.cs" />
+    <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\taxistasController.cs" />
@@ -449,6 +451,11 @@
     <Content Include="Views\vehiculos\Edit.cshtml" />
     <Content Include="Views\vehiculos\Index.cshtml" />
     <Content Include="Views\Shared\_AgregarVehiculo.cshtml" />
+    <Content Include="Views\clientes\Create.cshtml" />
+    <Content Include="Views\clientes\Delete.cshtml" />
+    <Content Include="Views\clientes\Details.cshtml" />
+    <Content Include="Views\clientes\Edit.cshtml" />
+    <Content Include="Views\clientes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
