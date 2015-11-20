@@ -25,6 +25,9 @@ namespace Cabspot.Models
         [StringLength(15)]
         public string nombreUsuario { get; set; }
 
+        [StringLength(32)]
+        public string apikey { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
 

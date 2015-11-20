@@ -17,22 +17,6 @@ namespace Cabspot.Controllers
     {
         private CabspotDB db = new CabspotDB();
 
-        public 
-        //public ActionResult Create()
-        //{
-        //    empleados empleado = new empleados();
-        //    direcciones d = new direcciones();
-        //    personas p = new personas();
-        //    contactos c = new contactos();
-        //    empleado.listaBases = new SelectList(db.bases, "idBase", "nombreBase");
-        //    empleado.listaRoles = new SelectList(db.roles, "idRol", "rol");
-        //    d.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
-        //    p.direcciones = d;
-        //    empleado.personas = p;
-
-        //    return View(empleado);
-        //}
-
         // GET: api/clientes
         public IQueryable<clientes> Getclientes()
         {
