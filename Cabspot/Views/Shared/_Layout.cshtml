@@ -1,19 +1,29 @@
 ﻿@{
     
     ViewBag.Title = "Cabspot";
+    var usuario = "Bertoldo Edmundo Melones y Dieta";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    @Scripts.Render("~/bundles/jquery");
+    @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")    
-    @Styles.Render("~/Content/admin")
+    @*@Styles.Render("~/Content/admin")*@
+    @Styles.Render("~/Content/gentella")
     @Scripts.Render("~/bundles/modernizr")
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">      
+
+    <script>
+        NProgress.start();
+    </script>
+
 
     <script>
     @* Obteniendo todos los paises via WS *@
@@ -45,115 +55,364 @@
     </script>
 
 </head>
-<body>
-    <div id="wrapper">
 
-        <!--INICIO MENU-->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Cabspot", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+@* Body *@
+<body class="nav-md">
+    <div class="container body">
 
-            @*<ul class="nav navbar-text navbar-right">
-                <li><strong>@greetings @username.ToLower()</strong></li>
-            </ul>*@
-
-            <div class="navbar-inverse sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        @*<li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <a href="@Url.Action("Index", "Home")" class="fa fa-home"> Home</a>
-                            </div>
-                        </li>*@
-                        <li><a href="@Url.Action("Index", "Home")" class="fa fa-home fa-2x"> Inicio</a></li>
-                        @* BASES MENU *@
-                        <li>
-                            <a href="#" class="fa fa-map-marker">  Bases<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Create", "Bases")" class="fa fa-plus"> Añadir Base</a>
-                                </li>                                
-                            </ul>
-                        </li>
-                        @* EMPLEADOS MENU *@
-                        <li>
-                            <a href="#" class="fa fa-users">  Empleados<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Create", "Empleados")" class="fa fa-plus"> Añadir Empleado</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        @* TAXISTAS MENU *@
-                        <li>
-                            <a href="#" class="fa fa-taxi">  Taxistas<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Create", "Taxistas")" class="fa fa-plus"> Añadir Taxista</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        @* About *@
-                        <li><a href="@Url.Action("About", "Home")" class="fa fa-info-circle"> About</a></li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-        </nav>
-        <!--FIN MENU -->
-        <div id="page-wrapper" >
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        @RenderBody()
+        @* Sidebar *@
+        <div class="main_container">
+        
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index","Home")" class="site_title"><i class="fa fa-circle"></i> <span>CabSpot</span></a>
                     </div>
-                    <!-- /.col-lg-12 -->
+                    <div class="clearfix"></div>
+                    <!-- menu prile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                        </div>
+                        <div class="profile_info">
+                            <span>Bienvenido,</span>
+                            <h2>@usuario</h2>
+                        </div>
+                    </div>
+                    <!-- /menu prile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            @*<h3>General</h3>*@
+                            <ul class="nav side-menu">
+                                @* Inicio *@
+                                <li>
+                                    <a href="@Url.Action("Index","Home")"><i class="fa fa-home"></i> Inicio</a>                                    
+                                </li>
+                                @* Bases *@
+                                <li>
+                                    <a><i class="fa fa-building"></i> Bases <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="@Url.Action("Create","Bases")">Agregar Base</a>
+                                        </li>                                        
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
-            @* Footer *@
-            <div class="navbar navbar-inverse navbar-fixed-bottom">
-                <div class="container">
-                    <p class="navbar-text pull-left">
-                        © 2015 - Cabpost
-                    </p>
-                    <p class="navbar-text pull-right">
-                        <span class="fa fa-code"></span>  Desarrolado Por Josué Martínez &amp; Jordani Rozón
-                    </p>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                                    
+                                    <img src="~/Content/images/user.png" />  @usuario
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                                    <li>
+                                        <a href="javascript:;">  Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">Help</a>
+                                    </li>
+                                    <li>
+                                        <a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image">
+                                                <img src="images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong><a href="inbox.html">See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-            @* Footer END *@
+            <!-- /top navigation -->
 
-        </div>
-    </div>
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/admin")
-    @RenderSection("scripts", required: false)
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>@ViewBag.controller</h3>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
 
-    <script>
-        $("#menu-toggle").click(function(e) {
-             e.preventDefault();
-             $("#wrapper").toggleClass("toggled");
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>@ViewBag.action</h2>                                    
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    @RenderBody()
+                                    @* Spinning *@
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                        <!-- footer content -->
+                        <footer>
+                            <div>
+                                <p class="pull-right">
+                                    <span class="fa fa-code"></span> Proyecto Final ISC por Jordani Rozón &Aacute; Josué Martínez
+                                    <span class="lead"> <i class="fa fa-circle"></i> Cabspot</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                        <!-- /footer content -->
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div id="custom_notifications" class="custom-notifications dsp_none">
+                <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group"></ul>
+                <div class="clearfix"></div>
+                <div id="notif-group" class="tabbed_notifications"></div>
+            </div>
+
+
+
+
+            @Scripts.Render("~/bundles/bootstrap")
+            @*@Scripts.Render("~/bundles/admin")*@
+            @Scripts.Render("~/bundles/gentella")
+            @Scripts.Render("~/bundles/gauge")
+            @Scripts.Render("~/bundles/chart")
+            @Scripts.Render("~/bundles/progress")
+            @Scripts.Render("~/bundles/icheck")
+            @Scripts.Render("~/bundles/daterangepicker")
+            @Scripts.Render("~/bundles/flot")
+            @Scripts.Render("~/bundles/worldmap")
+            @Scripts.Render("~/bundles/notify")
+
+            @RenderSection("scripts", required: false)
+
+            <script>
+                NProgress.done();
+                                    </script>
+
+    @* Wizard form -------------------------------------------------------------------------------------------------------*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Smart Wizard
+            $('#wizard').smartWizard();
+
+            function onFinishCallback() {
+                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                //alert('Finish Clicked');
+            }
         });
 
         $(document).ready(function () {
-            $(".complete").select2();
+            // Smart Wizard
+            $('#wizard_verticle').smartWizard({
+                transitionEffect: 'slide'
+            });
+
         });
 
+        //<!-- input_mask -->
+       $(document).ready(function () {
+           $(":input").inputmask();
+       });
+    </script>
+    
+    @* FORM VALIDATION --------------------------------------------------------------------------------------------------- *@
+    <script>
+            // initialize the validator function
+            validator.message['date'] = 'not a real date';
 
+            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+            $('form')
+                .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                .on('change', 'select.required', validator.checkField)
+                .on('keypress', 'input[required][pattern]', validator.keypress);
+
+            $('.multi.required')
+                .on('keyup blur', 'input', function () {
+                    validator.checkField.apply($(this).siblings().last()[0]);
+                });
+
+            // bind the validation to the form submit event
+            //$('#send').click('submit');//.prop('disabled', true);
+
+            $('form').submit(function (e) {
+                e.preventDefault();
+                var submit = true;
+                // evaluate the form using generic validaing
+                if (!validator.checkAll($(this))) {
+                    submit = false;
+                }
+
+                if (submit)
+                    this.submit();
+                return false;
+            });
+
+            /* FOR DEMO ONLY */
+            $('#vfields').change(function () {
+                $('form').toggleClass('mode2');
+            }).prop('checked', false);
+
+            $('#alerts').change(function () {
+                validator.defaults.alerts = (this.checked) ? false : true;
+                if (this.checked)
+                    $('form .alert').remove();
+            }).prop('checked', false);
     </script>
 
-    
-    
+
+    @* Spin when submit *@
+    <div id="loading">
+        <div id="loadingcontent">
+            <p id="loadingspinner">
+                Por favor espere, estamos procesando...
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#formulario').submit(function () {
+            $("#loading").fadeIn();
+            var opts = {
+                lines: 12, // The number of lines to draw
+                length: 7, // The length of each line
+                width: 4, // The line thickness
+                radius: 10, // The radius of the inner circle
+                color: '#000', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false // Whether to use hardware acceleration
+            };
+            var target = document.getElementById('loading');
+            var spinner = new Spinner(opts).spin(target);
+            $("#loading").delay(5000)
+            $("#loading").fadeOut();
+        });
+    </script>
+
+
+
+
+
+
+
 </body>
+
 </html>

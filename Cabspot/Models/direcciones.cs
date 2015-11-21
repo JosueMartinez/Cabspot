@@ -20,22 +20,27 @@ namespace Cabspot.Models
         [Key]
         public int idDireccion { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "¿Cuál es el número en la puerta?")]
         [StringLength(5)]
+        [Display(Name = "Número Puerta")]
         public string numeroPuerta { get; set; }
 
         [StringLength(5)]
+        [Display(Name = "Número Edificio")]
         public string numeroEdificio { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Edificio / Residencial")]
         public string nombreEdificio { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "¿En qué calle?")]
         [StringLength(255)]
+        [Display(Name = "Calle")]
         public string calle { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="¿En qué ciudad?")]
         [StringLength(100)]
+        [Display(Name = "Ciudad / Sector")]
         public string ciudad { get; set; }
 
         public int idMunicipio { get; set; }
@@ -55,11 +60,13 @@ namespace Cabspot.Models
         public SelectList listaProvincias { get; set; }
 
         [NotMapped]
-        [Required]
+        [Required(ErrorMessage = "¿En qué provincia?")]
+        [Display(Name = "Provincia")]
         public int provinciaSeleccionada { get; set; }
 
         [NotMapped]
-        [Required]
+        [Required(ErrorMessage = "¿En qué municipio?")]
+        [Display(Name = "Municipio")]
         public int municipioSeleccionado { get; set; }
 
         [NotMapped]

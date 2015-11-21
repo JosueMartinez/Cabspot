@@ -18,8 +18,9 @@ namespace Cabspot.Models
         [Key]
         public int idBase { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "¿Cuál es el nombre de la base?")]
         [StringLength(50)]
+        [Display(Name = "Nombre Base")]
         public string nombreBase { get; set; }
 
         public int idDireccion { get; set; }

@@ -1,8 +1,39 @@
 ﻿@model IEnumerable<Cabspot.Models.bases>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.controller = "Bases";
+    ViewBag.action = "Listado Bases";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //lanzando notificacion de exito
+    if (TempData["success"] != null)
+    {
+        <script type="text/javascript">
+            var permanotice, tooltip, _alert;
+            $(function () {
+                new PNotify({
+                    title: "Error",
+                    type: "error",
+                    text: "Exito! se ha agregado una base",
+                    nonblock: {
+                        nonblock: true
+                    },
+                    before_close: function (PNotify) {
+                        // You can access the notice's options with this. It is read only.
+                        //PNotify.options.text;
+
+                        // You can change the notice's options after the timer like this:
+                        PNotify.update({
+                            title: PNotify.options.title + " - Enjoy your Stay",
+                            before_close: null
+                        });
+                        PNotify.queueRemove();
+                        return false;
+                    }
+                });
+            });
+        </script>
+    }
 }
 
 <h2>Index</h2>

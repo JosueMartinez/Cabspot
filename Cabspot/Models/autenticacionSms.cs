@@ -18,7 +18,7 @@ namespace Cabspot.Models
         [StringLength(15)]
         public string codigo { get; set; }
 
-        public bool verificado { get; set; }
+        public bool verificado { get; set; }       
 
         public virtual clientes clientes { get; set; }
 
