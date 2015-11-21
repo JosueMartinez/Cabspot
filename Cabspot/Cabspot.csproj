@@ -82,6 +82,10 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.2\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -149,6 +153,18 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Twilio.Api, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.4.4.0\lib\3.5\Twilio.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Twilio.Mvc, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.Mvc.3.1.15\lib\3.5\Twilio.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Twilio.Twiml, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.TwiML.3.0\lib\3.5\Twilio.Twiml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
@@ -247,10 +263,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
+    <Compile Include="Controllers\Clases\Constantes.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\requestSms.cs" />
+    <Compile Include="Controllers\requestSmsController.cs" />
     <Compile Include="Controllers\taxistasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\vehiculosController.cs" />
@@ -300,6 +317,14 @@
     <Compile Include="Migrations\201511202051035_autenticacionSms1.cs" />
     <Compile Include="Migrations\201511202051035_autenticacionSms1.Designer.cs">
       <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511212112467_generarcontacto.cs" />
+    <Compile Include="Migrations\201511212112467_generarcontacto.Designer.cs">
+      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511212114216_generarcontacto1.cs" />
+    <Compile Include="Migrations\201511212114216_generarcontacto1.Designer.cs">
+      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -460,10 +485,14 @@
     <Content Include="Views\clientes\Details.cshtml" />
     <Content Include="Views\clientes\Edit.cshtml" />
     <Content Include="Views\clientes\Index.cshtml" />
+    <Content Include="Views\requestSms\Create.cshtml" />
+    <Content Include="Views\requestSms\Delete.cshtml" />
+    <Content Include="Views\requestSms\Details.cshtml" />
+    <Content Include="Views\requestSms\Edit.cshtml" />
+    <Content Include="Views\requestSms\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
-    <Folder Include="Controllers\Clases\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -502,6 +531,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511202051035_autenticacionSms1.resx">
       <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511212112467_generarcontacto.resx">
+      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511212114216_generarcontacto1.resx">
+      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,7 +19,7 @@ namespace Cabspot.Models
         [Key]
         public int idContacto { get; set; }
 
-        [StringLength(10)]
+        [StringLength(12)]
         [DataType(DataType.PhoneNumber, ErrorMessage = "El formato no es válido")]
         [Phone]
         public string telefonoMovil { get; set; }
