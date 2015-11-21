@@ -56,6 +56,7 @@ namespace Cabspot.Controllers
         {
             //creando objetos de entidades bases y direcciones
             bases bases = new bases();
+
             direcciones d = new direcciones();
             d.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
             bases.direcciones = d;

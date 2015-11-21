@@ -82,6 +82,10 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.2\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -149,6 +153,18 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Twilio.Api, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.4.4.0\lib\3.5\Twilio.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Twilio.Mvc, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.Mvc.3.1.15\lib\3.5\Twilio.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Twilio.Twiml, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.TwiML.3.0\lib\3.5\Twilio.Twiml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
@@ -247,8 +263,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
+    <Compile Include="Controllers\Clases\Constantes.cs" />
+    <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\requestSmsController.cs" />
     <Compile Include="Controllers\taxistasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\vehiculosController.cs" />
@@ -295,49 +314,17 @@
     <Compile Include="Migrations\201511182130351_migration1.Designer.cs">
       <DependentUpon>201511182130351_migration1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511192134535_mig2.cs" />
-    <Compile Include="Migrations\201511192134535_mig2.Designer.cs">
-      <DependentUpon>201511192134535_mig2.cs</DependentUpon>
+    <Compile Include="Migrations\201511202051035_autenticacionSms1.cs" />
+    <Compile Include="Migrations\201511202051035_autenticacionSms1.Designer.cs">
+      <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511202028095_apiKey.cs" />
-    <Compile Include="Migrations\201511202028095_apiKey.Designer.cs">
-      <DependentUpon>201511202028095_apiKey.cs</DependentUpon>
+    <Compile Include="Migrations\201511212112467_generarcontacto.cs" />
+    <Compile Include="Migrations\201511212112467_generarcontacto.Designer.cs">
+      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511202044477_mig3.cs" />
-    <Compile Include="Migrations\201511202044477_mig3.Designer.cs">
-      <DependentUpon>201511202044477_mig3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511202046585_mig4.cs" />
-    <Compile Include="Migrations\201511202046585_mig4.Designer.cs">
-      <DependentUpon>201511202046585_mig4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511202054195_mig5.cs" />
-    <Compile Include="Migrations\201511202054195_mig5.Designer.cs">
-      <DependentUpon>201511202054195_mig5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212007031_sms.cs" />
-    <Compile Include="Migrations\201511212007031_sms.Designer.cs">
-      <DependentUpon>201511212007031_sms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212024578_telefonoMovil.cs" />
-    <Compile Include="Migrations\201511212024578_telefonoMovil.Designer.cs">
-      <DependentUpon>201511212024578_telefonoMovil.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212027297_mig6.cs" />
-    <Compile Include="Migrations\201511212027297_mig6.Designer.cs">
-      <DependentUpon>201511212027297_mig6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212030171_mig7.cs" />
-    <Compile Include="Migrations\201511212030171_mig7.Designer.cs">
-      <DependentUpon>201511212030171_mig7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212031353_mig8.cs" />
-    <Compile Include="Migrations\201511212031353_mig8.Designer.cs">
-      <DependentUpon>201511212031353_mig8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212032175_mig9.cs" />
-    <Compile Include="Migrations\201511212032175_mig9.Designer.cs">
-      <DependentUpon>201511212032175_mig9.cs</DependentUpon>
+    <Compile Include="Migrations\201511212114216_generarcontacto1.cs" />
+    <Compile Include="Migrations\201511212114216_generarcontacto1.Designer.cs">
+      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -383,44 +370,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\animate.min.css" />
-    <Content Include="Content\custom.css" />
     <Content Include="Content\datepicker.css" />
-    <Content Include="Content\floatexamples.css" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\gridmvc.datepicker.min.css" />
-    <Content Include="Content\icheck\flat\aero%402x.png" />
-    <Content Include="Content\icheck\flat\aero.css" />
-    <Content Include="Content\icheck\flat\aero.png" />
-    <Content Include="Content\icheck\flat\blue%402x.png" />
-    <Content Include="Content\icheck\flat\blue.css" />
-    <Content Include="Content\icheck\flat\blue.png" />
-    <Content Include="Content\icheck\flat\flat%402x.png" />
-    <Content Include="Content\icheck\flat\flat.css" />
-    <Content Include="Content\icheck\flat\flat.png" />
-    <Content Include="Content\icheck\flat\green%402x.png" />
-    <Content Include="Content\icheck\flat\green.css" />
-    <Content Include="Content\icheck\flat\green.png" />
-    <Content Include="Content\icheck\flat\grey%402x.png" />
-    <Content Include="Content\icheck\flat\grey.css" />
-    <Content Include="Content\icheck\flat\grey.png" />
-    <Content Include="Content\icheck\flat\orange%402x.png" />
-    <Content Include="Content\icheck\flat\orange.css" />
-    <Content Include="Content\icheck\flat\orange.png" />
-    <Content Include="Content\icheck\flat\pink%402x.png" />
-    <Content Include="Content\icheck\flat\pink.css" />
-    <Content Include="Content\icheck\flat\pink.png" />
-    <Content Include="Content\icheck\flat\purple%402x.png" />
-    <Content Include="Content\icheck\flat\purple.css" />
-    <Content Include="Content\icheck\flat\purple.png" />
-    <Content Include="Content\icheck\flat\red%402x.png" />
-    <Content Include="Content\icheck\flat\red.css" />
-    <Content Include="Content\icheck\flat\red.png" />
-    <Content Include="Content\icheck\flat\yellow%402x.png" />
-    <Content Include="Content\icheck\flat\yellow.css" />
-    <Content Include="Content\icheck\flat\yellow.png" />
-    <Content Include="Content\icheck\flat\_all.css" />
-    <Content Include="Content\images\user.png" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sidebar.css" />
@@ -463,29 +417,15 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <Content Include="Content\jasny-bootstrap.css.map" />
     <Content Include="Grid.mvc.readme" />
     <None Include="Properties\PublishProfiles\CabspotApi%28Default-SQL-EastUS%29.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\chartjs\chart.min.js" />
-    <Content Include="Scripts\custom.js" />
-    <Content Include="Scripts\datepicker\daterangepicker.js" />
-    <Content Include="Scripts\flot\curvedLines.js" />
-    <Content Include="Scripts\flot\date.js" />
-    <Content Include="Scripts\flot\jquery.flot.js" />
-    <Content Include="Scripts\flot\jquery.flot.orderBars.js" />
-    <Content Include="Scripts\flot\jquery.flot.pie.js" />
-    <Content Include="Scripts\flot\jquery.flot.resize.js" />
-    <Content Include="Scripts\flot\jquery.flot.spline.js" />
-    <Content Include="Scripts\flot\jquery.flot.stack.js" />
-    <Content Include="Scripts\flot\jquery.flot.time.min.js" />
-    <Content Include="Scripts\flot\jquery.flot.tooltip.min.js" />
-    <Content Include="Scripts\gauge\gauge.min.js" />
-    <Content Include="Scripts\gauge\gauge_demo.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
     <Content Include="Scripts\gridmvc.min.js" />
-    <Content Include="Scripts\icheck\icheck.min.js" />
-    <Content Include="Scripts\input_mask\jquery.inputmask.js" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -494,28 +434,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\maps\gdp-data.js" />
-    <Content Include="Scripts\maps\jquery-jvectormap-2.0.1.min.js" />
-    <Content Include="Scripts\maps\jquery-jvectormap-us-aea-en.js" />
-    <Content Include="Scripts\maps\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Scripts\metisMenu.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\nicescroll\jquery.nicescroll.min.js" />
-    <Content Include="Scripts\notify\pnotify.buttons.js" />
-    <Content Include="Scripts\notify\pnotify.core.js" />
-    <Content Include="Scripts\notify\pnotify.nonblock.js" />
-    <Content Include="Scripts\nprogress.js" />
-    <Content Include="Scripts\progressbar\bootstrap-progressbar.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
-    <Content Include="Scripts\skycons\skycons.js" />
     <Content Include="Scripts\spin.js" />
-    <Content Include="Scripts\validator\validator.js" />
-    <Content Include="Scripts\wizard\jquery.smartWizard.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -554,7 +480,16 @@
     <Content Include="Views\vehiculos\Edit.cshtml" />
     <Content Include="Views\vehiculos\Index.cshtml" />
     <Content Include="Views\Shared\_AgregarVehiculo.cshtml" />
-    <Content Include="Scripts\maps\us-unemployment.json" />
+    <Content Include="Views\clientes\Create.cshtml" />
+    <Content Include="Views\clientes\Delete.cshtml" />
+    <Content Include="Views\clientes\Details.cshtml" />
+    <Content Include="Views\clientes\Edit.cshtml" />
+    <Content Include="Views\clientes\Index.cshtml" />
+    <Content Include="Views\requestSms\Create.cshtml" />
+    <Content Include="Views\requestSms\Delete.cshtml" />
+    <Content Include="Views\requestSms\Details.cshtml" />
+    <Content Include="Views\requestSms\Edit.cshtml" />
+    <Content Include="Views\requestSms\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
@@ -594,38 +529,14 @@
     <EmbeddedResource Include="Migrations\201511182130351_migration1.resx">
       <DependentUpon>201511182130351_migration1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511192134535_mig2.resx">
-      <DependentUpon>201511192134535_mig2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511202051035_autenticacionSms1.resx">
+      <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511202028095_apiKey.resx">
-      <DependentUpon>201511202028095_apiKey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511212112467_generarcontacto.resx">
+      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511202044477_mig3.resx">
-      <DependentUpon>201511202044477_mig3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511202046585_mig4.resx">
-      <DependentUpon>201511202046585_mig4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511202054195_mig5.resx">
-      <DependentUpon>201511202054195_mig5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212007031_sms.resx">
-      <DependentUpon>201511212007031_sms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212024578_telefonoMovil.resx">
-      <DependentUpon>201511212024578_telefonoMovil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212027297_mig6.resx">
-      <DependentUpon>201511212027297_mig6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212030171_mig7.resx">
-      <DependentUpon>201511212030171_mig7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212031353_mig8.resx">
-      <DependentUpon>201511212031353_mig8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212032175_mig9.resx">
-      <DependentUpon>201511212032175_mig9.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511212114216_generarcontacto1.resx">
+      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
