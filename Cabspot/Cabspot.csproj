@@ -326,6 +326,26 @@
     <Compile Include="Migrations\201511212114216_generarcontacto1.Designer.cs">
       <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511212148507_generarcontacto2.cs" />
+    <Compile Include="Migrations\201511212148507_generarcontacto2.Designer.cs">
+      <DependentUpon>201511212148507_generarcontacto2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511212341241_generarcontacto3.cs" />
+    <Compile Include="Migrations\201511212341241_generarcontacto3.Designer.cs">
+      <DependentUpon>201511212341241_generarcontacto3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511220008066_generarcontacto4.cs" />
+    <Compile Include="Migrations\201511220008066_generarcontacto4.Designer.cs">
+      <DependentUpon>201511220008066_generarcontacto4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511220100587_clientemovil.cs" />
+    <Compile Include="Migrations\201511220100587_clientemovil.Designer.cs">
+      <DependentUpon>201511220100587_clientemovil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511220103367_clientemovil1.cs" />
+    <Compile Include="Migrations\201511220103367_clientemovil1.Designer.cs">
+      <DependentUpon>201511220103367_clientemovil1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -333,6 +353,7 @@
     <Compile Include="Models\bases.cs" />
     <Compile Include="Models\CabspotDB.cs" />
     <Compile Include="Models\carreras.cs" />
+    <Compile Include="Models\clientemovil.cs" />
     <Compile Include="Models\clientes.cs" />
     <Compile Include="Models\comentarios.cs" />
     <Compile Include="Models\condicionvehiculos.cs" />
@@ -537,6 +558,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511212114216_generarcontacto1.resx">
       <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511212148507_generarcontacto2.resx">
+      <DependentUpon>201511212148507_generarcontacto2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511212341241_generarcontacto3.resx">
+      <DependentUpon>201511212341241_generarcontacto3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511220008066_generarcontacto4.resx">
+      <DependentUpon>201511220008066_generarcontacto4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511220100587_clientemovil.resx">
+      <DependentUpon>201511220100587_clientemovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511220103367_clientemovil1.resx">
+      <DependentUpon>201511220103367_clientemovil1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

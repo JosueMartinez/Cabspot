@@ -11,6 +11,7 @@ using Cabspot.Models;
 using Twilio;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using Cabspot.Controllers.Clases;
 
 namespace Cabspot.Controllers
 {
@@ -82,7 +83,7 @@ namespace Cabspot.Controllers
             contactos c = createContacto(telefonoMovil);
             autenticacionSms sms = generarCodigo();
 
-            string AccountSid = "AC44ec8cb4a1f64fbaf319c8631d9ad15b";
+            string AccountSid = Constantes.ACCOUNT_SID;
             string AuthToken = "e4b0d062616e0d65e9bc155b829b816a";
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
@@ -96,7 +97,13 @@ namespace Cabspot.Controllers
         public contactos createContacto(String telefonoMovil)
         {
             contactos c = new contactos();
-            c.telefonoMovil = telefonoMovil = "8297596854";
+            c.telefonoMovil = telefonoMovil = "+18297596854";
+            //c.telefonoResidencial = "8297596854";
+            //c.telefonoTrabajo = "8297596854";
+            //c.fax = "8297596854";
+            //c.email = "jordanirozon1@gmail.com";
+            //c.emailAlternativo = "jordanirozon1@gmail.com";
+            //c.paginaWeb = "www.google.com";
             db.contactos.Add(c);
             db.SaveChanges();
         
@@ -119,7 +126,8 @@ namespace Cabspot.Controllers
 
         public void verificarCodigo(String telefonoMovil, int otp)
         {
-
+            contactos c = new contactos();
+            autenticacionSms sms = new autenticacionSms();
         }
 
         // POST: requestSms/Create

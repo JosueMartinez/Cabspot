@@ -40,7 +40,6 @@ namespace Cabspot.Models
         public virtual DbSet<vehiculos> vehiculos { get; set; }
         public virtual DbSet<viasolicitud> viasolicitud { get; set; }
         public virtual DbSet<encuestaspreguntas> encuestaspreguntas { get; set; }
-        public virtual DbSet<autenticacionSms> autenticacionSms { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
