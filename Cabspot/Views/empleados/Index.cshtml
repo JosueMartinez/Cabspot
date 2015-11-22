@@ -68,24 +68,24 @@
             <tr>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.personas.nombres)
-                </td class="text-center">
+                </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.personas.apellidos)
-                </td class="text-center">
+                </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.roles.rol)
-                </td class="text-center">
+                </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.estadoempleados.estadoEmpleado)
-                </td class="text-center">
+                </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.usuario)
-                </td class="text-center">
+                </td>
                 <td class="text-center">
                     @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil-square-o", id = item.idEmpleado, title = "Editar" }) |
                     @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idEmpleado, title = "Detalles" }) |
                     @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idEmpleado, title = "Borrar" })
-                </td class="text-center">
+                </td>
             </tr>
         }
     </tbody>

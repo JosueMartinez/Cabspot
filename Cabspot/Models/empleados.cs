@@ -35,6 +35,7 @@ using System.Web.Mvc;
 
         [Required]
         [StringLength(25)]
+        [Display(Name="Usuario")]
         public string usuario { get; set; }
 
         [Required]

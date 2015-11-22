@@ -20,6 +20,7 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(20)]
+        [Display(Name="Rol")]
         public string rol { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

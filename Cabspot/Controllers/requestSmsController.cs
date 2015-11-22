@@ -98,6 +98,7 @@ namespace Cabspot.Controllers
         {
             clientesMovil c = new clientesMovil();
             c.telefonoMovil = telefonoMovil = "+18297596854";
+            //c.telefonoMovil = telefonoMovil = "+18099801767";
             db.clientesMovil.Add(c);
             db.SaveChanges();
         
@@ -110,7 +111,10 @@ namespace Cabspot.Controllers
             autenticacionsms sms = new autenticacionsms();
 
             int otp = random.Next(100000, 999999);
-            sms.idClienteMovil = 1;
+            //buscando al cliente con el numeroMovil correcto
+            var idclienteMovil = from cl in db.clientesMovil where cl.telefonoMovil.Equals("+18297596854") select cl.idClienteMovil;
+            
+            sms.idClienteMovil = idclienteMovil.First();   //hay que validar que no sea nulo (debe existir)
             sms.codigo = otp.ToString();
 
             db.autenticacionSms.Add(sms);
