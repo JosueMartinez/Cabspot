@@ -102,7 +102,18 @@
                                         </li>                                        
                                     </ul>
                                 </li>
-                                
+                                @* Empleados *@
+                                <li>
+                                    <a><i class="fa fa-users"></i> Empleados <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Empleados")">Listado Empleados</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Create", "Empleados")">Agregar Empleado</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

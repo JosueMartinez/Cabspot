@@ -326,6 +326,10 @@
     <Compile Include="Migrations\201511212114216_generarcontacto1.Designer.cs">
       <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511220303177_clientesMovil.cs" />
+    <Compile Include="Migrations\201511220303177_clientesMovil.Designer.cs">
+      <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -334,6 +338,7 @@
     <Compile Include="Models\CabspotDB.cs" />
     <Compile Include="Models\carreras.cs" />
     <Compile Include="Models\clientes.cs" />
+    <Compile Include="Models\clientesMovil.cs" />
     <Compile Include="Models\comentarios.cs" />
     <Compile Include="Models\condicionvehiculos.cs" />
     <Compile Include="Models\contactos.cs" />
@@ -535,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511212114216_generarcontacto1.resx">
       <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511220303177_clientesMovil.resx">
+      <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

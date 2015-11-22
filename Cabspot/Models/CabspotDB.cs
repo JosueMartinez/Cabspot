@@ -11,7 +11,7 @@ namespace Cabspot.Models
             : base("name=CabspotDB")
         {
         }
-        public virtual DbSet<autenticacionSms> autenticacionSms { get; set; }
+        public virtual DbSet<autenticacionsms> autenticacionSms { get; set; }
         public virtual DbSet<bases> bases { get; set; }
         public virtual DbSet<carreras> carreras { get; set; }
         public virtual DbSet<clientes> clientes { get; set; }
@@ -40,7 +40,7 @@ namespace Cabspot.Models
         public virtual DbSet<vehiculos> vehiculos { get; set; }
         public virtual DbSet<viasolicitud> viasolicitud { get; set; }
         public virtual DbSet<encuestaspreguntas> encuestaspreguntas { get; set; }
-        //public virtual DbSet<autenticacionSms> autenticacionSms { get; set; }
+        public virtual DbSet<clientesMovil> clientesMovil { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
