@@ -84,7 +84,7 @@ namespace Cabspot.Controllers
             autenticacionsms sms = generarCodigo();
 
             string AccountSid = Constantes.ACCOUNT_SID;
-            string AuthToken = Constantes.ACCOUNT_SID;
+            string AuthToken = "e4b0d062616e0d65e9bc155b829b816a";
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             var message = twilio.SendMessage(
@@ -108,7 +108,6 @@ namespace Cabspot.Controllers
         {
             Random random = new Random();
             autenticacionsms sms = new autenticacionsms();
-            clientesMovil c = new clientesMovil();
 
             int otp = random.Next(100000, 999999);
             sms.idClienteMovil = 1;
