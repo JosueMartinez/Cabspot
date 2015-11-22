@@ -66,22 +66,22 @@
         {
 
             <tr>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.nombreBase)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.contactos.telefonoTrabajo)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.contactos.telefonoMovil)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.direcciones.ciudad)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.direcciones.municipios.provincias.nombreProvincia)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.ActionLink(" ", "Edit",null, new {@class = "fa fa-pencil-square-o", id = item.idBase, title = "Editar" }) |
                     @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idBase, title = "Detalles" }) |
                     @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idBase, title = "Borrar" })
