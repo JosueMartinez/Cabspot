@@ -81,23 +81,23 @@ namespace Cabspot.Controllers
             //recibo un json el cual convierto a string
             string telefono = (telefonoMovil);
             clientesMovil c = createClienteMovil(telefonoMovil);
-            autenticacionsms sms = generarCodigo();
+            autenticacionsms sms = generarCodigo(telefonoMovil);
 
             string AccountSid = Constantes.ACCOUNT_SID;
-            string AuthToken = "e4b0d062616e0d65e9bc155b829b816a";
+            string AuthToken = Constantes.AUTH_TOKEN;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             var message = twilio.SendMessage(
-                "+19179831394", "+18297596854",
+                "+19179831394", telefonoMovil,
                 "Tu codigo es este " + sms.codigo);
 
             return Json("jordani" + telefono, JsonRequestBehavior.AllowGet);
         }
 
-        public clientesMovil createClienteMovil(String telefonoMovil)
+        public clientesMovil createClienteMovil(string telefonoMovil)
         {
             clientesMovil c = new clientesMovil();
-            c.telefonoMovil = telefonoMovil = "+18297596854";
+            c.telefonoMovil = telefonoMovil;
             //c.telefonoMovil = telefonoMovil = "+18099801767";
             db.clientesMovil.Add(c);
             db.SaveChanges();
@@ -105,14 +105,14 @@ namespace Cabspot.Controllers
             return c;
         }
 
-        public autenticacionsms generarCodigo()
+        public autenticacionsms generarCodigo(string telefonoMovil)
         {
             Random random = new Random();
             autenticacionsms sms = new autenticacionsms();
 
             int otp = random.Next(100000, 999999);
             //buscando al cliente con el numeroMovil correcto
-            var idclienteMovil = from cl in db.clientesMovil where cl.telefonoMovil.Equals("+18297596854") select cl.idClienteMovil;
+            var idclienteMovil = from cl in db.clientesMovil where cl.telefonoMovil.Equals(telefonoMovil) select cl.idClienteMovil;
             
             sms.idClienteMovil = idclienteMovil.First();   //hay que validar que no sea nulo (debe existir)
             sms.codigo = otp.ToString();
