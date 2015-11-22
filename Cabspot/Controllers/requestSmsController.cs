@@ -80,11 +80,11 @@ namespace Cabspot.Controllers
         {
             //recibo un json el cual convierto a string
             string telefono = (telefonoMovil);
-            contactos c = createContacto(telefonoMovil);
+            clientesMovil c = createClienteMovil(telefonoMovil);
             autenticacionsms sms = generarCodigo();
 
             string AccountSid = Constantes.ACCOUNT_SID;
-            string AuthToken = "e4b0d062616e0d65e9bc155b829b816a";
+            string AuthToken = Constantes.ACCOUNT_SID;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             var message = twilio.SendMessage(
@@ -94,17 +94,11 @@ namespace Cabspot.Controllers
             return Json("jordani" + telefono, JsonRequestBehavior.AllowGet);
         }
 
-        public contactos createContacto(String telefonoMovil)
+        public clientesMovil createClienteMovil(String telefonoMovil)
         {
-            contactos c = new contactos();
+            clientesMovil c = new clientesMovil();
             c.telefonoMovil = telefonoMovil = "+18297596854";
-            //c.telefonoResidencial = "8297596854";
-            //c.telefonoTrabajo = "8297596854";
-            //c.fax = "8297596854";
-            //c.email = "jordanirozon1@gmail.com";
-            //c.emailAlternativo = "jordanirozon1@gmail.com";
-            //c.paginaWeb = "www.google.com";
-            db.contactos.Add(c);
+            db.clientesMovil.Add(c);
             db.SaveChanges();
         
             return c;
@@ -114,8 +108,10 @@ namespace Cabspot.Controllers
         {
             Random random = new Random();
             autenticacionsms sms = new autenticacionsms();
+            clientesMovil c = new clientesMovil();
+
             int otp = random.Next(100000, 999999);
-            //sms.idClienteMovil = 1;
+            sms.idClienteMovil = 1;
             sms.codigo = otp.ToString();
 
             db.autenticacionSms.Add(sms);
@@ -127,7 +123,7 @@ namespace Cabspot.Controllers
         public void verificarCodigo(String telefonoMovil, int otp)
         {
             contactos c = new contactos();
-            autenticacionSms sms = new autenticacionSms();
+            autenticacionsms sms = new autenticacionsms();
         }
 
         // POST: requestSms/Create
