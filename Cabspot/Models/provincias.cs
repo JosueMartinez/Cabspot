@@ -21,6 +21,7 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name="Provincia")]
         public string nombreProvincia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

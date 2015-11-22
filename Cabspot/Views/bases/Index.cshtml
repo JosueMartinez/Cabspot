@@ -12,8 +12,8 @@
             var permanotice, tooltip, _alert;
             $(function () {
                 new PNotify({
-                    title: "Error",
-                    type: "error",
+                    title: "Exito",
+                    type: "success",
                     text: "Exito! se ha agregado una base",
                     nonblock: {
                         nonblock: true
@@ -36,42 +36,57 @@
     }
 }
 
-<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nueva", "Create", null,new {@class = "btn btn-primary"})
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.contactos.telefonoMovil)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direcciones.numeroPuerta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreBase)
-        </th>
-        <th></th>
-    </tr>
+<table id="example" class="table table-striped responsive-utilities jambo_table">
+   <thead>
+             <tr class="headings">
+                 <th class="text-center">
+                     @Html.DisplayNameFor(model => model.nombreBase)
+                 </th>
+                 <th class="text-center">
+                     @Html.DisplayNameFor(model => model.contactos.telefonoTrabajo)
+                 </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.contactos.telefonoMovil)
+                </th>
+                 <th class="text-center">
+                     @Html.DisplayNameFor(model => model.direcciones.ciudad)
+                 </th>
+                 <th class="text-center">
+                     @Html.DisplayNameFor(model => model.direcciones.municipios.provincias.nombreProvincia)
+                 </th>
+                <th></th>
+            </tr>
+   </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.contactos.telefonoMovil)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.direcciones.numeroPuerta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombreBase)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idBase }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idBase }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idBase })
-        </td>
-    </tr>
-}
-
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreBase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contactos.telefonoTrabajo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contactos.telefonoMovil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direcciones.ciudad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direcciones.municipios.provincias.nombreProvincia)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit",null, new {@class = "fa fa-pencil-square-o", id = item.idBase, title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idBase, title = "Detalles" }) |
+                    @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idBase, title = "Borrar" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

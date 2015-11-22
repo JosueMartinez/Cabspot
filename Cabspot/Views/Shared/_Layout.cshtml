@@ -95,11 +95,25 @@
                                     <a><i class="fa fa-building"></i> Bases <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li>
-                                            <a href="@Url.Action("Create","Bases")">Agregar Base</a>
+                                            <a href="@Url.Action("Index","Bases")">Listado Bases</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Create","Bases")" >Agregar Base</a>
                                         </li>                                        
                                     </ul>
                                 </li>
-                                
+                                @* Empleados *@
+                                <li>
+                                    <a><i class="fa fa-users"></i> Empleados <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Empleados")">Listado Empleados</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Create", "Empleados")">Agregar Empleado</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -406,6 +420,65 @@
             $("#loading").fadeOut();
         });
     </script>
+
+    @* Datatables *@
+    <script>
+    $(document).ready(function () {
+        $('input.tableflat').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    });
+
+    var asInitVals = new Array();
+    $(document).ready(function () {
+        var oTable = $('#example').dataTable({
+            "oLanguage": {
+                "sSearch": "Buscar:"
+            },
+            "aoColumnDefs": [
+                {
+                    'bSortable': false,
+                    'aTargets': [0]
+                } //disables sorting for column one
+            ],
+            'iDisplayLength': 12,
+            "sPaginationType": "full_numbers",
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
+            }
+        });
+        $("tfoot input").keyup(function () {
+            /* Filter on the column based on the index of this element's parent <th> */
+            oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+        });
+        $("tfoot input").each(function (i) {
+            asInitVals[i] = this.value;
+        });
+        $("tfoot input").focus(function () {
+            if (this.className == "search_init") {
+                this.className = "";
+                this.value = "";
+            }
+        });
+        $("tfoot input").blur(function (i) {
+            if (this.value == "") {
+                this.className = "search_init";
+                this.value = asInitVals[$("tfoot input").index(this)];
+            }
+        });
+    });
+    </script>
+
+
+
+
+
+
+
+
+
 
 
 

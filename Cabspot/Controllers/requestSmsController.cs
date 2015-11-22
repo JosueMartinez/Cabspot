@@ -81,7 +81,7 @@ namespace Cabspot.Controllers
             //recibo un json el cual convierto a string
             string telefono = (telefonoMovil);
             contactos c = createContacto(telefonoMovil);
-            autenticacionSms sms = generarCodigo();
+            autenticacionsms sms = generarCodigo();
 
             string AccountSid = Constantes.ACCOUNT_SID;
             string AuthToken = "e4b0d062616e0d65e9bc155b829b816a";
@@ -110,12 +110,12 @@ namespace Cabspot.Controllers
             return c;
         }
 
-        public autenticacionSms generarCodigo()
+        public autenticacionsms generarCodigo()
         {
             Random random = new Random();
-            autenticacionSms sms = new autenticacionSms();
+            autenticacionsms sms = new autenticacionsms();
             int otp = random.Next(100000, 999999);
-            sms.idCliente = 1;
+            //sms.idClienteMovil = 1;
             sms.codigo = otp.ToString();
 
             db.autenticacionSms.Add(sms);

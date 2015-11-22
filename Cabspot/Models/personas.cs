@@ -28,20 +28,22 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(30)]
-        [Display(Name="Nombre Completo")]
+        [Display(Name="Nombre(s)")]
         public string nombres { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Apellido(s)")]
         public string apellidos { get; set; }
 
         [Column(TypeName = "date")]
-        
+        [Display(Name = "Fecha Nacimiento")]
         public DateTime fechaNacimiento { get; set; }
 
         [Column(TypeName = "char")]
         [Required]
         [StringLength(1)]
+        [Display(Name = "Genero")]
         public string sexo { get; set; }
 
         [Required]
@@ -50,6 +52,7 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Nacionalidad")]
         public string nacionalidad { get; set; }
 
         public int idDireccion { get; set; }

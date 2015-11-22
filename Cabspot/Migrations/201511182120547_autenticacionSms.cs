@@ -8,7 +8,7 @@ namespace Cabspot.Migrations
         public override void Up()
         {
             CreateTable(
-                "autenticacionSms",
+                "autenticacionsms",
                 c => new
                     {
                         idSms = c.Int(nullable: false, identity: true),
@@ -20,15 +20,15 @@ namespace Cabspot.Migrations
                 //.ForeignKey("clientes", t => t.idCliente, cascadeDelete: true)
                 .Index(t => t.idCliente);
 
-            AddForeignKey("autenticacionSms", "idCliente", "clientes", "idCliente");
+            AddForeignKey("autenticacionsms", "idCliente", "clientes", "idCliente");
             
         }
         
         public override void Down()
         {
-            DropForeignKey("autenticacionSms", "idCliente", "clientes");
-            DropIndex("autenticacionSms", new[] { "idCliente" });
-            DropTable("autenticacionSms");
+            DropForeignKey("autenticacionsms", "idCliente", "clientes");
+            DropIndex("autenticacionsms", new[] { "idCliente" });
+            DropTable("autenticacionsms");
         }
     }
 }

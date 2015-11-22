@@ -41,7 +41,8 @@ namespace Cabspot
                     "~/Content/animate.min.css",
                     "~/Content/custom.css",
                     "~/Content/icheck/flat/green.css",
-                    "~/Content/floatexamples.css"
+                    "~/Content/floatexamples.css",
+                    "~/Content/dataTables.tableTools.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/gentella").Include(
@@ -50,7 +51,9 @@ namespace Cabspot
                     "~/Scripts/skycons/skycons.js",
                     "~/Scripts/wizard/jquery.smartWizard.js",
                     "~/Scripts/input_mask/jquery.inputmask.js",
-                    "~/Scripts/spin.js"
+                    "~/Scripts/spin.js",
+                    "~/Scripts/Datatables/jquery.dataTables.js",
+                    "~/Scripts/Datatables/dataTables.tableTools.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(

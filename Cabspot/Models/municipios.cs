@@ -21,6 +21,7 @@ namespace Cabspot.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Municipio")]
         public string nombreMunicipio { get; set; }
 
         public int idProvincia { get; set; }
