@@ -326,6 +326,10 @@
     <Compile Include="Migrations\201511220303177_clientesMovil.Designer.cs">
       <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511221548289_generarclientemovil.cs" />
+    <Compile Include="Migrations\201511221548289_generarclientemovil.Designer.cs">
+      <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -536,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511220303177_clientesMovil.resx">
       <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511221548289_generarclientemovil.resx">
+      <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
