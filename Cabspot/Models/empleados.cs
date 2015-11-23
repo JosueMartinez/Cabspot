@@ -22,6 +22,7 @@ using System.Web.Mvc;
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
 
+        [Display(Name="Registrado Por")]
         public int? registradoPor { get; set; }
 
         public int idEstadoEmpleado { get; set; }
@@ -33,14 +34,15 @@ using System.Web.Mvc;
         //agregado luego
         public int idPersona { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Debe elegir su nombre de usuario")]
         [StringLength(25)]
         [Display(Name="Usuario")]
         public string usuario { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="¿Cuál va a ser su contraseña?")]
         [StringLength(20)]
         [DataType(DataType.Password)]
+        [Display(Name = "Contrasena")]
         public string contrasena { get; set; }
 
         public virtual bases bases { get; set; }
@@ -55,18 +57,23 @@ using System.Web.Mvc;
         [NotMapped]
         public SelectList listaBases { get; set; }
         [NotMapped]
+        [Display(Name="Base")]
+        [Required]
         public string baseSeleccionada { get; set; }
 
         [NotMapped]
         public SelectList listaRoles { get; set; }
         [NotMapped]
+        [Display(Name="Rol")]
+        [Required(ErrorMessage = "¿Cuál será el rol del empleado?")]
         public string rolSeleccionado { get; set; }
 
         [NotMapped]
-        [Required]
+        [Required(ErrorMessage="Confirme su contraseña")]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("contrasena")]
+        [System.ComponentModel.DataAnnotations.Compare("contrasena", ErrorMessage="Las contraseñas no coinciden")]
+        [Display(Name = "Confirmar Contraseña")]
         public string confirmarContrasena { get; set; }
 
     }
