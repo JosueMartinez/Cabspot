@@ -1,82 +1,92 @@
 ﻿@model IEnumerable<Cabspot.Models.taxistas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.controller = "Taxistas";
+    ViewBag.action = "Listado Taxistas";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //lanzando notificacion de exito
+    if (TempData["success"] != null)
+    {
+        <script type="text/javascript">
+            var permanotice, tooltip, _alert;
+            $(function () {
+                new PNotify({
+                    title: "Exito",
+                    type: "success",
+                    text: "Exito! se ha agregado.",
+                    nonblock: {
+                        nonblock: true
+                    },
+                    before_close: function (PNotify) {
+                        // You can access the notice's options with this. It is read only.
+                        //PNotify.options.text;
+
+                        // You can change the notice's options after the timer like this:
+                        PNotify.update({
+                            title: PNotify.options.title + " - Enjoy your Stay",
+                            before_close: null
+                        });
+                        PNotify.queueRemove();
+                        return false;
+                    }
+                });
+            });
+        </script>
+    }
 }
 
-<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Taxista", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idPersona)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codigoTaxista)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idEstadoDisponibilidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idBase)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaRegistro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.registradoPor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitudActual)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.longitudActual)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ultimaActualizacionPosicion)
-        </th>
-        <th></th>
-    </tr>
+<table id="example" class="table table-striped responsive-utilities jambo_table">
+    <thead>
+        <tr class="headings">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.personas.nombres)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.personas.apellidos)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.codigoTaxista)
+            </th>
+            @*<th class="text-center">
+                @Html.DisplayNameFor(model => model.estadoempleados.estadoEmpleado)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.usuario)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idPersona)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codigoTaxista)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idEstadoDisponibilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idBase)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaRegistro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.registradoPor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitudActual)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitudActual)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ultimaActualizacionPosicion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idTaxista }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idTaxista }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idTaxista })
-        </td>
-    </tr>
-}
-
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.personas.nombres)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.personas.apellidos)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.codigoTaxista)
+                </td>
+                @*<td class="text-center">
+                    @Html.DisplayFor(modelItem => item.estadoempleados.estadoEmpleado)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.usuario)
+                </td>*@
+                <td class="text-center">
+                    @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil-square-o", id = item.idTaxista, title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idTaxista, title = "Detalles" }) |
+                    @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idTaxista, title = "Borrar" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

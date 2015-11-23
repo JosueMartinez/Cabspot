@@ -36,9 +36,10 @@
     }
 }
 
-<form class="form-horizontal form-label-left" action="@Url.Action("Create","Empleados")" method="post" id="formulario" enctype="multipart/form-data">
+@using (Html.BeginForm("Create", "Empleados", FormMethod.Post, htmlAttributes: new {@class = "form-horizontal form-label-left", id = "formulario", enctype = "multipart/form-data" }))
+{
     @Html.AntiForgeryToken()
-
+    
     <div id="wizard_verticle" class="form_wizard wizard_verticle">
         @* Lista Pasos *@
         <ul class="list-unstyled wizard_steps">
@@ -156,18 +157,17 @@
                         </div>
                     </div>
                 </div>
-
-                
             </div>
         </div>
         @* FIN INFORMACION GENERAL *@
+
         <div id="step-22">
             <h2 class="StepTitle">Paso 2</h2>
             <div class="form-horizontal form-label-left">
                 <span class="section">Información Empleado</span>
             </div>
 
-            @* Base*@   
+            @* Base*@
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3">
                     @Html.LabelFor(model => model.baseSeleccionada, htmlAttributes: new { @class = "control-label" }) <span class="required">*</span>
@@ -379,5 +379,4 @@
         </div>
         @* FIN CONTACTOS *@
     </div>
-
-</form>
+}

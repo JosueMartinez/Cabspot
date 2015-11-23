@@ -68,14 +68,14 @@ namespace Cabspot.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(bases bases)
         {
             //quitando parentesis y guiones agregados por la mascara en la vista de numeros de telefono
-            //if (bases.contactos.telefonoMovil != null) { bases.contactos.telefonoMovil = bases.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.telefonoTrabajo != null) { bases.contactos.telefonoTrabajo = bases.contactos.telefonoTrabajo.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.telefonoResidencial != null) { bases.contactos.telefonoResidencial = bases.contactos.telefonoResidencial.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.fax != null) { bases.contactos.fax = bases.contactos.fax.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.telefonoMovil != null) { bases.contactos.telefonoMovil = bases.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.telefonoTrabajo != null) { bases.contactos.telefonoTrabajo = bases.contactos.telefonoTrabajo.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.telefonoResidencial != null) { bases.contactos.telefonoResidencial = bases.contactos.telefonoResidencial.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.fax != null) { bases.contactos.fax = bases.contactos.fax.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
 
             //var len = bases.contactos.telefonoMovil.Length;
 
