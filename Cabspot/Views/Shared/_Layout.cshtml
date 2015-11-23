@@ -471,11 +471,60 @@
     });
     </script>
 
-    @* Datepicker *@
+      
+    <!-- /datepicker -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#single_cal1').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_1"
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+            $('#single_cal2').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_2"
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+            $('#single_cal3').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_3"
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+            $('#single_cal4').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_4"
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#reservation').daterangepicker(null, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+        });
+    </script>
 
-
-
-
+    <!-- select2 -->
+    <script>
+        $(document).ready(function () {
+            $(".select2_single").select2({
+                //placeholder: "Select a state",
+                allowClear: true
+            });
+            $(".select2_group").select2({});
+            $(".select2_multiple").select2({
+                maximumSelectionLength: 4,
+                placeholder: "With Max Selection limit 4",
+                allowClear: true
+            });
+        });
+    </script>
+    <!-- /select2 -->
 
 
 
