@@ -76,28 +76,28 @@ namespace Cabspot.Controllers
             return View();
         }
 
-        public JsonResult getTelefonoMovil(string telefonoMovil)
+        public JsonResult getTelefonoMovil(String telefonoMovil)
         {
             //recibo un json el cual convierto a string
             string telefono = (telefonoMovil);
-            clientesMovil c = createClienteMovil(telefonoMovil);
-            autenticacionsms sms = generarCodigo(telefonoMovil);
+            clientesMovil c = createClienteMovil(telefono);
+            autenticacionsms sms = generarCodigo(telefono);
 
             string AccountSid = Constantes.ACCOUNT_SID;
             string AuthToken = Constantes.AUTH_TOKEN;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             var message = twilio.SendMessage(
-                "+19179831394", telefonoMovil,
+                "+19179831394", telefono,
                 "Tu codigo es este " + sms.codigo);
 
-            return Json("jordani" + telefono, JsonRequestBehavior.AllowGet);
+            return Json("jordani" + "+" + telefono, JsonRequestBehavior.AllowGet);
         }
 
-        public clientesMovil createClienteMovil(string telefonoMovil)
+        public clientesMovil createClienteMovil(String telefonoMovil)
         {
             clientesMovil c = new clientesMovil();
-            c.telefonoMovil = telefonoMovil;
+            c.telefonoMovil = "+" + telefonoMovil;
             //c.telefonoMovil = telefonoMovil = "+18099801767";
             db.clientesMovil.Add(c);
             db.SaveChanges();
@@ -105,14 +105,14 @@ namespace Cabspot.Controllers
             return c;
         }
 
-        public autenticacionsms generarCodigo(string telefonoMovil)
+        public autenticacionsms generarCodigo(String telefonoMovil)
         {
             Random random = new Random();
             autenticacionsms sms = new autenticacionsms();
 
             int otp = random.Next(100000, 999999);
             //buscando al cliente con el numeroMovil correcto
-            var idclienteMovil = from cl in db.clientesMovil where cl.telefonoMovil.Equals(telefonoMovil) select cl.idClienteMovil;
+            var idclienteMovil = from cl in db.clientesMovil where cl.telefonoMovil.Equals("+" + telefonoMovil) select cl.idClienteMovil;
             
             sms.idClienteMovil = idclienteMovil.First();   //hay que validar que no sea nulo (debe existir)
             sms.codigo = otp.ToString();
@@ -123,10 +123,19 @@ namespace Cabspot.Controllers
             return sms;
         }
 
-        public void verificarCodigo(String telefonoMovil, int otp)
+        public JsonResult verificarCodigo(int otp)
         {
-            contactos c = new contactos();
-            autenticacionsms sms = new autenticacionsms();
+            autenticacionsms objetoSeleccionado = new autenticacionsms();
+            var activarCliente = from clm in db.clientesMovil join sms in db.autenticacionSms on clm.idClienteMovil equals sms.idClienteMovil where (sms.idClienteMovil == clm.idClienteMovil) select sms;
+            if (activarCliente.Count() > 0)
+            {
+                objetoSeleccionado = activarCliente.First();
+                objetoSeleccionado.verificado = true;
+                //db.autenticacionSms.Add(objetoSeleccionado);
+                db.SaveChanges();
+            }
+
+            return Json("jordani " + otp, JsonRequestBehavior.AllowGet);
         }
 
         // POST: requestSms/Create
