@@ -113,7 +113,7 @@ namespace Cabspot
             //font-awesome
             bundles.Add(new StyleBundle("~/Content/fa", @"//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"));
 
-            
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
