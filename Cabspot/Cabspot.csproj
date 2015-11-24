@@ -57,6 +57,10 @@
       <HintPath>..\packages\DevelopersDo.DataAnnotations.1.0.1.0\lib\net40\DevelopersDo.Validator.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Azure.AppService.ApiApps.Service, Version=0.9.16.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.AppService.ApiApps.Service.0.9.16\lib\net45\Microsoft.Azure.AppService.ApiApps.Service.dll</HintPath>
       <Private>True</Private>
@@ -377,11 +381,10 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\dataTables.tableTools.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\gridmvc.datepicker.min.css" />
-    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
-    <Content Include="Content\select2.min.css" />
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\timeline.css" />
     <Content Include="index.html" />
@@ -422,10 +425,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <Content Include="Grid.mvc.readme" />
+    <None Include="Properties\PublishProfiles\CabspotApi%28Default-SQL-EastUS%29.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\Datatables\dataTables.tableTools.js" />
     <Content Include="Scripts\Datatables\jquery.dataTables.js" />
-    <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -441,7 +448,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
-    <Content Include="Scripts\select2.full.js" />
     <Content Include="Scripts\spin.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -473,6 +479,8 @@
     <Content Include="Views\taxistas\Details.cshtml" />
     <Content Include="Views\taxistas\Edit.cshtml" />
     <Content Include="Views\taxistas\Index.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\vehiculos\Create.cshtml" />
     <Content Include="Views\vehiculos\Delete.cshtml" />
     <Content Include="Views\vehiculos\Details.cshtml" />
@@ -492,7 +500,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

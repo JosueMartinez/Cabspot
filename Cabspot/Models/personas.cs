@@ -21,37 +21,36 @@ namespace Cabspot.Models
         [Key]
         public int idPersona { get; set; }
 
-        [Required(ErrorMessage="¿Cuál es su cédula?")]
+        [Required]
         [StringLength(15)]
-        [Cedula(ErrorMessage="La cédula no es válida")]
+        [Cedula]
         public string identificacion { get; set; }
 
-        [Required(ErrorMessage="¿Cómo se llama?")]
+        [Required]
         [StringLength(30)]
         [Display(Name="Nombre(s)")]
         public string nombres { get; set; }
 
-        [Required(ErrorMessage="¿Cuáles son sus apellidos?")]
+        [Required]
         [StringLength(50)]
         [Display(Name = "Apellido(s)")]
         public string apellidos { get; set; }
 
         [Column(TypeName = "date")]
         [Display(Name = "Fecha Nacimiento")]
-        [Required(ErrorMessage="¿Cuándo nació?")]
         public DateTime fechaNacimiento { get; set; }
 
         [Column(TypeName = "char")]
-        [Required(ErrorMessage="Debe elegir un género")]
+        [Required]
         [StringLength(1)]
         [Display(Name = "Genero")]
         public string sexo { get; set; }
 
-        [Required(ErrorMessage="Debe elegir una foto de perfil")]
+        [Required]
         [StringLength(255)]
         public string foto { get; set; }
 
-        [Required(ErrorMessage="¿Cuál es su nacionalidad?")]
+        [Required]
         [StringLength(50)]
         [Display(Name = "Nacionalidad")]
         public string nacionalidad { get; set; }

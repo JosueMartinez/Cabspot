@@ -24,17 +24,16 @@ namespace Cabspot
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       //"~/Scripts/bootstrap-datepicker.js",//datepicker
-                      "~/Scripts/jasny-bootstrap.min.js",  //fileinput espanol                    
-                      "~/Scripts/select2.full.js"
+                      "~/Scripts/jasny-bootstrap.min.js"  //fileinput espanol
+
                       ));  
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/select2.min.css",
+                      "~/Content/bootstrap.min.css"
                       //"~/Content/site.css",
                       //"~/Content/datepicker.css",   //datepicker
                       //"~/Content/gridmvc.datepicker.min.css",  //datepicker
-                      "~/Content/jasny-bootstrap.min.css"  //fileinput
+                      //"~/Content/jasny-bootstrap.min.css"  //fileinput
                       ));
             
             //Gentella template------------------------------------------------------
