@@ -68,7 +68,7 @@ namespace Cabspot.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-       // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(bases bases)
         {
             //quitando parentesis y guiones agregados por la mascara en la vista de numeros de telefono
@@ -77,13 +77,24 @@ namespace Cabspot.Controllers
             if (bases.contactos.telefonoResidencial != null) { bases.contactos.telefonoResidencial = bases.contactos.telefonoResidencial.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
             if (bases.contactos.fax != null) { bases.contactos.fax = bases.contactos.fax.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
 
-            //var len = bases.contactos.telefonoMovil.Length;
+            //buscando campos unique de nombre y numero movil
+            var nombre = from n in db.bases where n.nombreBase.ToUpper().Equals(bases.nombreBase.ToUpper()) select n;
+            if (nombre.Count() > 0)
+            {
+                ModelState.AddModelError("nombreBase", "Existe una base con este nombre");
+            }
 
+            var movil = from n in db.bases where n.contactos.telefonoMovil.Equals(bases.contactos.telefonoMovil) select n;
+            if (movil.Count() > 0)
+            {
+                ModelState.AddModelError("contactos.telefonoMovil", "Existe una base con este teléfono móvil");
+            }
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                   
+
 
                     //municipio para direccion
                     bases.direcciones.idMunicipio = bases.direcciones.municipioSeleccionado;
@@ -93,14 +104,14 @@ namespace Cabspot.Controllers
 
                     //redirigiendo a home...tempdata para mensaje de exito
                     TempData["success"] = "Se ha añadido una base exitosamente";
-                    return RedirectToAction("Index","Bases");
+                    return RedirectToAction("Index", "Bases");
                 }
                 catch (Exception e)
                 {
                     TempData["error"] = e.ToString();
                     return Redirect("~/Shared/Error.cshtml");
                 }
-                
+
             }
             bases.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
             ViewBag.municipio = bases.direcciones.municipioSeleccionado;

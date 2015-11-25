@@ -23,13 +23,14 @@ namespace Cabspot
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                      //"~/Scripts/bootstrap-datepicker.js",//datepicker
+                      "~/Scripts/select2.full.js",
                       "~/Scripts/jasny-bootstrap.min.js"  //fileinput espanol
 
                       ));  
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css"
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/select2.min.css"
                       //"~/Content/site.css",
                       //"~/Content/datepicker.css",   //datepicker
                       //"~/Content/gridmvc.datepicker.min.css",  //datepicker
