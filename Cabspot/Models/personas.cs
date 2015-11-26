@@ -24,6 +24,7 @@ namespace Cabspot.Models
         [Required(ErrorMessage = "¿Cuál es su cédula?")]
         [StringLength(15)]
         [Cedula(ErrorMessage = "La cédula no es válida")]
+        [Display(Name="Cédula")]
         public string identificacion { get; set; }
 
         [Required(ErrorMessage = "¿Cómo se llama?")]

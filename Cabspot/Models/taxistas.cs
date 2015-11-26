@@ -23,9 +23,10 @@ namespace Cabspot.Models
 
         public int idPersona { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Debe especificar un código")]
         [StringLength(10)]
         [Column("codigoTaxista")]
+        [Display(Name = "Código Taxista")]
         public string codigoTaxista { get; set; }
 
         public int? idEstadoDisponibilidad { get; set; }
@@ -61,6 +62,7 @@ namespace Cabspot.Models
         [NotMapped]
         public SelectList listaBases { get; set; }
         [NotMapped]
+        [Display(Name = "Base")]
         public string baseSeleccionada { get; set; }
 
 
