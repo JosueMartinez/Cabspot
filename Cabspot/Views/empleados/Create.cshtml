@@ -39,6 +39,9 @@
 <form class="form-horizontal form-label-left" action="@Url.Action("Create","Empleados")" method="post" id="formulario" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
+    @* Hidden para pasar model state de foto *@
+    @Html.Hidden("personas.foto", "~/Content/images/user.png")
+
     <div id="wizard_verticle" class="form_wizard wizard_verticle">
         @* Lista Pasos *@
         <ul class="list-unstyled wizard_steps">
@@ -242,7 +245,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="municipio" name="direcciones.municipioSeleccionado" class="form-control municipio complete"></select>
+                        <select id="municipio" name="personas.direcciones.municipioSeleccionado" class="form-control municipio complete"></select>
                         @Html.ValidationMessageFor(model => model.personas.direcciones.municipioSeleccionado, "", new { @class = "text-danger" })
                     </div>
                 </div>

@@ -101,6 +101,19 @@ namespace Cabspot.Controllers
                 }
                 //fin unique email
 
+                //unique usuario
+                if (empleados.usuario != null)
+                {
+                    empleados.usuario = empleados.usuario.Trim();
+                    var usuario = from n in db.empleados where n.usuario.Equals(empleados.usuario) select n;
+                    if (usuario.Count() > 0)
+                    {
+                        ModelState.AddModelError("usuario", "El usuario ya existe");
+                    }
+                }
+
+                //fin unique usuario
+
 
                 //base y rol
                 empleados.idBase = int.Parse(empleados.baseSeleccionada);
@@ -138,6 +151,8 @@ namespace Cabspot.Controllers
                 {
                     db.empleados.Add(empleados);
                     await db.SaveChangesAsync();
+                    //redirigiendo a index...tempdata para mensaje de exito
+                    TempData["success"] = "Se ha añadido un empleado exitosamente";
                     return RedirectToAction("Index");
                 }
                 catch (Exception e)
