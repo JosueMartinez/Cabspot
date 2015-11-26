@@ -65,6 +65,43 @@ namespace Cabspot.Controllers
             //asignando ids
             try
             {
+                //unique de cedula
+                if (empleados.personas.identificacion != null) 
+                { 
+                    empleados.personas.identificacion = empleados.personas.identificacion.Replace("-", "").Trim();
+                    var cedula = from n in db.empleados where n.personas.identificacion.Equals(empleados.personas.identificacion) select n;
+                    if (cedula.Count() > 0)
+                    {
+                        ModelState.AddModelError("personas.identificacion", "Existe una persona con esta cédula");
+                    }
+                }
+                //fin unique cedula
+
+                //unique numero movil
+                if (empleados.personas.contactos.telefonoMovil != null)
+                {
+                    empleados.personas.contactos.telefonoMovil = empleados.personas.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
+                    var movil = from n in db.bases where n.contactos.telefonoMovil.Equals(empleados.personas.contactos.telefonoMovil) select n;
+                    if (movil.Count() > 0)
+                    {
+                        ModelState.AddModelError("personas.contactos.telefonoMovil", "Este móvil ya está en uso");
+                    }
+                }
+                //fin unique nnumero movil
+
+                //unique email
+                if (empleados.personas.contactos.email != null)
+                {
+                    empleados.personas.contactos.email = empleados.personas.contactos.email.Trim();
+                    var movil = from n in db.bases where n.contactos.email.Equals(empleados.personas.contactos.email) select n;
+                    if (movil.Count() > 0)
+                    {
+                        ModelState.AddModelError("personas.contactos.email", "Este móvil ya está en uso");
+                    }
+                }
+                //fin unique email
+
+
                 //base y rol
                 empleados.idBase = int.Parse(empleados.baseSeleccionada);
                 empleados.idRol = int.Parse(empleados.rolSeleccionado);
