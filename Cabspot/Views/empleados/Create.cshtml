@@ -311,7 +311,8 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <input class="form-control" id="personas_contactos_telefonoMovil" name="personas.contactos.telefonoMovil" type="tel" value="">
+                        @*<input class="form-control" id="personas_contactos_telefonoMovil" name="personas.contactos.telefonoMovil" type="tel" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.telefonoMovil, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.telefonoMovil, "", new { @class = "text-danger" })
                     </div>
@@ -321,7 +322,8 @@
                         @Html.LabelFor(model => model.personas.contactos.telefonoResidencial, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <input class="form-control" id="contactos_telefonoResidencial" name="contactos.telefonoResidencial" type="tel" value="">
+                        @*<input class="form-control" id="contactos_telefonoResidencial" name="contactos.telefonoResidencial" type="tel" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.telefonoResidencial, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.telefonoResidencial, "", new { @class = "text-danger" })
                     </div>
@@ -331,7 +333,8 @@
                         @Html.LabelFor(model => model.personas.contactos.telefonoTrabajo, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <input class="form-control" id="contactos_telefonoTrabajo" name="contactos.telefonoTrabajo" type="tel" value="">
+                        @*<input class="form-control" id="contactos_telefonoTrabajo" name="contactos.telefonoTrabajo" type="tel" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.telefonoTrabajo, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.telefonoTrabajo, "", new { @class = "text-danger" })
                     </div>
@@ -341,7 +344,8 @@
                         @Html.LabelFor(model => model.personas.contactos.fax, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <input class="form-control" id="contactos_fax" name="contactos.fax" type="text" value="">
+                        @*<input class="form-control" id="contactos_fax" name="contactos.fax" type="text" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.fax, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-fax form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.fax, "", new { @class = "text-danger" })
                     </div>
@@ -351,7 +355,8 @@
                         @Html.LabelFor(model => model.personas.contactos.email, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" id="contactos_email" name="contactos.email" type="email" value="">
+                        @*<input class="form-control" id="contactos_email" name="contactos.email" type="email" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.email, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.email, "", new { @class = "text-danger" })
                     </div>
@@ -361,7 +366,8 @@
                         @Html.LabelFor(model => model.personas.contactos.emailAlternativo, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" id="contactos_emailAlternativo" name="contactos.emailAlternativo" type="email" value="">
+                        @*<input class="form-control" id="contactos_emailAlternativo" name="contactos.emailAlternativo" type="email" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.emailAlternativo, new { htmlAttributes = new { @class = "form-control" } })
                         <span class="fa fa-envelope-o form-control-feedback right" aria-hidden="true"></span>
                         @Html.ValidationMessageFor(model => model.personas.contactos.emailAlternativo, "", new { @class = "text-danger" })
                     </div>
@@ -371,7 +377,8 @@
                         @Html.LabelFor(model => model.personas.contactos.paginaWeb, htmlAttributes: new { @class = "control-label" })
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control" id="contactos_paginaWeb" name="contactos.paginaWeb" type="url" value="">
+                        @*<input class="form-control" id="contactos_paginaWeb" name="contactos.paginaWeb" type="url" value="">*@
+                        @Html.EditorFor(model => model.personas.contactos.paginaWeb, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.personas.contactos.paginaWeb, "", new { @class = "text-danger" })
                     </div>
                 </div>
