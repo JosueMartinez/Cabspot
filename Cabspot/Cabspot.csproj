@@ -264,6 +264,7 @@
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
+    <Compile Include="Controllers\Clases\Utilidades.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -333,6 +334,14 @@
     <Compile Include="Migrations\201511221548289_generarclientemovil.cs" />
     <Compile Include="Migrations\201511221548289_generarclientemovil.Designer.cs">
       <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511270233583_ratingTaxista.cs" />
+    <Compile Include="Migrations\201511270233583_ratingTaxista.Designer.cs">
+      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511270249478_ratingInt.cs" />
+    <Compile Include="Migrations\201511270249478_ratingInt.Designer.cs">
+      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -504,6 +513,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
+    <Folder Include="FotosPerfil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -554,6 +564,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511221548289_generarclientemovil.resx">
       <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511270233583_ratingTaxista.resx">
+      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511270249478_ratingInt.resx">
+      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

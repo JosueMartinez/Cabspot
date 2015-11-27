@@ -39,6 +39,10 @@ namespace Cabspot.Controllers
             v.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo");
             v.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo");
             taxistas.vehiculo = v;
+
+            //ruta relativa de foto de perfil
+            //taxistas.personas.foto = Clases.Utilidades.RutaRelativa(taxistas.personas.foto, "~/Content/Images/");
+            
             return View(taxistas);
         }
 
@@ -83,15 +87,58 @@ namespace Cabspot.Controllers
 
                     //subir foto
                     var filename = Path.GetFileName(foto.FileName);
-                    var path = Path.Combine(Server.MapPath(@"~/App_Data/files/"), filename);
+                    var path = "~/FotosPerfil/" + filename;
                     foto.SaveAs(path);
                     taxistas.personas.foto = path;
 
-                    //verificar que codigo de taxista no esta asignado
+                    //unique de cedula
+                    if (taxistas.personas.identificacion != null)
+                    {
+                        taxistas.personas.identificacion = taxistas.personas.identificacion.Replace("-", "").Trim();
+                        var cedula = from n in db.taxistas where n.personas.identificacion.Equals(taxistas.personas.identificacion) select n;
+                        if (cedula.Count() > 0)
+                        {
+                            ModelState.AddModelError("personas.identificacion", "Existe una persona con esta cédula");
+                        }
+                    }
+                    //fin unique cedula
 
-                    //model error para identidad reutilizada distintos
+                    //unique numero movil
+                    if (taxistas.personas.contactos.telefonoMovil != null)
+                    {
+                        taxistas.personas.contactos.telefonoMovil = taxistas.personas.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
+                        var movil = from n in db.bases where n.contactos.telefonoMovil.Equals(taxistas.personas.contactos.telefonoMovil) select n;
+                        if (movil.Count() > 0)
+                        {
+                            ModelState.AddModelError("personas.contactos.telefonoMovil", "Este móvil ya está en uso");
+                        }
+                    }
+                    //fin unique nnumero movil
 
-                    //model error para movil e email distintos
+                    //unique email
+                    if (taxistas.personas.contactos.email != null)
+                    {
+                        taxistas.personas.contactos.email = taxistas.personas.contactos.email.Trim();
+                        var movil = from n in db.bases where n.contactos.email.Equals(taxistas.personas.contactos.email) select n;
+                        if (movil.Count() > 0)
+                        {
+                            ModelState.AddModelError("personas.contactos.email", "Este móvil ya está en uso");
+                        }
+                    }
+                    //fin unique email
+
+                    //unique codigo
+                    if (taxistas.codigoTaxista != null)
+                    {
+                        taxistas.codigoTaxista = taxistas.codigoTaxista.Trim();
+                        var usuario = from n in db.taxistas where n.codigoTaxista.Equals(taxistas.codigoTaxista) select n;
+                        if (usuario.Count() > 0)
+                        {
+                            ModelState.AddModelError("usuario", "El código ya existe");
+                        }
+                    }
+
+                    //fin unique codigo
 
                 }
                 catch (Exception e)

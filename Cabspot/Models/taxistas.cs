@@ -29,6 +29,9 @@ namespace Cabspot.Models
         [Display(Name = "Código Taxista")]
         public string codigoTaxista { get; set; }
 
+        [Display(Name = "Rating")]
+        public int? rating { get; set; }
+
         public int? idEstadoDisponibilidad { get; set; }
 
         public int? idBase { get; set; }
@@ -64,6 +67,7 @@ namespace Cabspot.Models
         [NotMapped]
         [Display(Name = "Base")]
         public string baseSeleccionada { get; set; }
+
 
 
         //[NotMapped]

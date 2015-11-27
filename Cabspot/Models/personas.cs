@@ -6,6 +6,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using DevelopersDo.DataAnnotations;
+    using Microsoft.SqlServer.Server;
 
     [Table("personas")]
     public partial class personas
@@ -25,6 +26,7 @@ namespace Cabspot.Models
         [StringLength(15)]
         [Cedula(ErrorMessage = "La cédula no es válida")]
         [Display(Name="Cédula")]
+        [DisplayFormat(DataFormatString = "{0:000-0000000-0}", ApplyFormatInEditMode = true)]
         public string identificacion { get; set; }
 
         [Required(ErrorMessage = "¿Cómo se llama?")]
@@ -40,6 +42,7 @@ namespace Cabspot.Models
         [Column(TypeName = "date")]
         [Display(Name = "Fecha Nacimiento")]
         [Required(ErrorMessage = "¿Cuándo nació?")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime fechaNacimiento { get; set; }
 
         [Column(TypeName = "char")]

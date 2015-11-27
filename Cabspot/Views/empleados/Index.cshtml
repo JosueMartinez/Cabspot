@@ -82,9 +82,9 @@
                     @Html.DisplayFor(modelItem => item.usuario)
                 </td>
                 <td class="text-center">
-                    @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil-square-o", id = item.idEmpleado, title = "Editar" }) |
-                    @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idEmpleado, title = "Detalles" }) |
-                    @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idEmpleado, title = "Borrar" })
+                    @Html.ActionLink(" ", "Edit", "Taxistas", new { id = item.idEmpleado }, new { @class = "fa fa-edit" }) |
+                    @Html.ActionLink(" ", "Details", "Taxistas", new { id = item.idEmpleado }, new { @class = "fa fa-eye" }) |
+                    @Html.ActionLink(" ", "Delete", "Taxistas", new { id = item.idEmpleado }, new { @class = "fa fa-trash" })
                 </td>
             </tr>
         }

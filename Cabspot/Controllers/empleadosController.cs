@@ -130,7 +130,7 @@ namespace Cabspot.Controllers
 
                 //subir foto
                 var filename = Path.GetFileName(foto.FileName);
-                var path = Path.Combine(Server.MapPath(@"~/App_Data/files/"), filename);
+                var path = "~/FotosPerfil/" + filename;
                 foto.SaveAs(path);
                 empleados.personas.foto = path;
                // ModelState.SetModelValue("personas.foto", new ValueProviderResult(path,path, ));

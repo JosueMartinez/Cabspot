@@ -4,41 +4,12 @@
     ViewBag.controller = "Taxistas";
     ViewBag.action = "Listado Taxistas";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    //lanzando notificacion de exito
-    if (TempData["success"] != null)
-    {
-        <script type="text/javascript">
-            var permanotice, tooltip, _alert;
-            $(function () {
-                new PNotify({
-                    title: "Exito",
-                    type: "success",
-                    text: "Exito! se ha agregado.",
-                    nonblock: {
-                        nonblock: true
-                    },
-                    before_close: function (PNotify) {
-                        // You can access the notice's options with this. It is read only.
-                        //PNotify.options.text;
-
-                        // You can change the notice's options after the timer like this:
-                        PNotify.update({
-                            title: PNotify.options.title + " - Enjoy your Stay",
-                            before_close: null
-                        });
-                        PNotify.queueRemove();
-                        return false;
-                    }
-                });
-            });
-        </script>
-    }
+    
 }
 
 
 <p>
-    @Html.ActionLink("Nuevo Taxista", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Nuevo Taxista", "Create", null, new { @class = "btn btn-success" })
 </p>
 <table id="example" class="table table-striped responsive-utilities jambo_table">
     <thead>
@@ -52,12 +23,9 @@
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.codigoTaxista)
             </th>
-            @*<th class="text-center">
-                @Html.DisplayNameFor(model => model.estadoempleados.estadoEmpleado)
-            </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.usuario)
-            </th>*@
+                @Html.DisplayNameFor(model => model.rating)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -75,16 +43,28 @@
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.codigoTaxista)
                 </td>
-                @*<td class="text-center">
-                    @Html.DisplayFor(modelItem => item.estadoempleados.estadoEmpleado)
+                @* Rating *@
+                <td class="text-center">
+                    <p class="ratings">
+                       @for (int i = 1; i <= 5; i++)
+                       {
+                           if (i <= item.rating)
+                           {
+                             <span class="fa fa-star"></span>
+                           }
+                           else
+                           {
+
+                            <span class="fa fa-star-o"></span>
+                           }
+                       }
+                    </p>
                 </td>
+                @* Fin Rating *@
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.usuario)
-                </td>*@
-                <td class="text-center">
-                    @Html.ActionLink(" ", "Edit", null, new { @class = "fa fa-pencil-square-o", id = item.idTaxista, title = "Editar" }) |
-                    @Html.ActionLink(" ", "Details", null, new { @class = "fa fa-eye", id = item.idTaxista, title = "Detalles" }) |
-                    @Html.ActionLink(" ", "Delete", null, new { @class = "fa fa-trash danger", id = item.idTaxista, title = "Borrar" })
+                    @Html.ActionLink(" ", "Edit", "Taxistas", new { id = item.idTaxista }, new { @class = "fa fa-edit" }) |
+                    @Html.ActionLink(" ", "Details", "Taxistas", new { id = item.idTaxista }, new { @class = "fa fa-eye" }) |
+                    @Html.ActionLink(" ", "Delete", "Taxistas", new { id = item.idTaxista }, new { @class = "fa fa-trash" })
                 </td>
             </tr>
         }
