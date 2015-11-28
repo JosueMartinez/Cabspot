@@ -43,7 +43,8 @@ namespace Cabspot
                     "~/Content/custom.css",
                     "~/Content/icheck/flat/green.css",
                     "~/Content/floatexamples.css",
-                    "~/Content/dataTables.tableTools.css"
+                    "~/Content/dataTables.tableTools.css",
+                    "~/Content/colorpicker/bootstrap-colorpicker.min.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/gentella").Include(
@@ -54,7 +55,9 @@ namespace Cabspot
                     "~/Scripts/input_mask/jquery.inputmask.js",
                     "~/Scripts/spin.js",
                     "~/Scripts/Datatables/jquery.dataTables.js",
-                    "~/Scripts/Datatables/dataTables.tableTools.js"
+                    "~/Scripts/Datatables/dataTables.tableTools.js",
+                    "~/Scripts/bootstrap-colorpicker.js",
+                    "~/Scripts/docs.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(

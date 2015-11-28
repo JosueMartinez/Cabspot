@@ -25,9 +25,14 @@ namespace Cabspot.Models
         [Required(ErrorMessage = "¿Cuál es su cédula?")]
         [StringLength(15)]
         [Cedula(ErrorMessage = "La cédula no es válida")]
-        [Display(Name="Cédula")]
+        [Display(Name = "Cédula")]
         [DisplayFormat(DataFormatString = "{0:000-0000000-0}", ApplyFormatInEditMode = true)]
-        public string identificacion { get; set; }
+        public string identificacion
+        {
+            get { return "nulo"; }
+
+            set { }
+        }
 
         [Required(ErrorMessage = "¿Cómo se llama?")]
         [StringLength(30)]
@@ -48,7 +53,7 @@ namespace Cabspot.Models
         [Column(TypeName = "char")]
         [Required(ErrorMessage = "Debe elegir un género")]
         [StringLength(1)]
-        [Display(Name = "Genero")]
+        [Display(Name = "Género")]
         public string sexo { get; set; }
 
         [Required(ErrorMessage = "Debe elegir una foto de perfil")]

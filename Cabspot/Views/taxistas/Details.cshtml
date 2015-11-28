@@ -1,5 +1,4 @@
 ﻿@model Cabspot.Models.taxistas
-@using GridMvc.Html
 
 @{
     ViewBag.controller = "Taxistas";
@@ -16,6 +15,64 @@
                     title: "Exito",
                     type: "success",
                     text: "Exito! se ha agregado un taxista.",
+                    nonblock: {
+                        nonblock: true
+                    },
+                    before_close: function (PNotify) {
+                        // You can access the notice's options with this. It is read only.
+                        //PNotify.options.text;
+
+                        // You can change the notice's options after the timer like this:
+                        PNotify.update({
+                            title: PNotify.options.title + " - Enjoy your Stay",
+                            before_close: null
+                        });
+                        PNotify.queueRemove();
+                        return false;
+                    }
+                });
+            });
+        </script>
+    }
+    
+    if (TempData["mensajeAgregarVehiculo"] != null)
+    {
+        <script type="text/javascript">
+            var permanotice, tooltip, _alert;
+            $(function () {
+                new PNotify({
+                    title: "Exito",
+                    type: "success",
+                    text: "Exito! se ha agregado un vehículo para este taxista.",
+                    nonblock: {
+                        nonblock: true
+                    },
+                    before_close: function (PNotify) {
+                        // You can access the notice's options with this. It is read only.
+                        //PNotify.options.text;
+
+                        // You can change the notice's options after the timer like this:
+                        PNotify.update({
+                            title: PNotify.options.title + " - Enjoy your Stay",
+                            before_close: null
+                        });
+                        PNotify.queueRemove();
+                        return false;
+                    }
+                });
+            });
+        </script>
+    }
+
+    if (TempData["error"] != null)
+    {
+        <script type="text/javascript">
+            var permanotice, tooltip, _alert;
+            $(function () {
+                new PNotify({
+                    title: "Error",
+                    type: "danger",
+                    text: "Ha ocurrido un error intentando agregar el vehículo",
                     nonblock: {
                         nonblock: true
                     },
@@ -152,6 +209,7 @@
                 @* Cedula *@
                 <dt>@Html.DisplayNameFor(model => model.personas.identificacion)</dt>
                 <dd>@Html.DisplayFor(model => model.personas.identificacion)</dd>
+                @*<dd>@Html.DisplayFor(model => string.Format("{0:n}", model.personas.identificacion))</dd>*@
                 @* Fecha Nacimiento *@
                 <dt>@Html.DisplayNameFor(model => model.personas.fechaNacimiento)</dt>
                 <dd>@Html.DisplayFor(model => model.personas.fechaNacimiento)</dd>                
@@ -179,6 +237,9 @@
     </div>
 
     @* Vehiculos *@
+    <hr />
+    <h2 class="text-center">Vehículos</h2>
+    
     <div class="row" style="margin-top: 50px">
         <p>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-car"></i> Agregar Vehículo</button>
@@ -241,7 +302,7 @@
                     @* Header *@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center"><i class="fa fa-car"></i> Vehículos</h4>
+                        <h4 class="modal-title text-center"><i class="fa fa-car"></i>Agregar Vehículo</h4>
                     </div>
                     @* Body *@
                     <div class="modal-body">
@@ -251,7 +312,7 @@
                     </div>
                     @* Footer *@
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>

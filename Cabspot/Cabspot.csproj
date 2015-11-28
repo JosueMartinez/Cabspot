@@ -388,9 +388,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\colorpicker\alpha.png" />
+    <Content Include="Content\colorpicker\bootstrap-colorpicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorpicker\hue-horizontal.png" />
+    <Content Include="Content\colorpicker\hue.png" />
+    <Content Include="Content\colorpicker\saturation.png" />
     <Content Include="Content\dataTables.tableTools.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\Gridmvc.css" />
@@ -424,6 +430,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\bootstrap-colorpicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
@@ -442,6 +449,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Datatables\dataTables.tableTools.js" />
     <Content Include="Scripts\Datatables\jquery.dataTables.js" />
+    <Content Include="Scripts\docs.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
     <Content Include="Scripts\gridmvc.min.js" />

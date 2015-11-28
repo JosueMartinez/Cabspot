@@ -54,12 +54,16 @@ namespace Cabspot.Models
         [Display(Name = "Unidad")]
         public string unidad { get; set; }
 
+        [Display(Name = "Tipo")]
         public int? idTipoVehiculo { get; set; }
 
+        [Display(Name = "Estado")]
         public int? idEstadoVehiculo { get; set; }
 
+        [Display(Name = "Condición")]
         public int? idCondicionVehiculo { get; set; }
 
+        [Display(Name = "Cantidad Asientos")]
         public int cantidadAsientos { get; set; }
 
         [Column(TypeName = "date")]

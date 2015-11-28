@@ -247,24 +247,56 @@ namespace Cabspot.Controllers
             taxista.vehiculo.idCondicionVehiculo = taxista.vehiculo.condicionSeleccionada;
             taxista.vehiculo.idEstadoVehiculo = taxista.vehiculo.estadoSeleccionado;
             taxista.vehiculo.idTipoVehiculo = taxista.vehiculo.tipoSeleccionado;
-            taxista.vehiculo.registradoPor = 1;  //meanwhile
+            taxista.vehiculo.registradoPor = 1;  //mientras tanto
 
-            taxistas t = db.taxistas.Find(taxista.idTaxista);
+            //unique de chasis y numero de placa
+            var chasis = from c in db.vehiculos where c.chasis.Equals(taxista.vehiculo.chasis) select c;
+            var placa = from c in db.vehiculos where c.placa.Equals(taxista.vehiculo.placa) select c;
 
-            if (ModelState.IsValid)
+            if (chasis.Count() > 0)
             {
-                db.vehiculos.Add(taxista.vehiculo);
-                await db.SaveChangesAsync();
-                ViewData["mensajeAgregarVehiculo"] = "Se ha agregado un vehículo para este taxista";
-                return View("Details", t);
+                ModelState.AddModelError("vehiculo.chasis", "Este chasis ya está registrado");
             }
 
-            var errors = ViewData.ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
-            taxista.vehiculo.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo", taxista.vehiculo.condicionSeleccionada);
-            taxista.vehiculo.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo", taxista.vehiculo.estadoSeleccionado);
-            taxista.vehiculo.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo", taxista.vehiculo.tipoSeleccionado);
-            ViewData["mensajeAgregarVehiculo"] = "Ha ocurrido un error agregando el vehículo.";
-            return View("Details", taxista);
+            if (placa.Count() > 0)
+            {
+                ModelState.AddModelError("vehiculo.placa", "Esta placa ya está registrada");
+            }
+
+
+            try
+            {
+                taxistas t = db.taxistas.Find(taxista.idTaxista);
+                if (t != null)
+                {
+                    taxista.vehiculo.idTaxista = t.idTaxista;
+                    taxista.codigoTaxista = t.codigoTaxista;  //volando ModelState (sin razon aparente)
+                    if (ModelState.IsValid)
+                    {
+                        db.vehiculos.Add(taxista.vehiculo);
+                        await db.SaveChangesAsync();
+                        TempData["mensajeAgregarVehiculo"] = "exito";
+                        //return View("Details", t);
+                        return RedirectToAction("Details", "taxistas", new { id = t.idTaxista });
+                    }
+
+                    var errors = ViewData.ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
+                    taxista.vehiculo.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo", taxista.vehiculo.condicionSeleccionada);
+                    taxista.vehiculo.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo", taxista.vehiculo.estadoSeleccionado);
+                    taxista.vehiculo.listaTipo = new SelectList(db.tipovehiculos, "idTipoVehiculo", "tipoVehiculo", taxista.vehiculo.tipoSeleccionado);
+                    TempData["mensajeAgregarVehiculo"] = "error";
+                    return View("Details", taxista);
+                }
+                
+            }
+            catch (Exception e)
+            {
+                TempData["mensajeAgregarVehiculo"] = "error";
+                return RedirectToAction("Details", "taxistas", new { id = taxista.idTaxista });
+            }
+
+            return RedirectToAction("Index", "taxistas");
+            
         }
 
     }
