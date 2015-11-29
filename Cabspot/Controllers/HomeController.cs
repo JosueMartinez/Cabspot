@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cabspot.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,21 @@ namespace Cabspot.Controllers
 {
     public class HomeController : Controller
     {
+        CabspotDB db = new CabspotDB();
+
+        //enviando taxistas y su ubicacion
+        public JsonResult ubicacionTaxistas()
+        {
+            var taxistas = from t in db.taxistas select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
+                                                             t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,
+                                                             t.personas.contactos.telefonoMovil, t.rating, t.personas.foto};
+                return Json(taxistas.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+
+        //vista de mapa
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return View();
         }
     }

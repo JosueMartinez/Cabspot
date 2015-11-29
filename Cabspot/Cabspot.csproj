@@ -343,6 +343,10 @@
     <Compile Include="Migrations\201511270249478_ratingInt.Designer.cs">
       <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.cs" />
+    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.Designer.cs">
+      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -578,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511270249478_ratingInt.resx">
       <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511291848583_estadoDisponibilidad.resx">
+      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

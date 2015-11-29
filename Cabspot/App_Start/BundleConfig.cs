@@ -30,8 +30,8 @@ namespace Cabspot
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/select2.min.css"
-                      //"~/Content/site.css",
+                      "~/Content/select2.min.css",
+                      "~/Content/Site.css"
                       //"~/Content/datepicker.css",   //datepicker
                       //"~/Content/gridmvc.datepicker.min.css",  //datepicker
                       //"~/Content/jasny-bootstrap.min.css"  <-- el azaroso que jodio todos los inputs 

@@ -49,6 +49,8 @@ namespace Cabspot.Models
 
         public virtual personas personas { get; set; }
 
+        public virtual estadodisponibilidad estadodisponibilidad { get; set; }
+
         [NotMapped]
         public virtual vehiculos vehiculo { get; set; }
 

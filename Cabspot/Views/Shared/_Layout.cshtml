@@ -24,6 +24,14 @@
         NProgress.start();
     </script>
 
+    <!--Imagen alternativa en error-->
+    <script>
+        $(document).ready(function () {
+            $(".profile_img").error(function () {
+                $(this).attr('src', '/Content/images/user.png');
+            });
+        });
+    </script>
 
     <script>
     @* Obteniendo todos los paises via WS *@
