@@ -59,7 +59,8 @@ namespace Cabspot.Migrations
                     p => p.estadoDisponibilidad,
                     new estadodisponibilidad { estadoDisponibilidad = "Disponible" },
                     new estadodisponibilidad { estadoDisponibilidad = "Ocupado" },
-                    new estadodisponibilidad { estadoDisponibilidad = "Offline" }
+                    new estadodisponibilidad { estadoDisponibilidad = "Offline" },
+                    new estadodisponibilidad { estadoDisponibilidad = "No Activo" }
                  );
 
                 //estadoEmpleados
