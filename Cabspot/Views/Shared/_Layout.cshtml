@@ -78,15 +78,41 @@
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu prile quick info -->
-                    <div class="profile">
-                        <div class="profile_pic">
-                            <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                    @*@if (Request.IsAuthenticated)
+                    {
+                        <div class="profile">
+                            <div class="profile_pic">
+                                <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                            </div>
+                            <div class="profile_info">
+                                <span>Bienvenido,</span>
+                                <h2>@usuario</h2>
+                            </div>
                         </div>
-                        <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>@usuario</h2>
+                    }
+                    else
+                    {
+                        <div class="profile">
+                            <div class="profile_pic">
+                                <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                            </div>
+                            <div class="profile_info">
+                                <span>Bienvenido,</span>
+                                <h2>Ninguno</h2>
+                            </div>
                         </div>
-                    </div>
+                    }*@
+                    @if (Request.IsAuthenticated)
+                    {
+                        <strong>@Html.Encode(User.Identity.Name)</strong>
+                        @Html.ActionLink("Sign Out", "Logout", "User")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Register", "Register", "User")
+                        <span> | </span>
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    }
                     <!-- /menu prile quick info -->
                     <br />
                     <!-- sidebar menu -->

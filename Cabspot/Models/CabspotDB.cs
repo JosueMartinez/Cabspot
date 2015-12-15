@@ -12,6 +12,7 @@ namespace Cabspot.Models
         {
         }
         public virtual DbSet<autenticacionsms> autenticacionSms { get; set; }
+        public virtual DbSet<autenticacionsmstaxista> autenticacionSmsTaxista { get; set; }
         public virtual DbSet<bases> bases { get; set; }
         public virtual DbSet<carreras> carreras { get; set; }
         public virtual DbSet<clientes> clientes { get; set; }

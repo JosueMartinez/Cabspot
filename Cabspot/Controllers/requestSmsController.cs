@@ -76,20 +76,22 @@ namespace Cabspot.Controllers
             return View();
         }
 
-        public JsonResult getTelefonoMovil(String telefonoMovil)
+        [System.Web.Http.Route("taxistas/telefono/{telefonoMovil}")]
+        public JsonResult getTelefonoMovil(string telefonoMovil)
         {
             //recibo un json el cual convierto a string
-            string telefono = (telefonoMovil);
-            clientesMovil c = createClienteMovil(telefono);
-            autenticacionsms sms = generarCodigo(telefono);
-
+            string telefono = "+18297596854";
+            Random random = new Random();
+            //clientesMovil c = createClienteMovil(telefono);
+            //autenticacionsms sms = generarCodigo(telefono);
+            int otp = random.Next(100000, 999999);
             string AccountSid = Constantes.ACCOUNT_SID;
             string AuthToken = Constantes.AUTH_TOKEN;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             var message = twilio.SendMessage(
                 "+19179831394", telefono,
-                "Tu codigo es este " + sms.codigo);
+                "Tu codigo es este " + otp.ToString());
 
             return Json("jordani" + "+" + telefono, JsonRequestBehavior.AllowGet);
         }

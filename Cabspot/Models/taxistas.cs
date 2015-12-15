@@ -6,10 +6,13 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Web.Mvc;
+    using System.Linq;
 
     [Table("taxistas")]
     public partial class taxistas
     {
+        CabspotDB db = new CabspotDB();
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public taxistas()
         {
@@ -63,6 +66,9 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vehiculos> vehiculos { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<autenticacionsmstaxista> autenticacionsmstaxista { get; set; }
+
         //not mapped-----------------------------------------------------
         [NotMapped]
         public SelectList listaBases { get; set; }
@@ -71,8 +77,75 @@ namespace Cabspot.Models
         public string baseSeleccionada { get; set; }
 
 
+        //buscar al taxista por telefonoMovil
+        public taxistas FindByMobile(string telefonoMovil)
+        {
+            if (!string.IsNullOrEmpty(telefonoMovil))
+            {
+                var taxistas = from t in db.taxistas where t.personas.contactos.telefonoMovil.Equals(telefonoMovil) select t;
+                if (taxistas.Count() > 0)
+                {
+                    return taxistas.First();
+                }
+                return null;
+            }
+            return null;
+        }
 
-        //[NotMapped]
-        //public List<vehiculos> vehiculosAgregar {get;set;}
+        //buscar taxista por codigo
+        public taxistas FindByCodigo(string codigoTaxista)
+        {
+            if (!string.IsNullOrEmpty(codigoTaxista))
+            {
+                var taxistas = from t in db.taxistas where t.codigoTaxista.Equals(codigoTaxista) select t;
+                if (taxistas.Count() > 0)
+                {
+                    return taxistas.First();
+                }
+                return null;
+            }
+            return null;
+        }
+
+
+        //generar codigo aleatorio
+        public autenticacionsmstaxista generarCodigo(int idTaxista)
+        {
+            if (idTaxista != null)
+            {
+                taxistas taxista = db.taxistas.Find(idTaxista);
+                if (taxista != null)
+                {
+                    Random random = new Random();
+                    autenticacionsmstaxista sms = new autenticacionsmstaxista();
+
+                    int otp = random.Next(100000, 999999);
+
+                    //guardando sms
+                    sms.idTaxista = idTaxista;
+                    sms.codigo = otp.ToString();
+
+                    try
+                    {
+                        db.autenticacionSmsTaxista.Add(sms);
+                        db.SaveChanges();
+                        return sms;
+
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }  
+                }
+
+                return null;
+
+            }
+            return null;
+        }
+
+
+
+        
     }
 }
