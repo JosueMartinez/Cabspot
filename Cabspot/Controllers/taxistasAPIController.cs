@@ -43,7 +43,7 @@ namespace Cabspot.Controllers
                     {
                         try
                         {
-                            var numero = taxistaLogin.personas.contactos.telefonoMovil;
+                            var numero = "+1" + taxistaLogin.personas.contactos.telefonoMovil;  //formato EI64 para el numero
                             var message = twilio.SendMessage(Constantes.PHONE_JOSUE, numero, Constantes.Mensaje_Codigo + sms.codigo);
                             if(!string.IsNullOrEmpty(message.Sid))
                                 return true;
