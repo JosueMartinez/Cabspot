@@ -76,6 +76,27 @@ namespace Cabspot.Controllers
             return View();
         }
 
+
+        //public JsonResult getTelefonoMovil()
+        //{
+           
+        //    //return this.getTelefonoMovil1("+18297083218");
+        //    ////recibo un json el cual convierto a string
+        //    string telefono = HttpContext.Request.Form["telefonoMovil"];
+        //    clientesMovil c = createClienteMovil(telefono);
+        //    autenticacionsms sms = generarCodigo(telefono);
+
+        //    string AccountSid = Constantes.ACCOUNT_SID;
+        //    string AuthToken = Constantes.AUTH_TOKEN;
+        //    var twilio = new TwilioRestClient(AccountSid, AuthToken);
+
+        //    var message = twilio.SendMessage(
+        //        "+19179831394", telefono,
+        //        "Tu codigo es este " + sms.codigo);
+
+        //    return Json("+" + "80955555", JsonRequestBehavior.AllowGet);
+        //}
+
         public JsonResult getTelefonoMovil(String telefonoMovil)
         {
             //recibo un json el cual convierto a string
@@ -91,7 +112,7 @@ namespace Cabspot.Controllers
                 "+19179831394", telefono,
                 "Tu codigo es este " + sms.codigo);
 
-            return Json("jordani" + "+" + telefono, JsonRequestBehavior.AllowGet);
+            return Json("+" + telefono, JsonRequestBehavior.AllowGet);
         }
 
         public clientesMovil createClienteMovil(String telefonoMovil)
@@ -101,7 +122,7 @@ namespace Cabspot.Controllers
             //c.telefonoMovil = telefonoMovil = "+18099801767";
             db.clientesMovil.Add(c);
             db.SaveChanges();
-        
+
             return c;
         }
 
@@ -131,11 +152,10 @@ namespace Cabspot.Controllers
             {
                 objetoSeleccionado = activarCliente.First();
                 objetoSeleccionado.verificado = true;
-                //db.autenticacionSms.Add(objetoSeleccionado);
                 db.SaveChanges();
             }
 
-            return Json("jordani " + otp, JsonRequestBehavior.AllowGet);
+            return Json(otp, JsonRequestBehavior.AllowGet);
         }
 
         // POST: requestSms/Create
