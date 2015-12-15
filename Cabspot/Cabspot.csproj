@@ -57,6 +57,10 @@
       <HintPath>..\packages\DevelopersDo.DataAnnotations.1.0.1.0\lib\net40\DevelopersDo.Validator.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Azure.AppService.ApiApps.Service, Version=0.9.16.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.AppService.ApiApps.Service.0.9.16\lib\net45\Microsoft.Azure.AppService.ApiApps.Service.dll</HintPath>
       <Private>True</Private>
@@ -260,10 +264,12 @@
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
+    <Compile Include="Controllers\Clases\Utilidades.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\requestSmsController.cs" />
+    <Compile Include="Controllers\taxistasAPIController.cs" />
     <Compile Include="Controllers\taxistasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\vehiculosController.cs" />
@@ -330,10 +336,27 @@
     <Compile Include="Migrations\201511221548289_generarclientemovil.Designer.cs">
       <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511270233583_ratingTaxista.cs" />
+    <Compile Include="Migrations\201511270233583_ratingTaxista.Designer.cs">
+      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511270249478_ratingInt.cs" />
+    <Compile Include="Migrations\201511270249478_ratingInt.Designer.cs">
+      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.cs" />
+    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.Designer.cs">
+      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512142002202_autenticacionSmsTaxistas.cs" />
+    <Compile Include="Migrations\201512142002202_autenticacionSmsTaxistas.Designer.cs">
+      <DependentUpon>201512142002202_autenticacionSmsTaxistas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\autenticacionSms.cs" />
+    <Compile Include="Models\autenticacionsmstaxista.cs" />
     <Compile Include="Models\bases.cs" />
     <Compile Include="Models\CabspotDB.cs" />
     <Compile Include="Models\carreras.cs" />
@@ -375,22 +398,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\colorpicker\alpha.png" />
+    <Content Include="Content\colorpicker\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorpicker\hue-horizontal.png" />
+    <Content Include="Content\colorpicker\hue.png" />
+    <Content Include="Content\colorpicker\saturation.png" />
     <Content Include="Content\dataTables.tableTools.css" />
     <Content Include="Content\datepicker.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\gridmvc.datepicker.min.css" />
-    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\timeline.css" />
-    <Content Include="index.html" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="index.html" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -411,21 +440,29 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="apiapp.json" />
+    <Content Include="Grid.mvc.readme" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\CabspotApi%28Default-SQL-EastUS%29.pubxml" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
-    <Content Include="apiapp.json" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\Datatables\dataTables.tableTools.js" />
     <Content Include="Scripts\Datatables\jquery.dataTables.js" />
-    <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\docs.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -473,6 +510,8 @@
     <Content Include="Views\taxistas\Details.cshtml" />
     <Content Include="Views\taxistas\Edit.cshtml" />
     <Content Include="Views\taxistas\Index.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\vehiculos\Create.cshtml" />
     <Content Include="Views\vehiculos\Delete.cshtml" />
     <Content Include="Views\vehiculos\Details.cshtml" />
@@ -489,10 +528,12 @@
     <Content Include="Views\requestSms\Details.cshtml" />
     <Content Include="Views\requestSms\Edit.cshtml" />
     <Content Include="Views\requestSms\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
-    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="FotosPerfil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -543,6 +584,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511221548289_generarclientemovil.resx">
       <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511270233583_ratingTaxista.resx">
+      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511270249478_ratingInt.resx">
+      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511291848583_estadoDisponibilidad.resx">
+      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512142002202_autenticacionSmsTaxistas.resx">
+      <DependentUpon>201512142002202_autenticacionSmsTaxistas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

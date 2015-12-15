@@ -23,18 +23,18 @@ namespace Cabspot
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                      //"~/Scripts/bootstrap-datepicker.js",//datepicker
-                      "~/Scripts/jasny-bootstrap.min.js",  //fileinput espanol                    
                       "~/Scripts/select2.full.js"
+                      //"~/Scripts/jasny-bootstrap.min.js"  <-- el azaroso que jodio todos los inputs 
+
                       ));  
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/select2.min.css",
-                      //"~/Content/site.css",
+                      "~/Content/Site.css"
                       //"~/Content/datepicker.css",   //datepicker
                       //"~/Content/gridmvc.datepicker.min.css",  //datepicker
-                      "~/Content/jasny-bootstrap.min.css"  //fileinput
+                      //"~/Content/jasny-bootstrap.min.css"  <-- el azaroso que jodio todos los inputs 
                       ));
             
             //Gentella template------------------------------------------------------
@@ -43,7 +43,8 @@ namespace Cabspot
                     "~/Content/custom.css",
                     "~/Content/icheck/flat/green.css",
                     "~/Content/floatexamples.css",
-                    "~/Content/dataTables.tableTools.css"
+                    "~/Content/dataTables.tableTools.css",
+                    "~/Content/colorpicker/bootstrap-colorpicker.min.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/gentella").Include(
@@ -54,7 +55,9 @@ namespace Cabspot
                     "~/Scripts/input_mask/jquery.inputmask.js",
                     "~/Scripts/spin.js",
                     "~/Scripts/Datatables/jquery.dataTables.js",
-                    "~/Scripts/Datatables/dataTables.tableTools.js"
+                    "~/Scripts/Datatables/dataTables.tableTools.js",
+                    "~/Scripts/bootstrap-colorpicker.js",
+                    "~/Scripts/docs.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(
@@ -112,8 +115,6 @@ namespace Cabspot
             //---------------------------------------------------------------------------
             //font-awesome
             bundles.Add(new StyleBundle("~/Content/fa", @"//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"));
-
-            BundleTable.EnableOptimizations = true;
         }
     }
 }
