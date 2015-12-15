@@ -5,7 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-using System.Web.Mvc;
+    using System.Web.Mvc;
 
     [Table("empleados")]
     public partial class empleados
@@ -22,7 +22,7 @@ using System.Web.Mvc;
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
 
-        [Display(Name="Registrado Por")]
+        [Display(Name = "Registrado Por")]
         public int? registradoPor { get; set; }
 
         public int idEstadoEmpleado { get; set; }
@@ -34,12 +34,12 @@ using System.Web.Mvc;
         //agregado luego
         public int idPersona { get; set; }
 
-        [Required(ErrorMessage="Debe elegir su nombre de usuario")]
+        [Required(ErrorMessage = "Debe elegir su nombre de usuario")]
         [StringLength(25)]
-        [Display(Name="Usuario")]
+        [Display(Name = "Usuario")]
         public string usuario { get; set; }
 
-        [Required(ErrorMessage="¿Cuál va a ser su contraseña?")]
+        [Required(ErrorMessage = "¿Cuál va a ser su contraseña?")]
         [StringLength(20)]
         [DataType(DataType.Password)]
         [Display(Name = "Contrasena")]
@@ -50,29 +50,29 @@ using System.Web.Mvc;
         public virtual estadoempleados estadoempleados { get; set; }
 
         public virtual roles roles { get; set; }
-        
+
         public virtual personas personas { get; set; }
 
         //not mapped-----------------------------------------------------
         [NotMapped]
         public SelectList listaBases { get; set; }
         [NotMapped]
-        [Display(Name="Base")]
+        [Display(Name = "Base")]
         [Required]
         public string baseSeleccionada { get; set; }
 
         [NotMapped]
         public SelectList listaRoles { get; set; }
         [NotMapped]
-        [Display(Name="Rol")]
+        [Display(Name = "Rol")]
         [Required(ErrorMessage = "¿Cuál será el rol del empleado?")]
         public string rolSeleccionado { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage="Confirme su contraseña")]
+        [Required(ErrorMessage = "Confirme su contraseña")]
         [StringLength(20)]
         [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("contrasena", ErrorMessage="Las contraseñas no coinciden")]
+        [System.ComponentModel.DataAnnotations.Compare("contrasena", ErrorMessage = "Las contraseñas no coinciden")]
         [Display(Name = "Confirmar Contraseña")]
         public string confirmarContrasena { get; set; }
 

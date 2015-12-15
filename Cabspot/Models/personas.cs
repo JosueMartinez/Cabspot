@@ -6,6 +6,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using DevelopersDo.DataAnnotations;
+    using Microsoft.SqlServer.Server;
 
     [Table("personas")]
     public partial class personas
@@ -21,37 +22,45 @@ namespace Cabspot.Models
         [Key]
         public int idPersona { get; set; }
 
-        [Required(ErrorMessage="¿Cuál es su cédula?")]
+        [Required(ErrorMessage = "¿Cuál es su cédula?")]
         [StringLength(15)]
-        [Cedula(ErrorMessage="La cédula no es válida")]
-        public string identificacion { get; set; }
+        [Cedula(ErrorMessage = "La cédula no es válida")]
+        [Display(Name = "Cédula")]
+        [DisplayFormat(DataFormatString = "{0:000-0000000-0}", ApplyFormatInEditMode = true)]
+        public string identificacion
+        {
+            get { return "nulo"; }
 
-        [Required(ErrorMessage="¿Cómo se llama?")]
+            set { }
+        }
+
+        [Required(ErrorMessage = "¿Cómo se llama?")]
         [StringLength(30)]
-        [Display(Name="Nombre(s)")]
+        [Display(Name = "Nombre(s)")]
         public string nombres { get; set; }
 
-        [Required(ErrorMessage="¿Cuáles son sus apellidos?")]
+        [Required(ErrorMessage = "¿Cuáles son sus apellidos?")]
         [StringLength(50)]
         [Display(Name = "Apellido(s)")]
         public string apellidos { get; set; }
 
         [Column(TypeName = "date")]
         [Display(Name = "Fecha Nacimiento")]
-        [Required(ErrorMessage="¿Cuándo nació?")]
+        [Required(ErrorMessage = "¿Cuándo nació?")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime fechaNacimiento { get; set; }
 
         [Column(TypeName = "char")]
-        [Required(ErrorMessage="Debe elegir un género")]
+        [Required(ErrorMessage = "Debe elegir un género")]
         [StringLength(1)]
-        [Display(Name = "Genero")]
+        [Display(Name = "Género")]
         public string sexo { get; set; }
 
-        [Required(ErrorMessage="Debe elegir una foto de perfil")]
+        [Required(ErrorMessage = "Debe elegir una foto de perfil")]
         [StringLength(255)]
         public string foto { get; set; }
 
-        [Required(ErrorMessage="¿Cuál es su nacionalidad?")]
+        [Required(ErrorMessage = "¿Cuál es su nacionalidad?")]
         [StringLength(50)]
         [Display(Name = "Nacionalidad")]
         public string nacionalidad { get; set; }

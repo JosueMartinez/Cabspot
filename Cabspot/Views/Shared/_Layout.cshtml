@@ -20,10 +20,18 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">      
 
-    <script>
+    @*<script>
         NProgress.start();
-    </script>
+    </script>*@
 
+    <!--Imagen alternativa en error-->
+    <script>
+        $(document).ready(function () {
+            $(".profile_img").error(function () {
+                $(this).attr('src', '/Content/images/user.png');
+            });
+        });
+    </script>
 
     <script>
     @* Obteniendo todos los paises via WS *@
@@ -70,15 +78,41 @@
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu prile quick info -->
-                    <div class="profile">
-                        <div class="profile_pic">
-                            <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                    @*@if (Request.IsAuthenticated)
+                    {
+                        <div class="profile">
+                            <div class="profile_pic">
+                                <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                            </div>
+                            <div class="profile_info">
+                                <span>Bienvenido,</span>
+                                <h2>@usuario</h2>
+                            </div>
                         </div>
-                        <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>@usuario</h2>
+                    }
+                    else
+                    {
+                        <div class="profile">
+                            <div class="profile_pic">
+                                <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                            </div>
+                            <div class="profile_info">
+                                <span>Bienvenido,</span>
+                                <h2>Ninguno</h2>
+                            </div>
                         </div>
-                    </div>
+                    }*@
+                    @if (Request.IsAuthenticated)
+                    {
+                        <strong>@Html.Encode(User.Identity.Name)</strong>
+                        @Html.ActionLink("Sign Out", "Logout", "User")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Register", "Register", "User")
+                        <span> | </span>
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    }
                     <!-- /menu prile quick info -->
                     <br />
                     <!-- sidebar menu -->
@@ -111,6 +145,18 @@
                                         </li>
                                         <li>
                                             <a href="@Url.Action("Create", "Empleados")">Agregar Empleado</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @* Taxistas *@
+                                <li>
+                                    <a><i class="fa fa-taxi"></i> Taxistas <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Taxistas")">Listado Taxistas</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Create", "Taxistas")">Agregar Taxista</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -266,9 +312,6 @@
                                 </div>
                                 <div class="x_content">
                                     @RenderBody()
-                                    @* Spinning *@
-                                    
-
                                 </div>
                             </div>
                         </div>
@@ -317,9 +360,6 @@
 
             @RenderSection("scripts", required: false)
 
-            <script>
-                NProgress.done();
-                                    </script>
 
     @* Wizard form -------------------------------------------------------------------------------------------------------*@
     <script type="text/javascript">
@@ -341,55 +381,9 @@
 
         });
 
-        //<!-- input_mask -->
-       $(document).ready(function () {
-           $(":input").inputmask();
-       });
     </script>
     
-    @* FORM VALIDATION --------------------------------------------------------------------------------------------------- *@
-    <script>
-            // initialize the validator function
-            validator.message['date'] = 'not a real date';
 
-            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-            $('form')
-                .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-                .on('change', 'select.required', validator.checkField)
-                .on('keypress', 'input[required][pattern]', validator.keypress);
-
-            $('.multi.required')
-                .on('keyup blur', 'input', function () {
-                    validator.checkField.apply($(this).siblings().last()[0]);
-                });
-
-            // bind the validation to the form submit event
-            //$('#send').click('submit');//.prop('disabled', true);
-
-            $('form').submit(function (e) {
-                e.preventDefault();
-                var submit = true;
-                // evaluate the form using generic validaing
-                if (!validator.checkAll($(this))) {
-                    submit = false;
-                }
-
-                if (submit)
-                    this.submit();
-                return false;
-            });
-
-            /* FOR DEMO ONLY */
-            $('#vfields').change(function () {
-                $('form').toggleClass('mode2');
-            }).prop('checked', false);
-
-            $('#alerts').change(function () {
-                validator.defaults.alerts = (this.checked) ? false : true;
-                if (this.checked)
-                    $('form .alert').remove();
-            }).prop('checked', false);
-    </script>
 
 
     @* Spin when submit *@
@@ -471,49 +465,11 @@
     });
     </script>
 
-      
-    <!-- /datepicker -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#single_cal1').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_1"
-            }, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-            });
-            $('#single_cal2').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_2"
-            }, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-            });
-            $('#single_cal3').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_3"
-            }, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-            });
-            $('#single_cal4').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_4"
-            }, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#reservation').daterangepicker(null, function (start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-            });
-        });
-    </script>
-
     <!-- select2 -->
     <script>
         $(document).ready(function () {
             $(".select2_single").select2({
-                //placeholder: "Select a state",
+                placeholder: "Elija una opción",
                 allowClear: true
             });
             $(".select2_group").select2({});
@@ -525,16 +481,7 @@
         });
     </script>
     <!-- /select2 -->
-
-
-
-
-
-
-
-
-
-
+  
 </body>
 
 </html>

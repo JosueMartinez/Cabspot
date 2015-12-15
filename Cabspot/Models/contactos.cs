@@ -23,7 +23,7 @@ namespace Cabspot.Models
         [DataType(DataType.PhoneNumber, ErrorMessage = "El formato no es válido")]
         [Required(ErrorMessage="¿Cuál es el número de móvil?")]
         [Phone]
-        [Display(Name = "Celular")]
+        [Display( Name = "Celular")]
         public string telefonoMovil { get; set; }
 
         [StringLength(10)]

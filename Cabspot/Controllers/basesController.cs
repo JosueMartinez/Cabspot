@@ -72,18 +72,50 @@ namespace Cabspot.Controllers
         public async Task<ActionResult> Create(bases bases)
         {
             //quitando parentesis y guiones agregados por la mascara en la vista de numeros de telefono
-            //if (bases.contactos.telefonoMovil != null) { bases.contactos.telefonoMovil = bases.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.telefonoTrabajo != null) { bases.contactos.telefonoTrabajo = bases.contactos.telefonoTrabajo.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.telefonoResidencial != null) { bases.contactos.telefonoResidencial = bases.contactos.telefonoResidencial.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
-            //if (bases.contactos.fax != null) { bases.contactos.fax = bases.contactos.fax.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.telefonoMovil != null) { 
+                bases.contactos.telefonoMovil = bases.contactos.telefonoMovil.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
 
-            //var len = bases.contactos.telefonoMovil.Length;
+                //unique movil
+                var movil = from n in db.bases where n.contactos.telefonoMovil.Equals(bases.contactos.telefonoMovil) select n;
+                if (movil.Count() > 0)
+                {
+                    ModelState.AddModelError("contactos.telefonoMovil", "Existe una base con este teléfono móvil");
+                }
+            }
 
+            if (bases.contactos.telefonoTrabajo != null) { bases.contactos.telefonoTrabajo = bases.contactos.telefonoTrabajo.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.telefonoResidencial != null) { bases.contactos.telefonoResidencial = bases.contactos.telefonoResidencial.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+            if (bases.contactos.fax != null) { bases.contactos.fax = bases.contactos.fax.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim(); }
+
+            //buscando campos unique de nombre 
+            if (!string.IsNullOrEmpty(bases.nombreBase))
+            {
+                var nombre = from n in db.bases where n.nombreBase.ToUpper().Equals(bases.nombreBase.ToUpper()) select n;
+                if (nombre.Count() > 0)
+                {
+                    ModelState.AddModelError("nombreBase", "Existe una base con este nombre");
+                }
+            }
+
+            //unique email
+            if (bases.contactos.email != null)
+            {
+                bases.contactos.email = bases.contactos.email.Trim();
+                var movil = from n in db.bases where n.contactos.email.Equals(bases.contactos.email) select n;
+                if (movil.Count() > 0)
+                {
+                    ModelState.AddModelError("personas.contactos.email", "Este móvil ya está en uso");
+                }
+            }
+            //fin unique email
+
+            
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                   
+
 
                     //municipio para direccion
                     bases.direcciones.idMunicipio = bases.direcciones.municipioSeleccionado;
@@ -93,14 +125,14 @@ namespace Cabspot.Controllers
 
                     //redirigiendo a home...tempdata para mensaje de exito
                     TempData["success"] = "Se ha añadido una base exitosamente";
-                    return RedirectToAction("Index","Bases");
+                    return RedirectToAction("Index", "Bases");
                 }
                 catch (Exception e)
                 {
                     TempData["error"] = e.ToString();
                     return Redirect("~/Shared/Error.cshtml");
                 }
-                
+
             }
             bases.direcciones.listaProvincias = new SelectList(db.provincias, "idProvincia", "nombreProvincia");  //enviando el listado de provincias al View
             ViewBag.municipio = bases.direcciones.municipioSeleccionado;
