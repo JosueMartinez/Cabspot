@@ -13,13 +13,13 @@ using Cabspot.Models;
 using System.Web.Mvc;
 using Cabspot.Controllers.Clases;
 using Twilio;
+using Cabspot.Models;
 
 namespace Cabspot.Controllers
 {
     public class taxistasAPIController : ApiController
     {
         private CabspotDB db = new CabspotDB();
-        taxistas taxista = new taxistas();
 
         //login -------------------------------------------------------------------------
         [System.Web.Http.HttpGet]
@@ -27,24 +27,32 @@ namespace Cabspot.Controllers
         public bool loginTaxista(string codigoTaxista)
         {
             //variables de twilio
-            string AccountSid = Constantes.ACCOUNT_SID_JOSUE;
-            string AuthToken = Constantes.AUTH_TOKEN_JOSUE;
+            string AccountSid = Constantes.ACCOUNT_SID_CABSPOT;
+            string AuthToken = Constantes.AUTH_TOKEN_CABSPOT;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             //buscar el taxista que tiene ese telefonoMovil
             if (!string.IsNullOrEmpty(codigoTaxista))
             {
-                var taxistaLogin = taxista.FindByCodigo(codigoTaxista);
+                var taxistaLogin = taxistas.BuscarPorCodigo(codigoTaxista);
                 if (taxistaLogin != null)
                 {
                     //enviar mensaje de texto 
-                    autenticacionsmstaxista sms = taxista.generarCodigo(taxistaLogin.idTaxista);
+                    autenticacionsmstaxista sms = taxistas.generarCodigoTaxista(taxistaLogin.idTaxista);
                     if (sms != null)
                     {
                         try
                         {
-                            var numero = "+1" + taxistaLogin.personas.contactos.telefonoMovil;  //formato EI64 para el numero
-                            var message = twilio.SendMessage(Constantes.PHONE_JOSUE, numero, Constantes.Mensaje_Codigo + sms.codigo);
+                            //formato EI64 para el numero
+                            var numero = contactos.FormatearCelular(taxistaLogin.personas.contactos.telefonoMovil);  
+                            //si el numero no esta en el formato correcto SALIR
+                            if (numero == null)
+                            {
+                                return false;
+                            }
+                            //enviando mensaje
+                            var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);
+                            //respuesta si el mensaje fue enviado o no
                             if(!string.IsNullOrEmpty(message.Sid))
                                 return true;
                             return false;
@@ -60,6 +68,72 @@ namespace Cabspot.Controllers
                 return false; 
             }
             return false;          
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/autenticar/{codigoVerificacion}")]
+        [ResponseType(typeof(taxistas))]
+        public async Task<IHttpActionResult> autenticarTaxista(string codigoVerificacion)
+        {
+            if (!string.IsNullOrEmpty(codigoVerificacion))
+            {
+                //buscar codigo en tabla autenticacionsmstaxista
+                autenticacionsmstaxista sms = new autenticacionsmstaxista();// = autenticacionsmstaxista.getAutenticacionSMS(codigoVerificacion);
+                if (!string.IsNullOrEmpty(codigoVerificacion))
+                {
+                    var listaSMS = from l in db.autenticacionSmsTaxista where l.codigo.Equals(codigoVerificacion) select l;
+                    if (listaSMS.Count() > 0)
+                    {
+                        sms = listaSMS.FirstOrDefault();
+                    }
+                }
+
+                if (sms != null)
+                {
+                    //revisar codigo no ha sido verificado
+                    if (!sms.verificado)
+                    {
+                        //buscar taxista
+                        taxistas taxista = db.taxistas.Find(sms.idTaxista);
+                        if (taxista != null)
+                        {
+                            //cambio de verificado en DB
+                            sms.verificado = true;
+                            
+                            try
+                            {
+                                //actualizando en bd
+                                db.Entry(sms).State = EntityState.Modified;
+                                await db.SaveChangesAsync();
+                                //devolver taxista
+                                //return Ok(taxista);
+                                return Ok(taxista);
+                            }
+                            catch (Exception e)
+                            {
+                                return BadRequest();
+                            }
+                            
+                        }
+                        else
+                        {
+                            return BadRequest();
+                        }                        
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }                
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -80,8 +154,10 @@ namespace Cabspot.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(taxistas);
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/taxistasAPI/5

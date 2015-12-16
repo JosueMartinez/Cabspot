@@ -5,6 +5,7 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Text.RegularExpressions;
 
     [Table("contactos")]
     public partial class contactos
@@ -70,5 +71,28 @@ namespace Cabspot.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<personas> personas { get; set; }
+
+        //Dar formato E.164 al movil ej. +18094531234 
+        public static string FormatearCelular(string telefono)
+        {
+            if (!string.IsNullOrEmpty(telefono))
+            {
+                string patron = @"^(809|849|829)\d{7}$";
+                //eliminar posibles caracteres no deseados
+                telefono = telefono.Replace("-", "").Replace("(", " ").Replace(")", " ");
+                telefono = telefono.Trim();
+
+                //validar numero con regex ^(809|849|829)\d{7}$
+                var validar = Regex.Match(telefono, patron);
+                if (validar.Success)
+                {
+                    return "+1" + telefono;
+                }
+
+                return null;
+            }
+
+            return null;
+        }
     }
 }

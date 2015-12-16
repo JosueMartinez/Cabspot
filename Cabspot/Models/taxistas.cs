@@ -9,9 +9,10 @@ namespace Cabspot.Models
     using System.Linq;
 
     [Table("taxistas")]
+    [Serializable]
     public partial class taxistas
     {
-        CabspotDB db = new CabspotDB();
+        public static CabspotDB db = new CabspotDB();
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public taxistas()
@@ -78,7 +79,7 @@ namespace Cabspot.Models
 
 
         //buscar al taxista por telefonoMovil
-        public taxistas FindByMobile(string telefonoMovil)
+        public static taxistas BuscarPorMovil(string telefonoMovil)
         {
             if (!string.IsNullOrEmpty(telefonoMovil))
             {
@@ -93,7 +94,7 @@ namespace Cabspot.Models
         }
 
         //buscar taxista por codigo
-        public taxistas FindByCodigo(string codigoTaxista)
+        public static taxistas BuscarPorCodigo(string codigoTaxista)
         {
             if (!string.IsNullOrEmpty(codigoTaxista))
             {
@@ -107,9 +108,8 @@ namespace Cabspot.Models
             return null;
         }
 
-
-        //generar codigo aleatorio
-        public autenticacionsmstaxista generarCodigo(int idTaxista)
+        //generar codigo aleatorio para autenticar al taxista
+        public static autenticacionsmstaxista generarCodigoTaxista(int idTaxista)
         {
             if (idTaxista != null)
             {
@@ -135,7 +135,7 @@ namespace Cabspot.Models
                     catch (Exception e)
                     {
                         return null;
-                    }  
+                    }
                 }
 
                 return null;
@@ -143,6 +143,7 @@ namespace Cabspot.Models
             }
             return null;
         }
+        
 
 
 
