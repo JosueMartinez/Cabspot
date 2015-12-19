@@ -73,7 +73,7 @@ namespace Cabspot.Controllers
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("taxistas/autenticar/{codigoVerificacion}")]
         [ResponseType(typeof(taxistas))]
-        public async Task<IHttpActionResult> autenticarTaxista(string codigoVerificacion)
+        public IHttpActionResult autenticarTaxista(string codigoVerificacion)
         {
             if (!string.IsNullOrEmpty(codigoVerificacion))
             {
@@ -104,7 +104,7 @@ namespace Cabspot.Controllers
                             {
                                 //actualizando en bd
                                 db.Entry(sms).State = EntityState.Modified;
-                                await db.SaveChangesAsync();
+                                db.SaveChanges();
                                 //devolver taxista
                                 //return Ok(taxista);
                                 return Ok(taxista);
@@ -147,16 +147,16 @@ namespace Cabspot.Controllers
 
         // GET: api/taxistasAPI/5
         [ResponseType(typeof(taxistas))]
-        public async Task<IHttpActionResult> Gettaxistas(int id)
+        public IHttpActionResult Gettaxistas(int id)
         {
-            taxistas taxistas = await db.taxistas.FindAsync(id);
+            taxistas taxistas = db.taxistas.Find(id);
             if (taxistas == null)
             {
                 return NotFound();
             }
             else
             {
-                return BadRequest();
+                return Ok(taxistas);
             }
         }
 

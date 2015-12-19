@@ -9,7 +9,6 @@ namespace Cabspot.Models
     using System.Linq;
 
     [Table("taxistas")]
-    [Serializable]
     public partial class taxistas
     {
         public static CabspotDB db = new CabspotDB();
