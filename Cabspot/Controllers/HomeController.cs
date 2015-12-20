@@ -14,10 +14,12 @@ namespace Cabspot.Controllers
         //enviando taxistas y su ubicacion
         public JsonResult ubicacionTaxistas()
         {
-            var taxistas = from t in db.taxistas select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
+            //obteniendo todos los taxistas activos(disponible u ocupado)
+            var taxistas = from t in db.taxistas where t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 101
+                                                            select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
                                                              t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,
                                                              t.personas.contactos.telefonoMovil, t.rating, t.personas.foto};
-                return Json(taxistas.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(taxistas.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ubicacionTaxista(int id)
@@ -25,7 +27,9 @@ namespace Cabspot.Controllers
             
             if (id != null)
             {
-                var taxistas = from t in db.taxistas where t.idTaxista == id select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
+                var taxistas = from t in db.taxistas where t.idTaxista == id 
+                                                            && (t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 101)
+                                                             select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
                                                              t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,
                                                              t.personas.contactos.telefonoMovil, t.rating, t.personas.foto};
 
