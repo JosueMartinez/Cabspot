@@ -24,7 +24,9 @@ namespace Cabspot.Controllers
 
         // GET: taxistas/Details/5
         public async Task<ActionResult> Details(int? id)
-        {            
+        {
+            bool ubicacionDisponible = false;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,6 +36,7 @@ namespace Cabspot.Controllers
             {
                 return HttpNotFound();
             }
+
             vehiculos v = new vehiculos();
             v.listaCondicion = new SelectList(db.condicionvehiculos, "idCondicionVehiculo", "condicionVehiculo");
             v.listaEstado = new SelectList(db.estadovehiculos, "idEstadoVehiculo", "estadoVehiculo");
@@ -42,7 +45,14 @@ namespace Cabspot.Controllers
 
             //ruta relativa de foto de perfil
             //taxistas.personas.foto = Clases.Utilidades.RutaRelativa(taxistas.personas.foto, "~/Content/Images/");
-            
+
+            //ubicacion disponible
+            if (taxistas.idEstadoDisponibilidad == 81 || taxistas.idEstadoDisponibilidad == 101)
+            {
+                ubicacionDisponible = true;
+            }
+
+            ViewBag.ubicacionDisponbile = ubicacionDisponible;
             return View(taxistas);
         }
 

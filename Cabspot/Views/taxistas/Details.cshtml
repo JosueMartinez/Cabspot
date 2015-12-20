@@ -4,6 +4,7 @@
     ViewBag.controller = "Taxistas";
     ViewBag.action = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool ubicacionDisponible = (bool)ViewBag.ubicacionDisponbile;
 
     //lanzando notificacion de exito
     if (TempData["success"] != null)
@@ -17,19 +18,7 @@
                     text: "Exito! se ha agregado un taxista.",
                     nonblock: {
                         nonblock: true
-                    }//,
-                    //before_close: function (PNotify) {
-                    //    // You can access the notice's options with this. It is read only.
-                    //    //PNotify.options.text;
-
-                    //    // You can change the notice's options after the timer like this:
-                    //    PNotify.update({
-                    //        title: PNotify.options.title + " - Enjoy your Stay",
-                    //        before_close: null
-                    //    });
-                    //    PNotify.queueRemove();
-                    //    return false;
-                    //}
+                    }
                 });
             });
         </script>
@@ -328,66 +317,71 @@
 </div>
 @* FIN MODAL ---------------------------------------------------------------------------------------------------------------------------------- *@
 
+@if (ubicacionDisponible)
+{
+    <script type="text/javascript">
+        var map;
+        //var marcadores = [];
 
-<script type="text/javascript">
-    var map;
-    //var marcadores = [];
-
-    $(document).ready(function () {
-        //dijujar mapa
-        iniciarMapa();        
-    });
-
-    function iniciarMapa() {
-        google.maps.visualRefresh = true;
-        var monumento = { lat: 19.451392, lng: -70.694726 };
-
-        map = new google.maps.Map(document.getElementById('map_canvas'), {
-            zoom: 16,
-            center: monumento,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+        $(document).ready(function () {
+            //dijujar mapa
+            iniciarMapa();
         });
-        ubicarMarkers(map);
-    }
 
-    function ubicarMarkers(map) {
+        function iniciarMapa() {
+            google.maps.visualRefresh = true;
+            var monumento = { lat: 19.451392, lng: -70.694726 };
 
-        $.getJSON('/Home/ubicacionTaxista/'+@Model.idTaxista, function (data) {
-            $.each(data, function (i, item) {
-                //dibunado marcador
-                var latlng = new google.maps.LatLng(item.latitudActual, item.longitudActual);
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    //map: map,
-                });
-
-                //color del marcador de acuerdo a la disponibilidad
-                if (item.estadoDisponibilidad == "Ocupado") {
-                    marker.setIcon('/Content/images/taxiOcupado.png')
-                }
-                if (item.estadoDisponibilidad == "Disponible") {
-                    marker.setIcon('/Content/images/taxiDisponible.png')
-                }
-                if (item.estadoDisponibilidad == "Offline") {
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
-                }            
-
-                //evento de click en pin
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
-                });
-
-                marker.setMap(map);
-                map.setCenter(latlng);
-            })
-        })
-
-    }
-
-    function eliminarMarkers() {
-        for (var i = 0; i < marcadores.length; i++) {
-            marcadores[i].setMap(null);
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 16,
+                center: monumento,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            ubicarMarkers(map);
         }
-        marcadores = [];
-    }
-</script>
+
+        function ubicarMarkers(map) {
+
+            $.getJSON('/Home/ubicacionTaxista/'+@Model.idTaxista, function (data) {
+                $.each(data, function (i, item) {
+                    //dibunado marcador
+                    var latlng = new google.maps.LatLng(item.latitudActual, item.longitudActual);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        //map: map,
+                    });
+
+                    //color del marcador de acuerdo a la disponibilidad
+                    if (item.estadoDisponibilidad == "Ocupado") {
+                        marker.setIcon('/Content/images/taxiOcupado.png')
+                    }
+                    if (item.estadoDisponibilidad == "Disponible") {
+                        marker.setIcon('/Content/images/taxiDisponible.png')
+                    }
+
+                    //evento de click en pin
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+
+                    marker.setMap(map);
+                    map.setCenter(latlng);
+                })
+            })
+
+        }
+
+        function eliminarMarkers() {
+            for (var i = 0; i < marcadores.length; i++) {
+                marcadores[i].setMap(null);
+            }
+            marcadores = [];
+        }
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        document.getElementById('map_canvas').innerHTML = "<img src='/Content/images/ubicacion-no-disponible.jpg' style='width:300px;height:200px'>"
+    </script>
+}
