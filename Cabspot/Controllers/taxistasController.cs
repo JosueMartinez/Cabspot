@@ -79,9 +79,10 @@ namespace Cabspot.Controllers
                 {
                     //base
                     taxistas.idBase = int.Parse(taxistas.baseSeleccionada);
-                    //creado como disponible por default
-                    var idEstadoDisponibilidad = (from e in db.estadodisponibilidad where e.estadoDisponibilidad.Equals("No Activo") select e.idEstadoDisponibilidad).First();
-                    taxistas.idEstadoDisponibilidad = idEstadoDisponibilidad;
+
+                    //creado como NO ACTIVO por default
+                    //var idEstadoDisponibilidad = 111;
+                    taxistas.idEstadoDisponibilidad = 111;
                     //direccion
                     taxistas.personas.direcciones.idMunicipio = taxistas.personas.direcciones.municipioSeleccionado;
 
