@@ -75,6 +75,8 @@ namespace Cabspot.Models
         [Column(TypeName = "date")]
         public DateTime? fechaUltimaModificacion { get; set; }
 
+        public bool activo { get; set; }
+
         public int? modificadoPor { get; set; }
 
         public virtual condicionvehiculos condicionvehiculos { get; set; }
