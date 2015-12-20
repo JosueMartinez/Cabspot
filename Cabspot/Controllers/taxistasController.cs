@@ -253,7 +253,7 @@ namespace Cabspot.Controllers
         [HttpPost]
         public async Task<ActionResult> AgregarVehiculo(taxistas taxista)
         {
-            var idTaxista = Request.Form["idTaxista"];
+            //var idTaxista = Request.Form["idTaxista"];
             //asignando ids de estados
             taxista.vehiculo.idCondicionVehiculo = taxista.vehiculo.condicionSeleccionada;
             taxista.vehiculo.idEstadoVehiculo = taxista.vehiculo.estadoSeleccionado;
@@ -282,6 +282,13 @@ namespace Cabspot.Controllers
                 {
                     taxista.vehiculo.idTaxista = t.idTaxista;
                     taxista.codigoTaxista = t.codigoTaxista;  //volando ModelState (sin razon aparente)
+
+                    //si es el primer vehiculo que se asigna a este taxista se crea como activo
+                    if (t.vehiculos.Count() > 0)
+                    {
+                        taxista.vehiculo.activo = true;
+                    }
+
                     if (ModelState.IsValid)
                     {
                         db.vehiculos.Add(taxista.vehiculo);
