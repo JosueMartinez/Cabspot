@@ -48,7 +48,7 @@ namespace Cabspot.Controllers
                             //si el numero no esta en el formato correcto SALIR
                             if (numero == null)
                             {
-                                return false;
+                                return true;
                             }
                             //enviando mensaje
                             var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);
@@ -99,11 +99,20 @@ namespace Cabspot.Controllers
                         {
                             //cambio de verificado en DB
                             sms.verificado = true;
-                            
+                            var vehiculos = taxista.vehiculos;
+
+
+                            //cambiando estado del taxista a disponible si tiene por lo menos un vehiculo activo
+                            if (vehiculos.Count() > 0 && taxista.idEstadoDisponibilidad != 81)
+                            {
+                                taxista.idEstadoDisponibilidad = 81;
+                            }
+                                                        
                             try
                             {
                                 //actualizando en bd
                                 db.Entry(sms).State = EntityState.Modified;
+                                db.Entry(taxista).State = EntityState.Modified;
                                 db.SaveChanges();
                                 //devolver taxista
                                 //return Ok(taxista);
