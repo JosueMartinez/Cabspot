@@ -145,6 +145,51 @@ namespace Cabspot.Controllers
             }
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("vehiculos/activacion/{idVehiculo}")]
+        public bool elegirVehiculo(int idVehiculo)
+        {
+            //buscar vehiculo
+            vehiculos vehiculo = db.vehiculos.Find(idVehiculo);
+            if (vehiculo == null)
+            {
+                return false;
+            }
+
+            //en caso que el vehiculo ya esta activo
+            if (vehiculo.activo)
+            {
+                return true;
+            }
+
+            //sino esta activo
+
+            //buscar todos los vehiculos de ese taxista y deshabilitar
+            var todos = db.vehiculos.Where(t => t.idTaxista == vehiculo.idTaxista);
+            foreach (var v in todos)
+            {
+                v.activo = false;
+                db.Entry(v).State = EntityState.Modified;
+            }
+
+            //activar el seleccionado
+            vehiculo.activo = true;
+            db.Entry(vehiculo).State = EntityState.Modified;
+
+
+            //guardar cambios
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
+//            return true;
+        }
 
         //-------------------------------------------------------------------------------
 
@@ -247,9 +292,6 @@ namespace Cabspot.Controllers
         private bool taxistasExists(int id)
         {
             return db.taxistas.Count(e => e.idTaxista == id) > 0;
-        }
-
-
-        
+        }        
     }
 }
