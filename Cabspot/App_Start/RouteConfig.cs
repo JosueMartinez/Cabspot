@@ -18,6 +18,17 @@ namespace Cabspot
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "DefaultGet",
+                url: "{controller}/{action}/{id}",
+                defaults: new { action = "Get", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "DefaultPost",
+                url: "{controller}/{action}"
+            );
         }
     }
 }

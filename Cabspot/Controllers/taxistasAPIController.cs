@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using Cabspot.Controllers.Clases;
 using Twilio;
 using Cabspot.Models;
+using System.Text.RegularExpressions;
 
 namespace Cabspot.Controllers
 {
@@ -145,7 +146,7 @@ namespace Cabspot.Controllers
             }
         }
 
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         [System.Web.Http.Route("vehiculos/activacion/{idVehiculo}")]
         public bool elegirVehiculo(int idVehiculo)
         {
@@ -189,6 +190,46 @@ namespace Cabspot.Controllers
             }
             
 //            return true;
+        }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("taxistas/actualizarUbicacion")]
+        public void actualizarUbicacion(taxistas taxistas)
+        {
+            
+           //verificar que el id no sea nulo y que exista
+            if (taxistas.idTaxista > 0)
+            {
+                taxistas taxistaBD = db.taxistas.Find(taxistas.idTaxista);
+                if (taxistaBD != null)
+                {
+                    //verificar que longitud y latitud no sea nulos
+                    if (taxistas.longitudActual != null && taxistas.latitudActual != null)
+                    {
+                        //verificar formato de posicion
+                        string patron = @"^(\-?\d+\.\d+)";
+                        var validarLat = Regex.Match(taxistas.latitudActual.ToString(), patron);
+                        var validarLong = Regex.Match(taxistas.longitudActual.ToString(), patron);
+
+                        if (validarLat.Success && validarLong.Success)
+                        {
+                            //actualizar ubicacion taxista
+                            taxistaBD.latitudActual = taxistas.latitudActual;
+                            taxistaBD.longitudActual = taxistas.longitudActual;
+
+                            taxistaBD.ultimaActualizacionPosicion = DateTime.Now;
+
+                            try
+                            {
+                                //actualizar entidad
+                                db.Entry(taxistaBD).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                            catch (Exception e) { }
+                        }
+                    }
+                }
+            }           
         }
 
         //-------------------------------------------------------------------------------
