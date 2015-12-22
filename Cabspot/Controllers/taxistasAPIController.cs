@@ -201,7 +201,7 @@ namespace Cabspot.Controllers
             if (taxistas.idTaxista > 0)
             {
                 taxistas taxistaBD = db.taxistas.Find(taxistas.idTaxista);
-                if (taxistaBD != null)
+                if (taxistaBD != null && taxistaBD.idEstadoDisponibilidad != 111)   //si el taxista esta activo
                 {
                     //verificar que longitud y latitud no sea nulos
                     if (taxistas.longitudActual != null && taxistas.latitudActual != null)
