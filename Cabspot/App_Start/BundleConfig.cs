@@ -61,15 +61,15 @@ namespace Cabspot
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(
-                    "~/Scripts/notify/pnotify.buttons.js",
+                    //"~/Scripts/notify/pnotify.buttons.js",
                     "~/Scripts/notify/pnotify.core.js",
                     "~/Scripts/notify/pnotify.nonblock.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/gauge").Include(
-                    "~/Scripts/gauge/gauge.min.js",
-                    "~/Scripts/gauge/gauge_demo.js"
-                ));
+            //bundles.Add(new ScriptBundle("~/bundles/gauge").Include(
+            //        "~/Scripts/gauge/gauge.min.js",
+            //        "~/Scripts/gauge/gauge_demo.js"
+            //    ));
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                     "~/Scripts/chartjs/chart.min.js"
