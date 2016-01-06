@@ -256,7 +256,7 @@ namespace Cabspot.Controllers
         [System.Web.Http.Route("taxistas/getDatosTaxista/{idTaxista}")]
         public IHttpActionResult getDatosTaxista(int idTaxista)
         {
-            var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+            var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
             if (t.Count() == 0)
             {
                 return NotFound();
