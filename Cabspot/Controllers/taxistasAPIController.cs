@@ -166,8 +166,6 @@ namespace Cabspot.Controllers
                 }  
         }
 
-
-
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("vehiculos/activacion/{idVehiculo}")]
         public bool elegirVehiculo(int idVehiculo)
@@ -252,6 +250,21 @@ namespace Cabspot.Controllers
                     }
                 }
             }           
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/getDatosTaxista/{idTaxista}")]
+        public IHttpActionResult getDatosTaxista(int idTaxista)
+        {
+            var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+            if (t.Count() == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(t.First());
+            }
         }
 
 
