@@ -19,6 +19,7 @@ namespace Cabspot.Controllers
                                                             select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
                                                              t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,
                                                              t.personas.contactos.telefonoMovil, t.rating, t.personas.foto};
+
             return Json(taxistas.ToList(), JsonRequestBehavior.AllowGet);
         }
 

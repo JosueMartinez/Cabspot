@@ -253,23 +253,79 @@ namespace Cabspot.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("taxistas/getDatosTaxista/{idTaxista}")]
-        public IHttpActionResult getDatosTaxista(int idTaxista)
+        [System.Web.Http.Route("taxistas/getDatos/{idTaxista}")]
+        public IHttpActionResult getDatos(int idTaxista)
         {
-            var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
-            if (t.Count() == 0)
+            taxistas taxista = db.taxistas.Find(idTaxista);
+
+            if (taxista != null)
             {
-                return NotFound();
+                var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+                if (t.Count() == 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(t.First());
+                }
             }
             else
             {
-                return Ok(t.First());
+                return BadRequest();
             }
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/getPerfil/{idTaxista}")]
+        public IHttpActionResult getPerfil(int idTaxista)
+        {
+            taxistas taxista = db.taxistas.Find(idTaxista);
+
+            if(taxista != null)
+            {
+                var t = from x in db.taxistas 
+                        where x.idTaxista == idTaxista 
+                        select new {
+                                        //informacion basica
+                                        x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto, x.personas.identificacion, x.personas.fechaNacimiento, x.personas.sexo,
+                                        x.rating, x.personas.nacionalidad,
+                                        //direccion
+                                        x.personas.direcciones.nombreEdificio, x.personas.direcciones.numeroPuerta, x.personas.direcciones.calle, x.personas.direcciones.numeroEdificio, 
+                                        x.personas.direcciones.municipios.nombreMunicipio, x.personas.direcciones.municipios.provincias.nombreProvincia,
+                                        //contactos
+                                        x.personas.contactos.telefonoMovil            
+                                    };
+                if (t.Count() == 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(t.First());
+                }
+
+            }
+            else
+            {
+                return BadRequest();
+            }
 
 
+            
+        }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/getCarreras/{idTaxista}")]
+        public IHttpActionResult getCarreras(int idTaxista)
+        {
+            //var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+
+            var carreras = db.carreras.Where(x => x.idTaxista == idTaxista);
+            
+            return Ok(carreras);
+            
+        }
 
         //-------------------------------------------------------------------------------
 

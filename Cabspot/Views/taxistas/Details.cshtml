@@ -208,6 +208,16 @@
                 <dd>@Html.DisplayFor(model => model.personas.nacionalidad)</dd>
                 @* Rating *@
                 <dt>@Html.DisplayNameFor(model => model.rating)</dt>
+                <dd>
+                    @for (int i = 1; i <= 5; i++) {
+                        if (i <= Model.rating){
+                            <a href='#'><span class='fa fa-star'></span></a>
+                        }
+                        else { 
+                            <a href='#'><span class='fa fa-star-o'></span></a>
+                        }
+                    }
+                </dd>
                 <dt>Dirección</dt>
                 <dd>
                     @Model.personas.direcciones.nombreEdificio @Model.personas.direcciones.numeroPuerta <br />

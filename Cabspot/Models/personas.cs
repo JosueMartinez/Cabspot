@@ -27,12 +27,7 @@ namespace Cabspot.Models
         [Cedula(ErrorMessage = "La cédula no es válida")]
         [Display(Name = "Cédula")]
         [DisplayFormat(DataFormatString = "{0:000-0000000-0}", ApplyFormatInEditMode = true)]
-        public string identificacion
-        {
-            get { return "nulo"; }
-
-            set { }
-        }
+        public string identificacion { get; set; }
 
         [Required(ErrorMessage = "¿Cómo se llama?")]
         [StringLength(30)]
