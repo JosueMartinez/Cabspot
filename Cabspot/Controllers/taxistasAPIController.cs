@@ -319,12 +319,9 @@ namespace Cabspot.Controllers
         [System.Web.Http.Route("taxistas/getCarreras/{idTaxista}")]
         public IHttpActionResult getCarreras(int idTaxista)
         {
-            //var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
-
-            var carreras = db.carreras.Where(x => x.idTaxista == idTaxista);
+           var carreras = db.carreras.Where(x => x.idTaxista == idTaxista);
             
-            return Ok(carreras);
-            
+           return Ok(carreras);           
         }
 
         //-------------------------------------------------------------------------------
