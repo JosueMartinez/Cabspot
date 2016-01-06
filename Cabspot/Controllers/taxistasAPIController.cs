@@ -96,12 +96,12 @@ namespace Cabspot.Controllers
                     {
                         //buscar taxista
                         taxistas taxista = db.taxistas.Find(sms.idTaxista);
+                        
                         if (taxista != null)
                         {
                             //cambio de verificado en DB
                             sms.verificado = true;
-                            var vehiculos = taxista.vehiculos;
-
+                            var vehiculos = taxista.vehiculos.Where(v => v.idEstadoVehiculo == 31);
 
                             //cambiando estado del taxista a disponible si tiene por lo menos un vehiculo activo
                             if (vehiculos.Count() > 0 && taxista.idEstadoDisponibilidad != 81)
@@ -117,7 +117,7 @@ namespace Cabspot.Controllers
                                 db.SaveChanges();
                                 //devolver taxista
                                 //return Ok(taxista);
-                                return Ok(taxista);
+                                return getVehiculos(taxista.idTaxista);  //Ok(vehiculosEnviar);
                             }
                             catch (Exception e)
                             {
@@ -145,6 +145,28 @@ namespace Cabspot.Controllers
                 return BadRequest();
             }
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("vehiculos/getVehiculos/{idTaxista}")]
+        public IHttpActionResult getVehiculos(int idTaxista)
+        {
+                taxistas taxista = db.taxistas.Find(idTaxista);
+
+                if (taxista != null)
+                {
+                    var vehiculos = taxista.vehiculos;
+
+                    //enviar vehiculos con estado activo para posterior elección
+                    var vehiculosEnviar = from v in vehiculos where v.idEstadoVehiculo == 31 select new { v.idVehiculo, v.marca, v.modelo, v.serie, v.placa, v.anio, v.color, v.unidad, v.tipovehiculos.tipoVehiculo };
+                    return Ok(vehiculosEnviar);
+                }
+                else
+                {
+                    return BadRequest();
+                }  
+        }
+
+
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("vehiculos/activacion/{idVehiculo}")]
@@ -191,7 +213,7 @@ namespace Cabspot.Controllers
             
 //            return true;
         }
-
+        
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("taxistas/actualizarUbicacion")]
         public void actualizarUbicacion(taxistas taxistas)
@@ -231,6 +253,10 @@ namespace Cabspot.Controllers
                 }
             }           
         }
+
+
+
+
 
         //-------------------------------------------------------------------------------
 
