@@ -131,9 +131,12 @@ namespace Cabspot.Controllers
                 //subir foto
                 var filename = Path.GetFileName(foto.FileName);
                 var path = "~/FotosPerfil/" + filename;
-                foto.SaveAs(path);
+                foto.SaveAs(Server.MapPath(path));
                 empleados.personas.foto = path;
                // ModelState.SetModelValue("personas.foto", new ValueProviderResult(path,path, ));
+
+                //hashing contrasena
+                empleados.SetPassword(empleados.contrasena);
             }
             catch (Exception e)
             {

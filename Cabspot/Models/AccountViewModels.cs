@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using System.Linq;
+using System.Web.Helpers;
 
 namespace Cabspot.Models
 {
@@ -66,10 +67,11 @@ namespace Cabspot.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
-        public bool existe(string _usuario, string _constrasena)
+        public bool existe(string _usuario, string _contrasena)
         {
             CabspotDB db = new CabspotDB();
-            var usuario = from e in db.empleados where e.usuario.Equals(_usuario) && e.contrasena.Equals(_constrasena) select e;
+            string contrasenaHash = Crypto.Hash(_contrasena);
+            var usuario = from e in db.empleados where e.usuario.Equals(_usuario) && e.contrasena.Equals(contrasenaHash) select e;
             if (usuario.Count() > 0)
                 return true;
             return false;

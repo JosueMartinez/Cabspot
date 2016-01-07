@@ -5,6 +5,8 @@ namespace Cabspot.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Text;
+    using System.Web.Helpers;
     using System.Web.Mvc;
 
     [Table("empleados")]
@@ -75,6 +77,26 @@ namespace Cabspot.Models
         [System.ComponentModel.DataAnnotations.Compare("contrasena", ErrorMessage = "Las contraseñas no coinciden")]
         [Display(Name = "Confirmar Contraseña")]
         public string confirmarContrasena { get; set; }
+
+        public void SetPassword(string password)
+        {
+            contrasena = Crypto.Hash(password);
+        }
+
+        //public bool CheckPassword(string password)
+        //{
+        //    return string.Equals(contrasena, Crypto.Hash(password));
+        //}
+
+        //public static class Crypto
+        //{
+        //    public static string Hash(string value)
+        //    {
+        //        return Convert.ToBase64String(
+        //            System.Security.Cryptography.SHA256.Create()
+        //            .ComputeHash(Encoding.UTF8.GetBytes(value)));
+        //    }
+        //}
 
     }
 }

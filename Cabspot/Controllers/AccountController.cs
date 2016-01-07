@@ -86,6 +86,8 @@ namespace Cabspot.Controllers
                 return View(model);
             }
 
+            empleados emp = new empleados();
+            
             if (model.existe(model.usuario, model.contrasena))
             {
                 FormsAuthentication.SetAuthCookie(model.usuario, true);
