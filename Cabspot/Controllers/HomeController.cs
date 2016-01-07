@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Cabspot.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         CabspotDB db = new CabspotDB();

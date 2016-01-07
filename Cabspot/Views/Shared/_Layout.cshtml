@@ -1,7 +1,7 @@
 ﻿@{
     
     ViewBag.Title = "Cabspot";
-    var usuario = "Bertoldo Edmundo Melones y Dieta";
+   // var usuario = "Bertoldo Edmundo Melones y Dieta";
 }
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu prile quick info -->
-                    @*@if (Request.IsAuthenticated)
+                    @if (Request.IsAuthenticated)
                     {
                         <div class="profile">
                             <div class="profile_pic">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="profile_info">
                                 <span>Bienvenido,</span>
-                                <h2>@usuario</h2>
+                                <h2>@User.Identity.Name</h2>    
                             </div>
                         </div>
                     }
@@ -101,17 +101,6 @@
                                 <h2>Ninguno</h2>
                             </div>
                         </div>
-                    }*@
-                    @if (Request.IsAuthenticated)
-                    {
-                        <strong>@Html.Encode(User.Identity.Name)</strong>
-                        @Html.ActionLink("Sign Out", "Logout", "User")
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Register", "Register", "User")
-                        <span> | </span>
-                        @Html.ActionLink("Sign In", "Login", "User")
                     }
                     <!-- /menu prile quick info -->
                     <br />
@@ -193,7 +182,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                                    
-                                    <img src="~/Content/images/user.png" />  @usuario
+                                    <img src="~/Content/images/user.png" />  @User.Identity.Name
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -210,7 +199,20 @@
                                         <a href="javascript:;">Help</a>
                                     </li>
                                     <li>
-                                        <a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "LogOffForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a href="#" id="salir"  class="fa fa-sign-out pull-right">  Salir</a>
+                                            <script type="text/javascript">
+                                                $("#salir").click(function () {
+                                                    if (confirm("¿Está seguro que quiere salir?")) {
+                                                        document.getElementById('LogOffForm').submit();
+                                                    } else {
+                                                        return false;
+                                                    }
+                                                });
+                                            </script>
+                                        }                                      
                                     </li>
                                 </ul>
                             </li>
