@@ -59,6 +59,16 @@ namespace Cabspot.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (Request.IsAuthenticated)
+            {
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+                
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -70,6 +80,7 @@ namespace Cabspot.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -85,6 +96,9 @@ namespace Cabspot.Controllers
                 ModelState.AddModelError("", "Usuario y/o contraseña invalida.");
                 return View(model);
             }
+
+
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             //var result = await SignInManager.PasswordSignInAsync(model.usuario, model.contrasena, false, shouldLockout: false);
