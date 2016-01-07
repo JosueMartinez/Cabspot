@@ -46,6 +46,8 @@ namespace Cabspot.Models
 
         public int idMetodoPago { get; set; }
 
+        public float costo { get; set; }
+
         public virtual taxistas taxistas { get; set; }
 
         public virtual estadocarreras estadocarreras { get; set; }
