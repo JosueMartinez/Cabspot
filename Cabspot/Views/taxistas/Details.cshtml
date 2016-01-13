@@ -248,6 +248,7 @@
                     <th class="text-center">@Html.DisplayNameFor(model => model.vehiculo.modelo)</th>
                     <th class="text-center">@Html.DisplayNameFor(model => model.vehiculo.anio)</th>
                     <th class="text-center">@Html.DisplayNameFor(model => model.vehiculo.color)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.vehiculo.estadovehiculos.estadoVehiculo)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -262,12 +263,21 @@
                             <td class="text-center">@Html.DisplayFor(modelItem => item.modelo)</td>
                             <td class="text-center">@Html.DisplayFor(modelItem => item.anio)</td>
                             <td class="text-center"><i class="fa fa-circle fa-2x" style="color: @item.color"></i></td>@*@Html.DisplayFor(modelItem => item.color)</td>*@
+                            @if (item.idEstadoVehiculo == 31)//estado activo
+                            {
+                                <td class="text-center"><i class="fa fa-thumbs-up fa-2x success"></i></td>
+                            }
+                            else
+                            {
+                                <td class="text-center"><i class="fa fa-thumbs-down fa-2x danger"></i></td>
+                            }
+                            <td class="text-center">@Html.DisplayFor(modelItem => item.estadovehiculos.estadoVehiculo)</td>                           
 
                             @* Fin Rating *@
                             <td class="text-center">
-                                @Html.ActionLink(" ", "Edit", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-edit" }) |
-                                @Html.ActionLink(" ", "Details", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-eye" }) |
-                                @Html.ActionLink(" ", "Delete", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-trash" })
+                                @Html.ActionLink(" ", "Edit", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-edit", title = "Editar" }) |
+                                @Html.ActionLink(" ", "Details", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-eye", title = "Ver Detalles" }) |
+                                @Html.ActionLink(" ", "Inactivar", "Vehiculos", new { id = item.idVehiculo }, new { @class = "fa fa-times danger", title = "Inactivar" })
                             </td>
                         </tr>
                     }

@@ -104,7 +104,7 @@ namespace Cabspot.Controllers
         }
 
         // GET: vehiculos/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Inactivar(int? id)
         {
             if (id == null)
             {
@@ -117,15 +117,46 @@ namespace Cabspot.Controllers
             }
             return View(vehiculos);
         }
-
+        
         // POST: vehiculos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Inactivar")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             vehiculos vehiculos = await db.vehiculos.FindAsync(id);
+            taxistas taxista = await db.taxistas.FindAsync(vehiculos.taxistas); 
+
+            if (vehiculos != null)
+            {
+                vehiculos.idEstadoVehiculo = 41;
+                db.Entry(vehiculos).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                //si es el unico vehiculo, marcar al taxista como inactivo
+                if (taxista.vehiculos.Where(v => v.idEstadoVehiculo == 31).Count() > 0)
+                {
+                    taxista.idEstadoDisponibilidad = 111;
+                    db.Entry(taxista).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+
+                //si se inhabilita el vehiculo activo, mandar a elegir un vehículo
+
+
+
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+
             db.vehiculos.Remove(vehiculos);
             await db.SaveChangesAsync();
+            
+            
             return RedirectToAction("Index");
         }
 

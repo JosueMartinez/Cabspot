@@ -559,7 +559,7 @@
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\vehiculos\Create.cshtml" />
-    <Content Include="Views\vehiculos\Delete.cshtml" />
+    <Content Include="Views\vehiculos\Inactivar.cshtml" />
     <Content Include="Views\vehiculos\Details.cshtml" />
     <Content Include="Views\vehiculos\Edit.cshtml" />
     <Content Include="Views\vehiculos\Index.cshtml" />
