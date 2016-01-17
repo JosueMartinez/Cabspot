@@ -9,6 +9,8 @@ namespace Cabspot.Models
     [Table("cabspotdb.clientes")]
     public partial class clientes
     {
+        public static CabspotDB db = new CabspotDB();
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public clientes()
         {
@@ -41,5 +43,41 @@ namespace Cabspot.Models
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         //public virtual ICollection<autenticacionsms> autenticacionsms { get; set; }
+
+        //generar codigo aleatorio para autenticar al cliente
+        public static autenticacionsms generarCodigoCliente(int idCliente)
+        {
+            if (idCliente != null)
+            {
+                clientes cliente = db.clientes.Find(idCliente);
+                if (cliente != null)
+                {
+                    Random random = new Random();
+                    autenticacionsms sms = new autenticacionsms();
+
+                    int otp = random.Next(100000, 999999);
+
+                    //guardando sms
+                    sms.idClienteMovil = idCliente;
+                    sms.codigo = otp.ToString();
+
+                    try
+                    {
+                        db.autenticacionSms.Add(sms);
+                        db.SaveChanges();
+                        return sms;
+
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
+                }
+
+                return null;
+
+            }
+            return null;
+        }
     }
 }

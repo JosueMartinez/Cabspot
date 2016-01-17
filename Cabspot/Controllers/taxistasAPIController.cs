@@ -32,7 +32,7 @@ namespace Cabspot.Controllers
             string AuthToken = Constantes.AUTH_TOKEN_CABSPOT;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
-            //buscar el taxista que tiene ese telefonoMovil
+            //buscar el taxista que tiene ese codigoTaxista
             if (!string.IsNullOrEmpty(codigoTaxista))
             {
                 var taxistaLogin = taxistas.BuscarPorCodigo(codigoTaxista);
@@ -49,7 +49,7 @@ namespace Cabspot.Controllers
                             //si el numero no esta en el formato correcto SALIR
                             if (numero == null)
                             {
-                                return true;
+                                return false;
                             }
                             //enviando mensaje
                             var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);

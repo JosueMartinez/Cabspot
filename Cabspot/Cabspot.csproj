@@ -265,6 +265,7 @@
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
     <Compile Include="Controllers\Clases\Utilidades.cs" />
+    <Compile Include="Controllers\ClientesAPIController.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
