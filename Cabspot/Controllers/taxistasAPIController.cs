@@ -80,14 +80,13 @@ namespace Cabspot.Controllers
             {
                 //buscar codigo en tabla autenticacionsmstaxista
                 autenticacionsmstaxista sms = new autenticacionsmstaxista();// = autenticacionsmstaxista.getAutenticacionSMS(codigoVerificacion);
-                if (!string.IsNullOrEmpty(codigoVerificacion))
+                
+                var listaSMS = from l in db.autenticacionSmsTaxista where l.codigo.Equals(codigoVerificacion) select l;
+                if (listaSMS.Count() > 0)
                 {
-                    var listaSMS = from l in db.autenticacionSmsTaxista where l.codigo.Equals(codigoVerificacion) select l;
-                    if (listaSMS.Count() > 0)
-                    {
-                        sms = listaSMS.FirstOrDefault();
-                    }
+                    sms = listaSMS.FirstOrDefault();
                 }
+                
 
                 if (sms != null)
                 {
@@ -166,7 +165,7 @@ namespace Cabspot.Controllers
                 }  
         }
 
-        [System.Web.Http.HttpPost]
+        [System.Web.Http.HttpGet]
         [System.Web.Http.Route("vehiculos/activacion/{idVehiculo}")]
         public bool elegirVehiculo(int idVehiculo)
         {
