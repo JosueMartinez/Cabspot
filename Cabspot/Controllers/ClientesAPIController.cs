@@ -28,65 +28,41 @@ namespace Cabspot.Controllers
         {
             //telefono con formato E.164  ej. +1809453123
             string telefonoFormat = "";
-            
+
             //variables de twilio
             string AccountSid = Constantes.ACCOUNT_SID_CABSPOT;
             string AuthToken = Constantes.AUTH_TOKEN_CABSPOT;
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
-            
+
             if (!string.IsNullOrEmpty(telefonoMovil))
             {
-                //verificar que es un numero correcto ---------------------
+                //verificar que es un numero en formato correcto ---------------------
                 telefonoFormat = contactos.FormatearCelular(telefonoMovil);
                 if (telefonoFormat != null)
                 {
-                    
-                    //buscar cliente en BD por el telefono
-                    var cliente = db.clientes.Where(x => x.personas.contactos.telefonoMovil.Equals(telefonoMovil));
-                    if (cliente.Count() > 0)
+
+                    //buscar al cliente en clientesMovil
+                    var clientes = db.clientesMovil.Where(x => x.telefonoMovil.Equals(telefonoMovil));
+
+                    //verificar si existe un cliente con ese numero movil
+                    if (clientes.Count() > 0)
                     {
-                        clientes clienteLogin = cliente.First();
+                        //si existe enviar mensaje de texto
+                        clientesMovil cliente = clientes.First();
 
                         //enviar mensaje de texto
-                        autenticacionsms sms = clientes.generarCodigoCliente(clienteLogin.idCliente);
+                        return clientesMovil.enviarMensajeTexto(cliente);
 
-                        if (sms != null)
-                        {
-                            try
-                            {
-                                //si el numero no esta en el formato correcto salir
-                                if (telefonoFormat == null)
-                                {
-                                    return false;
-                                }
-                                //enviando mensaje
-                                var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, telefonoFormat, Constantes.Mensaje_Codigo + sms.codigo);
-
-                                //devolviendo resultado del envio del mensaje
-                                if (!string.IsNullOrEmpty(message.Sid))
-                                    return true;
-                                return false;
-                            }
-                            catch (Exception e)
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
                     }
-                    //el cliente no existe, primera vez que este se registra.
-                    //creamos un cliente nuevo
                     else
                     {
+                        //sino existe crear el clienteMovil
+
                         clientesMovil clientePrimeraVez = new clientesMovil();
                         clientePrimeraVez.fechaRegistro = DateTime.Now;
                         clientePrimeraVez.telefonoMovil = telefonoMovil;
 
-                        
                         try
                         {
                             //guardar el cliente
@@ -99,53 +75,20 @@ namespace Cabspot.Controllers
                             if (clientesMoviles.Count() > 0)
                             {
                                 clientesMovil clienteMovil = clientesMoviles.First();
-                                
+
                                 //enviar mensaje de texto
-                                autenticacionsms sms = clientesMovil.generarCodigoCliente(clienteMovil.idClienteMovil);
-
-                                if (sms != null)
-                                {
-                                    try
-                                    {
-                                        //formato EI64 para el numero
-                                        var numero = contactos.FormatearCelular(clienteMovil.telefonoMovil);
-                                        if (numero == null)
-                                        {
-                                            return false;
-                                        }
-
-                                        //enviando mensaje
-                                        //enviando mensaje
-                                        var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);
-                                        //respuesta si el mensaje fue enviado o no
-                                        if (!string.IsNullOrEmpty(message.Sid))
-                                            return true;
-                                        return false;
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        return false;
-                                    }
-                                }
-                            }                                                     
-                            
-
-
+                                return clientesMovil.enviarMensajeTexto(clienteMovil);
+                            }
                         }
                         catch (Exception e)
                         {
                             return false;
                         }
-
-                        
                     }
                 }
-                else
-                {
-                    return false;
-                }
-            }
 
+                return false;
+            }
             return false;
         }
 

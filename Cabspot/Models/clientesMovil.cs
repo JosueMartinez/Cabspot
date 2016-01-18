@@ -2,11 +2,13 @@
 
 namespace Cabspot.Models
 {
+    using Cabspot.Controllers.Clases;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Twilio;
 
     [Table("cabspotdb.clientesMovil")]
     public partial class clientesMovil
@@ -75,6 +77,43 @@ namespace Cabspot.Models
 
             }
             return null;
+        }
+
+        public static bool enviarMensajeTexto(clientesMovil cliente)
+        {
+            //variables de twilio
+            string AccountSid = Constantes.ACCOUNT_SID_CABSPOT;
+            string AuthToken = Constantes.AUTH_TOKEN_CABSPOT;
+            var twilio = new TwilioRestClient(AccountSid, AuthToken);
+
+            autenticacionsms sms = clientesMovil.generarCodigoCliente(cliente.idClienteMovil);
+
+            if (sms != null)
+            {
+                try
+                {
+                    //formato EI64 para el numero
+                    var numero = contactos.FormatearCelular(cliente.telefonoMovil);
+                    if (numero == null)
+                    {
+                        return false;
+                    }
+
+                    //enviando mensaje
+                    //enviando mensaje
+                    var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);
+                    //respuesta si el mensaje fue enviado o no
+                    if (!string.IsNullOrEmpty(message.Sid))
+                        return true;
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }
