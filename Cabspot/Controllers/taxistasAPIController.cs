@@ -156,7 +156,7 @@ namespace Cabspot.Controllers
                     var vehiculos = taxista.vehiculos;
 
                     //enviar vehiculos con estado activo para posterior elección
-                    var vehiculosEnviar = from v in vehiculos where v.idEstadoVehiculo == 31 select new { v.idVehiculo, v.marca, v.modelo, v.serie, v.placa, v.anio, v.color, v.unidad, v.tipovehiculos.tipoVehiculo };
+                    var vehiculosEnviar = from v in vehiculos where v.idEstadoVehiculo == 31 select new { v.idTaxista,v.idVehiculo, v.marca, v.modelo, v.serie, v.placa, v.anio, v.color, v.unidad, v.tipovehiculos.tipoVehiculo };
                     return Ok(vehiculosEnviar);
                 }
                 else
