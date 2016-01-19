@@ -51,11 +51,11 @@ namespace Cabspot.Models
         [Display(Name = "Género")]
         public string sexo { get; set; }
 
-        [Required(ErrorMessage = "Debe elegir una foto de perfil")]
+        //[Required(ErrorMessage = "Debe elegir una foto de perfil")]
         [StringLength(255)]
         public string foto { get; set; }
 
-        [Required(ErrorMessage = "¿Cuál es su nacionalidad?")]
+        //[Required(ErrorMessage = "¿Cuál es su nacionalidad?")]
         [StringLength(50)]
         [Display(Name = "Nacionalidad")]
         public string nacionalidad { get; set; }

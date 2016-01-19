@@ -116,4 +116,14 @@ namespace Cabspot.Models
             return false;
         }
     }
+
+    //esta es una clase para representar el resultado cuando un cliente es autenticado
+    [NotMapped]
+    public class clienteRetorno
+    {
+        
+        public int idCliente { get; set; }
+
+        public string antiguedadCliente { get; set; }
+    }
 }

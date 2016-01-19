@@ -50,7 +50,7 @@ namespace Cabspot.Models
         public string color { get; set; }
 
         [Required(ErrorMessage = "¿Cómo se identifica la únidad?")]
-        [StringLength(5)]
+        [StringLength(5, ErrorMessage="NO debe ser mayor de 5 caracteres")]
         [Display(Name = "Unidad")]
         public string unidad { get; set; }
 

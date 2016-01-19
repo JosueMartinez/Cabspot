@@ -92,7 +92,70 @@ namespace Cabspot.Controllers
             return false;
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("clientes/autenticar/{codigoVerificacion}")]
+        //[ResponseType(typeof(taxistas))]
+        public IHttpActionResult autenticarCliente(string codigoVerificacion)
+        {
+            if (!string.IsNullOrEmpty(codigoVerificacion))
+            {
+                //buscar codigo en BD
+                autenticacionsms sms = new autenticacionsms();
+                var listaSMS = db.autenticacionSms.Where(x => x.codigo.Equals(codigoVerificacion));
+                if (listaSMS.Count() > 0)
+                {
+                    sms = listaSMS.First();
+                }
 
+                //verificar el mensaje se ha enviado
+                if (sms != null)
+                {
+                    //verificar que no haya sido verificado ya
+                    if (!sms.verificado)
+                    {
+                        sms.verificado = true;
+                        var clientes = db.clientes.Where(x => x.personas.contactos.telefonoMovil.Equals(sms.clientesMovil.telefonoMovil));
+
+                        clienteRetorno cr = new clienteRetorno();
+                        //cr.autenticado = true;
+
+                        //si es un cliente antiguo                        
+                        if (clientes.Count() > 0)
+                        {
+                            cr.antiguedadCliente = "Existente";
+                            cr.idCliente = clientes.First().idCliente;
+                        }
+                        //si es un cliente nuevo
+                        else
+                        {
+                            cr.antiguedadCliente = "Nuevo";
+                        }
+
+                        return Ok(cr);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("clientes/create")]
+        [ResponseType(typeof(clientes))]
+        public IHttpActionResult crearCliente(clienteNuevo cliente)
+        {
+            return Ok();
+        }
 
         // GET: api/ClientesAPI
         public IQueryable<clientes> Getclientes()

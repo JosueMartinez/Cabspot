@@ -115,6 +115,9 @@ namespace Cabspot
             //---------------------------------------------------------------------------
             //font-awesome
             bundles.Add(new StyleBundle("~/Content/fa", @"//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"));
+
+            //carqueryapi
+            //bundles.Add(new ScriptBundle(@"//www.carqueryapi.com/js/carquery.0.3.4.js"));
         }
     }
 }

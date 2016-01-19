@@ -30,13 +30,24 @@
                 @Html.ValidationMessageFor(model => model.vehiculo.placa, "", new { @class = "text-danger" })
             </div>
         </div>
+        @* Año  *@
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3">
+                @Html.LabelFor(model => model.vehiculo.anio, htmlAttributes: new { @class = "control-label" }) <span class="required">*</span>
+            </label>
+            <div class="col-md-9 col-sm-9">
+                <select name="vehiculo.anio" id="car-years" class="select2_single form-control"></select>
+                @Html.ValidationMessageFor(model => model.vehiculo.anio, "", new { @class = "text-danger" })
+            </div>
+        </div>
         @* Marca *@
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3">
                 @Html.LabelFor(model => model.vehiculo.marca, htmlAttributes: new { @class = "control-label" }) <span class="required">*</span>
             </label>
-            <div class="col-md-6 col-sm-6">
-                @Html.EditorFor(model => model.vehiculo.marca, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-9 col-sm-9">
+                @*@Html.EditorFor(model => model.vehiculo.marca, new { htmlAttributes = new { @class = "form-control" } })*@
+                <select name="vehiculo.marca" id="car-makes" class="select2_single"></select>
                 @Html.ValidationMessageFor(model => model.vehiculo.marca, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,7 +57,8 @@
                 @Html.LabelFor(model => model.vehiculo.modelo, htmlAttributes: new { @class = "control-label" }) <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6">
-                @Html.EditorFor(model => model.vehiculo.modelo, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.vehiculo.modelo, new { htmlAttributes = new { @class = "form-control" } })*@
+                <select name="vehiculo.modelo" id="car-models" class="select2_single"></select>
                 @Html.ValidationMessageFor(model => model.vehiculo.modelo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,20 +68,11 @@
                 @Html.LabelFor(model => model.vehiculo.serie, htmlAttributes: new { @class = "control-label" })
             </label>
             <div class="col-md-6 col-sm-6">
-                @Html.EditorFor(model => model.vehiculo.serie, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.vehiculo.serie, new { htmlAttributes = new { @class = "form-control" } })*@
+                <select name="vehiculo.serie" id="car-model-trims" class="select2_single"></select> 
                 @Html.ValidationMessageFor(model => model.vehiculo.serie, "", new { @class = "text-danger" })
             </div>
-        </div>
-        @* Año  *@
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3">
-                @Html.LabelFor(model => model.vehiculo.anio, htmlAttributes: new { @class = "control-label" }) <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6">
-                @Html.EditorFor(model => model.vehiculo.anio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.vehiculo.anio, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </div>        
         @* Color *@
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3">
@@ -130,6 +133,7 @@
                 @Html.ValidationMessageFor(model => model.vehiculo.cantidadAsientos, "", new { @class = "text-danger" })
             </div>
         </div>
+        
         <div class="form-group">
             <div class="col-md-offset-5 col-md-10">
                 <button type="submit" class="btn btn-success" name="comando" value="agregarVehiculo">Agregar Vehículo</button>
