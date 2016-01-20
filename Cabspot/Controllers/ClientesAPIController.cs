@@ -13,6 +13,8 @@ using Cabspot.Models;
 using Twilio;
 using Cabspot.Controllers.Clases;
 using System.Text.RegularExpressions;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace Cabspot.Controllers
 {
@@ -192,20 +194,98 @@ namespace Cabspot.Controllers
                 {
                     db.clientes.Add(clienteAgregar);
                     await db.SaveChangesAsync();
-                    return Ok();
+
+                    //devolvemos ok junto al idCliente para llamar otras acciones desde movil
+                    return Ok(clienteAgregar.idCliente);
                 }
                 catch (Exception e)
                 {
                     return BadRequest();
+                }
+                
+            }
+            else
+            {
+                return BadRequest();
+            }            
+        }
+
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("clientes/getDatos/{idCliente}")]
+        public IHttpActionResult getDatos(int idCliente)
+        {
+            clientes cliente = db.clientes.Find(idCliente);
+
+            if(cliente != null)
+            {
+                var c = from x in db.clientes
+                        where x.idCliente == idCliente
+                        select new { x.idCliente, x.personas.nombres, x.personas.apellidos, x.personas.foto, x.personas.contactos.telefonoMovil };
+
+                if (c.Count() == 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(c.First());
                 }
             }
             else
             {
                 return BadRequest();
             }
-
-            
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("clientes/getPerfil/{idCliente}")]
+        public IHttpActionResult getPeril(int idCliente)
+        {
+            clientes cliente = db.clientes.Find(idCliente);
+
+            if (cliente != null)
+            {
+                var c = from x in db.clientes
+                        where x.idCliente == idCliente
+                        select new
+                        {
+                            //informacion basica
+                            x.idCliente,
+                            x.personas.nombres,
+                            x.personas.apellidos,
+                            x.personas.foto,
+                            x.personas.identificacion,
+                            x.personas.fechaNacimiento,
+                            x.personas.sexo,
+                            x.nombreUsuario,
+                            x.personas.nacionalidad,
+                            //direccion
+                            x.personas.direcciones.nombreEdificio,
+                            x.personas.direcciones.numeroPuerta,
+                            x.personas.direcciones.calle,
+                            x.personas.direcciones.numeroEdificio,
+                            x.personas.direcciones.municipios.nombreMunicipio,
+                            x.personas.direcciones.municipios.provincias.nombreProvincia,
+                            //contactos
+                            x.personas.contactos.telefonoMovil
+                        };
+                if (c.Count() == 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(c.First());
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }   
+        }
+
+
 
         // GET: api/ClientesAPI
         public IQueryable<clientes> Getclientes()

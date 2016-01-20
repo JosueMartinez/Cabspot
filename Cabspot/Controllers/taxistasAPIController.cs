@@ -259,7 +259,10 @@ namespace Cabspot.Controllers
 
             if (taxista != null)
             {
-                var t = from x in db.taxistas where x.idTaxista == idTaxista select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+                var t = from x in db.taxistas 
+                        where x.idTaxista == idTaxista 
+                        select new { x.idTaxista, x.codigoTaxista, x.personas.nombres, x.personas.apellidos, x.personas.foto };
+                
                 if (t.Count() == 0)
                 {
                     return NotFound();
@@ -303,15 +306,11 @@ namespace Cabspot.Controllers
                 {
                     return Ok(t.First());
                 }
-
             }
             else
             {
                 return BadRequest();
-            }
-
-
-            
+            }                        
         }
 
         [System.Web.Http.HttpGet]
