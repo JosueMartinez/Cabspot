@@ -18,7 +18,7 @@ namespace Cabspot.Controllers
 {
     public class ClientesAPIController : ApiController
     {
-        private CabspotDB db = new CabspotDB();
+        CabspotDB db = new CabspotDB();
 
 
         //login
@@ -152,9 +152,59 @@ namespace Cabspot.Controllers
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("clientes/create")]
         [ResponseType(typeof(clientes))]
-        public IHttpActionResult crearCliente(clienteNuevo cliente)
+        public async Task<IHttpActionResult> crearCliente(clienteNuevo cliente)
         {
-            return Ok();
+            //verificar ningun elemento sea nulo
+            if (!string.IsNullOrEmpty(cliente.nombres) || !string.IsNullOrEmpty(cliente.apellidos) || cliente.fechaNacimiento != null ||
+                !string.IsNullOrEmpty(cliente.telefonoMovil) || !string.IsNullOrEmpty(cliente.identificacion) || !string.IsNullOrEmpty(cliente.email) || !string.IsNullOrEmpty(cliente.genero))
+            {
+                //crear objeto cliente y agregar campos
+                clientes clienteAgregar = new clientes();
+                personas persona = new personas();
+                contactos contacto = new contactos();
+
+                persona.nombres = cliente.nombres;
+                persona.apellidos = cliente.apellidos;
+                persona.fechaNacimiento = cliente.fechaNacimiento;
+                persona.identificacion = cliente.identificacion;
+                persona.sexo = cliente.genero;
+                contacto.telefonoMovil = cliente.telefonoMovil;
+                contacto.email = cliente.email;
+                persona.contactos = contacto;
+
+                //refiriendonos a la direccion por default
+                //sera cambiada una vez el usuario pueda entrar a la app movil y editar su perfil
+                persona.idDireccion = 0;
+                
+                clienteAgregar.personas = persona;        
+                
+                
+
+                if (!string.IsNullOrEmpty(cliente.nombreUsuario))
+                {
+                    clienteAgregar.nombreUsuario = cliente.nombreUsuario;
+                }
+
+                clienteAgregar.fechaRegistro = DateTime.Now;
+
+                //agregar a bd
+                try
+                {
+                    db.clientes.Add(clienteAgregar);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                catch (Exception e)
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            
         }
 
         // GET: api/ClientesAPI

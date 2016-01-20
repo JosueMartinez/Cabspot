@@ -91,5 +91,6 @@ namespace Cabspot.Models
         public string identificacion { get; set; }
         public string email { get; set; }
         public string genero { get; set; }
+        public string nombreUsuario { get; set; }
     }
 }
