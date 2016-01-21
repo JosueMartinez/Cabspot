@@ -96,7 +96,6 @@ namespace Cabspot.Controllers
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("clientes/autenticar/{codigoVerificacion}")]
-        //[ResponseType(typeof(taxistas))]
         public IHttpActionResult autenticarCliente(string codigoVerificacion)
         {
             if (!string.IsNullOrEmpty(codigoVerificacion))
