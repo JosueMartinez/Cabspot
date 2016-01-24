@@ -13,6 +13,7 @@ using Cabspot.Models;
 
 namespace Cabspot.Controllers
 {
+    [Authorize]
     public class clientesController : ApiController
     {
         private CabspotDB db = new CabspotDB();

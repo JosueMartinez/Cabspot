@@ -11,6 +11,7 @@ using Cabspot.Models;
 
 namespace Cabspot.Controllers
 {
+    [Authorize]
     public class basesController : Controller
     {
         private CabspotDB db = new CabspotDB();

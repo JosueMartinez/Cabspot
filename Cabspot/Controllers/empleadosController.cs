@@ -12,6 +12,7 @@ using System.IO;
 
 namespace Cabspot.Controllers
 {
+    [Authorize]
     public class empleadosController : Controller
     {
         private CabspotDB db = new CabspotDB();
