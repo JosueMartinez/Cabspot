@@ -21,5 +21,11 @@ namespace Cabspot.Controllers.Clases
 
 
         public const string Mensaje_Codigo = "Cabspot \n Su código es: ";
+
+
+        //medicion
+        public const double RADIO_TIERRA = 6371;   //kilometros
+        public const double RADIO_DISTANCIA = 5;   
+
     }
 }

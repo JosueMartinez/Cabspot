@@ -24,7 +24,7 @@ namespace Cabspot.Models
 
         public int? idEstado { get; set; }
 
-        public DateTime fechaInicioCarrera { get; set; }
+        public DateTime? fechaInicioCarrera { get; set; }
 
         public DateTime? fechaFinCarrera { get; set; }
 
@@ -46,7 +46,7 @@ namespace Cabspot.Models
 
         public int idMetodoPago { get; set; }
 
-        public float costo { get; set; }
+        public float? costo { get; set; }
 
         public virtual taxistas taxistas { get; set; }
 

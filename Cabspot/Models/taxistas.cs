@@ -143,7 +143,17 @@ namespace Cabspot.Models
             return null;
         }
         
+        //crear solicitudes a taxistas cercanos a la ubicacion del cliente
+        public static void solicitudTaxista(carreras carrera)
+        {
+            //buscar taxistas en un radio de 5km a la ubicacion del cliente y que estan disponibles
+            //var taxistas = from t in db.taxistas 
+            //               where Math.Acos(Math.Sin(carrera.latitudOrigen)* Math.Sin(t.latitudActual * (180 / Math.PI))) 
+                           
+                               
+                               //acos(sin(:lat)*sin(radians(Lat)) + cos(:lat)*cos(radians(Lat))*cos(radians(Lon)-:lon)) * :R < :rad
 
+        }
 
 
         

@@ -188,16 +188,23 @@ namespace Cabspot.Controllers
 
                 clienteAgregar.fechaRegistro = DateTime.Now;
 
-                //agregar a bd
-                try
+                if (ModelState.IsValid)
                 {
-                    db.clientes.Add(clienteAgregar);
-                    await db.SaveChangesAsync();
+                    //agregar a bd
+                    try
+                    {
+                        db.clientes.Add(clienteAgregar);
+                        await db.SaveChangesAsync();
 
-                    //devolvemos ok junto al idCliente para llamar otras acciones desde movil
-                    return Ok(clienteAgregar.idCliente);
+                        //devolvemos ok junto al idCliente para llamar otras acciones desde movil
+                        return Ok(clienteAgregar.idCliente);
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
+                    }
                 }
-                catch (Exception e)
+                else
                 {
                     return BadRequest();
                 }
@@ -208,8 +215,7 @@ namespace Cabspot.Controllers
                 return BadRequest();
             }            
         }
-
-
+             
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("clientes/getDatos/{idCliente}")]
         public IHttpActionResult getDatos(int idCliente)
@@ -284,7 +290,72 @@ namespace Cabspot.Controllers
             }   
         }
 
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("clientes/carreraNueva")]
+        [ResponseType(typeof(clientes))]
+        public async Task<IHttpActionResult> crearCarrera(carreras carrera)
+        {
+            //verificar elementos nulos
+            if(carrera.idCliente > 0 &&   //cliente
+               carrera.longitudOrigen != null && carrera.latitudOrigen != null &&  //origen
+               carrera.longitudDestino != null && carrera.latitudDestino != null && //destino
+               carrera.idMetodoPago > 0 && carrera.idViaSolicitud > 0)   //metodo pago / via solicitud
+            {
+                //verificar formato de posicion
+                string patron = @"^(\-?\d+\.\d+)";
+                var validarLatOrigen = Regex.Match(carrera.latitudOrigen.ToString(), patron);
+                var validarLongOrigen = Regex.Match(carrera.longitudOrigen.ToString(), patron);
+                var validarLatDest = Regex.Match(carrera.latitudDestino.ToString(), patron);
+                var validarLongDest = Regex.Match(carrera.longitudDestino.ToString(), patron);
 
+                if (validarLatOrigen.Success && validarLatOrigen.Success && validarLatDest.Success && validarLongDest.Success)
+                {
+                    //buscar cliente
+                    clientes cliente = db.clientes.Find(carrera.idCliente);
+
+                    if (cliente != null)
+                    {
+                        carrera.idEstado = 41; // Creada como carrear "En Espera"
+                        carrera.fechaSolicitud = DateTime.Now;
+
+                        if (ModelState.IsValid)
+                        {
+                            //agregar a bd
+                            try
+                            {
+                                db.carreras.Add(carrera);
+                                await db.SaveChangesAsync();
+
+                                //crear las solicitudes a los taxistas
+                                taxistas.solicitudTaxista(carrera);
+
+                            }
+                            catch (Exception e)
+                            {
+                                return BadRequest("Ha ocurrido un error y no se ha podido crear la carrera.  Intente de nuevo.");
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest("Los datos proporcionados no son correctos");
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("El cliente no existe");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Ubicación origen y/o destino incorrecta(s)");
+                }
+            }
+            else{
+                return BadRequest("No todos los datos necesarios han sido proporcionados");
+            }
+
+            return Ok("Hemos recibido su solicitud.");
+        }
 
         // GET: api/ClientesAPI
         public IQueryable<clientes> Getclientes()

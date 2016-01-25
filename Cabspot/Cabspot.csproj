@@ -367,6 +367,10 @@
     <Compile Include="Migrations\201601190136243_nullablePersonas.Designer.cs">
       <DependentUpon>201601190136243_nullablePersonas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601250124210_migCarrera.cs" />
+    <Compile Include="Migrations\201601250124210_migCarrera.Designer.cs">
+      <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -787,6 +791,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601190136243_nullablePersonas.resx">
       <DependentUpon>201601190136243_nullablePersonas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601250124210_migCarrera.resx">
+      <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
