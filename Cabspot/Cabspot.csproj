@@ -547,7 +547,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="obj\Debug\Cabspot.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Cabspot.dll" />
     <Content Include="obj\Debug\Cabspot.pdb" />
     <Content Include="Scripts\bootstrap-colorpicker.js" />
