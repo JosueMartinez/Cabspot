@@ -7,6 +7,13 @@ namespace Cabspot.Models
     using System.Data.Entity.Spatial;
     using System.Web.Mvc;
     using System.Linq;
+    using Cabspot.Controllers.Clases;
+    using System.Web.Http;
+    using System.Threading.Tasks;
+    using System.Data.Entity.SqlServer;
+    using System.Net;
+    using System.IO;
+    using Newtonsoft.Json.Linq;
 
     [Table("taxistas")]
     public partial class taxistas
@@ -144,18 +151,109 @@ namespace Cabspot.Models
         }
         
         //crear solicitudes a taxistas cercanos a la ubicacion del cliente
-        public static void solicitudTaxista(carreras carrera)
+        public static bool solicitudTaxista(carreras carrera)
         {
+            //
+            var taxistasDisponibles = new List<taxistas>();
+            
+
+
             //buscar taxistas en un radio de 5km a la ubicacion del cliente y que estan disponibles
-            //var taxistas = from t in db.taxistas 
-            //               where Math.Acos(Math.Sin(carrera.latitudOrigen)* Math.Sin(t.latitudActual * (180 / Math.PI))) 
-                           
-                               
-                               //acos(sin(:lat)*sin(radians(Lat)) + cos(:lat)*cos(radians(Lat))*cos(radians(Lon)-:lon)) * :R < :rad
+            foreach (taxistas tax in db.taxistas)
+            {
+                string coordOrigen = tax.latitudActual + "," + tax.longitudActual ;
+                string coordDestino = carrera.latitudOrigen +  "," + carrera.longitudOrigen;
+
+                if (getDistance((double)tax.latitudActual, (double)tax.longitudActual, carrera.latitudOrigen, carrera.longitudOrigen) < Constantes.RADIO_DISTANCIA)
+                {
+                    taxistasDisponibles.Add(tax);
+                }
+            }
+            
+            //hay por lo menos un taxista en la zona del cliente
+            if (taxistasDisponibles.Count() > 0)
+            {
+                List<solicitudes> solicitudesNuevas = new List<solicitudes>();
+
+                //crear solicitudes
+                foreach (var t in taxistasDisponibles)
+                {
+                    solicitudes solicitud = new solicitudes();
+                    solicitud.idCarrera = carrera.idCarrera;
+                    solicitud.fechaSolicitud = DateTime.Now;
+                    solicitud.idEstadoSolicitud = 51;  //en espera
+
+                    solicitudesNuevas.Add(solicitud);                   
+
+                }
+
+                try
+                {
+                    db.solicitudes.AddRange(solicitudesNuevas);
+                    db.SaveChangesAsync();
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+
+
+            }
+            else
+            {
+                return false;
+            }
 
         }
 
+        public static int getDistance(double oLat, double oLng, double dLat, double dLng)
+        {
+            int distance = 0;
+            string api_key = "AIzaSyAjZNtyj1l5imtnp1v_M_aFCJFKVG_yPdQ";
+           // origen = "Vancouver+BC|Seattle";
+            //destino = "San+Francisco|Victoria+BC";
+           // String url = String.Format("https://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false", oLat, oLng, dLat, dLng);
+            string url = String.Format("http://maps.googleapis.com/maps/api/distancematrix/json?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false&language=es-ES", oLat, oLng, dLat, dLng);
+            string requestUrl = url;
+            string content = fileGetContents(requestUrl);
+            JObject o = JObject.Parse(content);
 
+            try
+            {
+                distance = (int)o.SelectToken("rows[0].elements[0].distance.value");
+                return distance / 1000;  //distancia en kilometros
+            }
+            catch(Exception e)
+            {
+                return distance;
+            }
+        }
+
+        protected static string fileGetContents(string fileName)
+        {
+            string sContents = string.Empty;
+            string me = string.Empty;
+            try
+            {
+                if (fileName.ToLower().IndexOf("http:") > -1)
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    byte[] response = wc.DownloadData(fileName);
+                    sContents = System.Text.Encoding.ASCII.GetString(response);
+
+                }
+                else
+                {
+                    System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
+                    sContents = sr.ReadToEnd();
+                    sr.Close();
+                }
+            }
+            catch { sContents = "unable to connect to server "; }
+            return sContents;
+        }
         
     }
 }

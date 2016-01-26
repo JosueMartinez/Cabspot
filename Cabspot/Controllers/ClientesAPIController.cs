@@ -327,7 +327,14 @@ namespace Cabspot.Controllers
                                 await db.SaveChangesAsync();
 
                                 //crear las solicitudes a los taxistas
-                                taxistas.solicitudTaxista(carrera);
+                                if (taxistas.solicitudTaxista(carrera))
+                                {
+                                    return Ok("Su solicitud esta siendo atendida.  Gracias.");
+                                }
+                                else
+                                {
+                                    return BadRequest("Ha ocurrido un error y no se ha podido crear la carrera.  Intente de nuevo.");
+                                }
 
                             }
                             catch (Exception e)

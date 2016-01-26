@@ -18,8 +18,11 @@ namespace Cabspot.Controllers.Clases
             return referenceUri.MakeRelativeUri(fileUri).ToString();
         }
 
-       
 
+        public static double DegreeToRadian(double angle)
+        {
+            return Math.PI * angle / 180.0;
+        }
         
 
 
