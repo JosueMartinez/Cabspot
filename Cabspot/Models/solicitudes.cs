@@ -27,4 +27,12 @@ namespace Cabspot.Models
 
         public virtual taxistas taxistas { get; set; }
     }
+
+    [NotMapped]
+    public class RespuestaSolicitud
+    {
+        public int idSolicitud { get; set; }
+        public int idTaxista { get; set; }
+        public bool respuesta { get; set; }
+    }
 }

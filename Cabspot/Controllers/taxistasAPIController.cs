@@ -322,9 +322,94 @@ namespace Cabspot.Controllers
            return Ok(carreras);           
         }
 
-        //-------------------------------------------------------------------------------
-         
-        // GET: api/taxistasAPI
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("taxistas/responderSolicitud")]
+        public IHttpActionResult responderSolicitud(RespuestaSolicitud respuesta)
+        {
+            //buscar solicitud
+            if (respuesta.idSolicitud > 0)
+            {
+                solicitudes solicitud = db.solicitudes.Find(respuesta.idSolicitud);
+
+                if (solicitud != null)
+                {
+                    if (respuesta.respuesta)
+                    {
+                        //solicitud es aceptada
+                        carreras carrera = db.carreras.Find(solicitud.idCarrera);
+                        taxistas taxista = db.taxistas.Find(respuesta.idTaxista);
+                        if (carrera != null || taxista != null)
+                        {
+                            //buscar que la carrera no haya sido aceptada por nadie
+                            if (carrera.idTaxista == null)
+                            {
+                                //cancelar todas las demas solicitudes para esta carrera
+                                var solicitudesCarrera = db.solicitudes.Where(x => x.idCarrera == carrera.idCarrera);
+                                foreach (var s in solicitudesCarrera)
+                                {
+                                    s.idEstadoSolicitud = 31;//Rechazada
+                                    db.Entry(s).State = EntityState.Modified;
+                                }
+
+                                //aceptar solicitud
+                                solicitud.idEstadoSolicitud = 41;   //aceptada;
+                                carrera.idTaxista = respuesta.idTaxista;
+                                db.Entry(solicitud).State = EntityState.Modified;
+
+
+                                //guardar cambios
+                                try
+                                {
+                                    db.SaveChangesAsync();
+                                    return Ok("Su solicitud ha sido aceptada");
+                                }
+                                catch
+                                {
+                                    return BadRequest("No se ha podido guardar cambios");
+                                }
+                            }
+                            else
+                            {
+                                return BadRequest("Esta carrera ya esta siendo atendida");
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest("Esta carrera no existe");
+                        }
+
+
+
+
+                    }
+                    else  //solicitud es rechazada
+                    {
+                        solicitud.idEstadoSolicitud = 31;//Rechazada
+                        db.Entry(solicitud).State = EntityState.Modified;
+
+                        try
+                        {
+                            db.SaveChangesAsync();
+                            return Ok("Solicitud rechazada");
+                        }
+                        catch
+                        {
+                            return BadRequest("No se ha podido guardar el cambio");
+                        }
+                    }
+                }
+                else
+                {
+                    return BadRequest("La solicitud no existe");
+                }
+            }
+            else
+            {
+                return BadRequest("La solicitud no existe");
+            }
+        } 
+        
         public IQueryable<taxistas> Gettaxistas()
         {
             return db.taxistas;

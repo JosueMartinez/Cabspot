@@ -361,7 +361,6 @@ namespace Cabspot.Controllers
                 return BadRequest("No todos los datos necesarios han sido proporcionados");
             }
 
-            return Ok("Hemos recibido su solicitud.");
         }
 
         // GET: api/ClientesAPI
