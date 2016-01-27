@@ -182,9 +182,9 @@ namespace Cabspot.Models
                     solicitud.idCarrera = carrera.idCarrera;
                     solicitud.fechaSolicitud = DateTime.Now;
                     solicitud.idEstadoSolicitud = 51;  //en espera
+                    solicitud.idTaxista = t.idTaxista;
 
-                    solicitudesNuevas.Add(solicitud);                   
-
+                    solicitudesNuevas.Add(solicitud);                 
                 }
 
                 try
