@@ -344,19 +344,23 @@ namespace Cabspot.Controllers
                             //buscar que la carrera no haya sido aceptada por nadie
                             if (carrera.idTaxista == null)
                             {
-                                //cancelar todas las demas solicitudes para esta carrera
-                                var solicitudesCarrera = db.solicitudes.Where(x => x.idCarrera == carrera.idCarrera);
-                                foreach (var s in solicitudesCarrera)
-                                {
-                                    s.idEstadoSolicitud = 31;//Rechazada
-                                    db.Entry(s).State = EntityState.Modified;
-                                }
-
+                                //ELIMINAR todas las demas solicitudes para esta carrera
+                                var solicitudesCarrera = db.solicitudes.Where(x => x.idCarrera == carrera.idCarrera && x.idSolicitud != solicitud.idSolicitud);
+                                db.solicitudes.RemoveRange(solicitudesCarrera);
+                                                                
                                 //aceptar solicitud
-                                solicitud.idEstadoSolicitud = 41;   //aceptada;
-                                carrera.idTaxista = respuesta.idTaxista;
-                                db.Entry(solicitud).State = EntityState.Modified;
-
+                                if (respuesta.idTaxista == solicitud.idTaxista)
+                                {
+                                    solicitud.idEstadoSolicitud = 41;   //aceptada;
+                                    carrera.idTaxista = respuesta.idTaxista;
+                                    carrera.fechaInicioCarrera = DateTime.Now;
+                                    carrera.idEstado = 71;  //en curso
+                                    db.Entry(solicitud).State = EntityState.Modified;
+                                }
+                                else
+                                {
+                                    return BadRequest("Esta solicitud no fue hecha para usted");
+                                }
 
                                 //guardar cambios
                                 try

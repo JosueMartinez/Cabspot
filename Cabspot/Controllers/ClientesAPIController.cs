@@ -245,7 +245,7 @@ namespace Cabspot.Controllers
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("clientes/getPerfil/{idCliente}")]
-        public IHttpActionResult getPeril(int idCliente)
+        public IHttpActionResult getPerfil(int idCliente)
         {
             clientes cliente = db.clientes.Find(idCliente);
 
