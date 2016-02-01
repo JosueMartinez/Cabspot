@@ -384,6 +384,18 @@
     <Compile Include="Migrations\201601250124210_migCarrera.Designer.cs">
       <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602011936071_notificaciones.cs" />
+    <Compile Include="Migrations\201602011936071_notificaciones.Designer.cs">
+      <DependentUpon>201602011936071_notificaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011944261_relacionnotificaciontaxista.cs" />
+    <Compile Include="Migrations\201602011944261_relacionnotificaciontaxista.Designer.cs">
+      <DependentUpon>201602011944261_relacionnotificaciontaxista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602011953398_relacionnotificacioncliente.cs" />
+    <Compile Include="Migrations\201602011953398_relacionnotificacioncliente.Designer.cs">
+      <DependentUpon>201602011953398_relacionnotificacioncliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -414,6 +426,8 @@
     <Compile Include="Models\MySQLConfiguration.cs" />
     <Compile Include="Models\MySqlHistoryContext.cs" />
     <Compile Include="Models\MySQLInitializer.cs" />
+    <Compile Include="Models\notificacionCliente.cs" />
+    <Compile Include="Models\notificacionTaxista.cs" />
     <Compile Include="Models\personas.cs" />
     <Compile Include="Models\preguntas.cs" />
     <Compile Include="Models\provincias.cs" />
@@ -804,6 +818,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601250124210_migCarrera.resx">
       <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011936071_notificaciones.resx">
+      <DependentUpon>201602011936071_notificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011944261_relacionnotificaciontaxista.resx">
+      <DependentUpon>201602011944261_relacionnotificaciontaxista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602011953398_relacionnotificacioncliente.resx">
+      <DependentUpon>201602011953398_relacionnotificacioncliente.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

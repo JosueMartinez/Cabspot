@@ -71,10 +71,18 @@ namespace Cabspot.Models
         {
             CabspotDB db = new CabspotDB();
             string contrasenaHash = Crypto.Hash(_contrasena);
-            var usuario = from e in db.empleados where e.usuario.Equals(_usuario) && e.contrasena.Equals(contrasenaHash) select e;
-            if (usuario.Count() > 0)
-                return true;
-            return false;
+            try
+            {
+                var usuario = from e in db.empleados where e.usuario.Equals(_usuario) && e.contrasena.Equals(contrasenaHash) select e;
+                if (usuario.Count() > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
     }
 

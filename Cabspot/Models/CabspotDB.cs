@@ -42,6 +42,8 @@ namespace Cabspot.Models
         public virtual DbSet<viasolicitud> viasolicitud { get; set; }
         public virtual DbSet<encuestaspreguntas> encuestaspreguntas { get; set; }
         public virtual DbSet<clientesMovil> clientesMovil { get; set; }
+        public virtual DbSet<notificacionCliente> notificacionCliente { get; set; }
+        public virtual DbSet<notificacionTaxista> notificacionTaxista { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -131,6 +133,8 @@ namespace Cabspot.Models
             //    .HasMany(e => e.vehiculos1)
             //    .WithOptional(e => e.empleados1)
             //    .HasForeignKey(e => e.modificadoPor);
+
+
 
             modelBuilder.Entity<estadocarreras>()
                 .Property(e => e.estadoCarrera)

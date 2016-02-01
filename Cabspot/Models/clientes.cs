@@ -16,7 +16,7 @@ namespace Cabspot.Models
         {
             carreras = new HashSet<carreras>();
             sugerencias = new HashSet<sugerencias>();
-            //autenticacionsms = new HashSet<autenticacionsms>();
+            notificacionCliente = new HashSet<notificacionCliente>();
         }
 
         [Key]
@@ -41,8 +41,8 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sugerencias> sugerencias { get; set; }
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<autenticacionsms> autenticacionsms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<notificacionCliente> notificacionCliente { get; set; }
 
         //generar codigo aleatorio para autenticar al cliente
         public static autenticacionsms generarCodigoCliente(int idCliente)
