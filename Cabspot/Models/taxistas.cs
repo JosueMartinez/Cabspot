@@ -158,10 +158,8 @@ namespace Cabspot.Models
         public static bool solicitudTaxista(carreras carrera)
         {
             //
-            var taxistasDisponibles = new List<taxistas>();
+            var taxistasDisponibles = new List<taxistas>();          
             
-
-
             //buscar taxistas en un radio de 5km a la ubicacion del cliente y que estan disponibles
             foreach (taxistas tax in db.taxistas)
             {
@@ -195,6 +193,9 @@ namespace Cabspot.Models
                 {
                     db.solicitudes.AddRange(solicitudesNuevas);
                     db.SaveChangesAsync();
+                    
+                    //generar notificaciones
+                    crearNotificaciones(taxistasDisponibles, solicitudesNuevas);
 
                     return true;
                 }
@@ -210,6 +211,45 @@ namespace Cabspot.Models
                 return false;
             }
 
+        }
+
+        private static bool crearNotificaciones(List<taxistas> taxistasDisponibles, List<solicitudes> solicitudes)
+        {
+            CabspotDB db = new CabspotDB();
+            List<notificacionTaxista> notificaciones = new List<notificacionTaxista>();
+
+            foreach (taxistas t in taxistasDisponibles)
+            {
+                //trama json (idSolicitud y direciones origen y destino)
+                var solicitud = db.solicitudes.Where(x => x.idTaxista == t.idTaxista)
+                                    .Select(x => new
+                                    {
+                                        x.idSolicitud,
+                                        x.carreras.latitudOrigen,
+                                        x.carreras.longitudOrigen,
+                                        x.carreras.latitudDestino,
+                                        x.carreras.longitudDestino
+                                    })
+                                    .First();
+                
+                notificacionTaxista notificacion = new notificacionTaxista();
+                notificacion.idTaxista = t.idTaxista;
+                notificacion.tramaJson = solicitud.ToString();
+
+                notificaciones.Add(notificacion);
+            }
+
+            try
+            {
+                db.notificacionTaxista.AddRange(notificaciones);
+                db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public static int getDistance(double oLat, double oLng, double dLat, double dLng)
