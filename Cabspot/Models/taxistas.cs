@@ -213,42 +213,44 @@ namespace Cabspot.Models
 
         }
 
-        private static bool crearNotificaciones(List<taxistas> taxistasDisponibles, List<solicitudes> solicitudes)
+        private static void crearNotificaciones(List<taxistas> taxistasDisponibles, List<solicitudes> solicitudes)
         {
             CabspotDB db = new CabspotDB();
             List<notificacionTaxista> notificaciones = new List<notificacionTaxista>();
 
             foreach (taxistas t in taxistasDisponibles)
             {
-                //trama json (idSolicitud y direciones origen y destino)
-                var solicitud = db.solicitudes.Where(x => x.idTaxista == t.idTaxista)
-                                    .Select(x => new
-                                    {
-                                        x.idSolicitud,
-                                        x.carreras.latitudOrigen,
-                                        x.carreras.longitudOrigen,
-                                        x.carreras.latitudDestino,
-                                        x.carreras.longitudDestino
-                                    })
-                                    .First();
+                foreach(solicitudes s in solicitudes){
+                    //trama json (idSolicitud y direciones origen y destino)
+                    var solicitud = db.solicitudes.Where(x => x.idTaxista == t.idTaxista && x.idSolicitud == s.idSolicitud )
+                                        .Select(x => new
+                                        {
+                                            x.idSolicitud,
+                                            x.carreras.latitudOrigen,
+                                            x.carreras.longitudOrigen,
+                                            x.carreras.latitudDestino,
+                                            x.carreras.longitudDestino
+                                        })
+                                        .First();
                 
-                notificacionTaxista notificacion = new notificacionTaxista();
-                notificacion.idTaxista = t.idTaxista;
-                notificacion.tramaJson = solicitud.ToString();
+                    notificacionTaxista notificacion = new notificacionTaxista();
+                    notificacion.idTaxista = t.idTaxista;
+                    notificacion.tramaJson = solicitud.ToString();
 
-                notificaciones.Add(notificacion);
+                    notificaciones.Add(notificacion);
+                    break;
+                }
+                
             }
 
             try
             {
                 db.notificacionTaxista.AddRange(notificaciones);
                 db.SaveChangesAsync();
-
-                return true;
             }
             catch (Exception e)
             {
-                return false;
+
             }
         }
 

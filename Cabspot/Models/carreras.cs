@@ -67,4 +67,15 @@ namespace Cabspot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<solicitudes> solicitudes { get; set; }
     }
+
+    [NotMapped]
+    public class respuestaCarera
+    {
+        public int idCarrera {get;set;}
+        public string nombreTaxista { get; set; }
+        public string foto { get; set; }
+        public string ubicacion { get; set; }
+        public string vehiculo { get; set; }
+        public string colorVehiculo { get; set; }
+    }
 }

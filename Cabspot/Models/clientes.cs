@@ -1,10 +1,13 @@
 namespace Cabspot.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
+    
 
     [Table("cabspotdb.clientes")]
     public partial class clientes
@@ -79,6 +82,47 @@ namespace Cabspot.Models
             }
             return null;
         }
+
+        //crear notificacion cuando una carrera es atendida 
+        //se envia al cliente la informacion del taxista y del vehiculo, asi como la posicion donde se encuentra y el tiempo 
+        //aproximado de recogida
+        public static void crearNotificaciones(int idCarrera)
+        {
+            CabspotDB db = new CabspotDB();
+            notificacionCliente notificacion = new notificacionCliente();
+            var carrera = db.carreras.Find(idCarrera);
+            var taxista = db.taxistas.Find(carrera.idTaxista);
+            var vehiculo = taxista.vehiculos.Where(x => x.activo).First();
+
+            //respuesta json a almacenar en bd
+            respuestaCarera respuesta = new respuestaCarera();
+            respuesta.idCarrera = idCarrera;
+            respuesta.nombreTaxista = taxista.personas.nombres + " " + taxista.personas.apellidos;
+            respuesta.ubicacion = taxista.latitudActual + "," + taxista.longitudActual;
+            respuesta.vehiculo = vehiculo.marca + " " + vehiculo.modelo + " " + vehiculo.anio;
+            respuesta.colorVehiculo = vehiculo.color;
+
+
+
+            //trama json 
+            string carreraJson = JsonConvert.SerializeObject(respuesta);
+
+
+            notificacion.idCliente = (int)carrera.idCliente;
+            notificacion.tramaJson = carreraJson;
+
+            try
+            {
+                db.notificacionCliente.Add(notificacion);
+                db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
     }
 
     [NotMapped]

@@ -366,9 +366,13 @@ namespace Cabspot.Controllers
                                 try
                                 {
                                     db.SaveChangesAsync();
+
+                                    //creando notificacion para cliente
+                                    clientes.crearNotificaciones(idCarrera: carrera.idCarrera);
+
                                     return Ok("Su solicitud ha sido aceptada");
                                 }
-                                catch
+                                catch(Exception e)
                                 {
                                     return BadRequest("No se ha podido guardar cambios");
                                 }
