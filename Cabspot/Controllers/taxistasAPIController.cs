@@ -416,8 +416,60 @@ namespace Cabspot.Controllers
             {
                 return BadRequest("La solicitud no existe");
             }
-        } 
-        
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/getNotificaciones/{idTaxista}")]
+        public IHttpActionResult getNotificacionesTaxista(int idTaxista)
+        {
+            //buscar taxista
+            taxistas taxista = db.taxistas.Find(idTaxista);
+
+            if (taxista != null)
+            {
+                //buscar notificaciones para ese cliente
+                //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
+                var notificacionesUpdate = from n in db.notificacionTaxista where n.idTaxista == idTaxista && !n.enviada select n;
+                //var notificacionesReturn = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n.tramaJson;
+                List<string> notificacionesReturn = new List<string>();
+
+                if (notificacionesUpdate.Count() > 0)
+                {
+                    //marcar notificaciones como leidas
+                    try
+                    {
+                        foreach (var n in notificacionesUpdate)
+                        {
+                            n.enviada = true;
+                            db.Entry(n).State = EntityState.Modified;
+                            notificacionesReturn.Add(n.tramaJson);
+                        }
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest("Ha ocurrido un error");
+                    }
+
+                    //devolver las notificaciones
+                    return Ok(notificacionesReturn.ToList());
+                }
+                else
+                {
+                    return Ok("No tiene notificaciones sin leer");
+                }
+            }
+            else
+            {
+                return BadRequest("El taxista no existe");
+            }
+        }
+
+
+
+
+
         public IQueryable<taxistas> Gettaxistas()
         {
             return db.taxistas;
