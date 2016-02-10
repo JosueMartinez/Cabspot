@@ -14,6 +14,8 @@ namespace Cabspot.Models
         public int idNotificacion { get; set; }                
         
         public int idCliente { get; set; }
+
+        public bool enviada { get; set; }
                 
         public string tramaJson { get; set; }
 

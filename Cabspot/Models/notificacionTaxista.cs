@@ -15,6 +15,8 @@ namespace Cabspot.Models
 
         public int idTaxista { get; set; }
 
+        public bool enviada { get; set; }
+
         public string tramaJson { get; set; }
 
         public virtual taxistas taxista { get; set; }
