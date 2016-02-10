@@ -203,8 +203,6 @@ namespace Cabspot.Models
                 {
                     return false;
                 }
-
-
             }
             else
             {

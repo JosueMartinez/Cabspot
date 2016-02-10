@@ -363,6 +363,34 @@ namespace Cabspot.Controllers
 
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("clientes/getNotificaciones/{idCliente}")]
+        public IHttpActionResult getNotificacionesCliente(int idCliente)
+        {
+            //buscar cliente
+            clientes cliente = db.clientes.Find(idCliente);
+
+            if (cliente != null)
+            {
+                //buscar notificaciones para ese cliente
+                //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
+                var notificaciones = from n in db.notificacionCliente where n.idCliente == idCliente select n.tramaJson;
+                if (notificaciones.Count() > 0)
+                {
+                    return Ok(notificaciones.ToList());
+                }
+                else
+                {
+                    return Ok("No tiene notificaciones sin leer");
+                }
+            }
+            else
+            {
+                return BadRequest("El cliente no existe");
+            }
+        }
+
+
         // GET: api/ClientesAPI
         public IQueryable<clientes> Getclientes()
         {
