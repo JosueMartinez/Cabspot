@@ -96,6 +96,7 @@ namespace Cabspot.Models
 
             //respuesta json a almacenar en bd
             respuestaCarera respuesta = new respuestaCarera();
+            
             respuesta.idCarrera = idCarrera;
             respuesta.nombreTaxista = taxista.personas.nombres + " " + taxista.personas.apellidos;
             respuesta.ubicacion = taxista.latitudActual + "," + taxista.longitudActual;

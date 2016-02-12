@@ -333,6 +333,19 @@ namespace Cabspot.Controllers
                                 }
                                 else
                                 {
+                                    //borrar la carrera y las solicitudes
+                                    var solicitudesCarrera = db.solicitudes.Where(x => x.idCarrera == carrera.idCarrera);
+
+                                    if (solicitudesCarrera.Count() > 0)
+                                    {
+                                        db.solicitudes.RemoveRange(solicitudesCarrera);
+                                    }  
+
+                                    db.carreras.Remove(carrera);                                                                    
+                                                                        
+                                    db.SaveChanges();
+                                    //fin borrado
+
                                     return BadRequest("Ha ocurrido un error y no se ha podido crear la carrera.  Intente de nuevo.");
                                 }
 

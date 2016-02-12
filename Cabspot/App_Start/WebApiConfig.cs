@@ -37,6 +37,7 @@ namespace Cabspot
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(name: "DefaultApi1", routeTemplate: "api/{controller}/{id}/{name}", defaults: new { });
         }
     }
 }

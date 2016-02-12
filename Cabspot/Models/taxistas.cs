@@ -166,7 +166,7 @@ namespace Cabspot.Models
                 string coordOrigen = tax.latitudActual + "," + tax.longitudActual ;
                 string coordDestino = carrera.latitudOrigen +  "," + carrera.longitudOrigen;
 
-                if (getDistance((double)tax.latitudActual, (double)tax.longitudActual, carrera.latitudOrigen, carrera.longitudOrigen) < Constantes.RADIO_DISTANCIA)
+                if (Utilidades.getDistance((double)tax.latitudActual, (double)tax.longitudActual, carrera.latitudOrigen, carrera.longitudOrigen) < Constantes.RADIO_DISTANCIA)
                 {
                     taxistasDisponibles.Add(tax);
                 }
@@ -220,25 +220,30 @@ namespace Cabspot.Models
             {
                 foreach(solicitudes s in solicitudes){
                     //trama json (idSolicitud y direciones origen y destino)
-                    var solicitud = db.solicitudes.Where(x => x.idTaxista == t.idTaxista && x.idSolicitud == s.idSolicitud )
+                    var solicitudesTaxista = db.solicitudes.Where(x => x.idTaxista == t.idTaxista && x.idSolicitud == s.idSolicitud)
                                         .Select(x => new
                                         {
                                             x.idSolicitud,
                                             x.carreras.latitudOrigen,
                                             x.carreras.longitudOrigen,
                                             x.carreras.latitudDestino,
-                                            x.carreras.longitudDestino
-                                        })
-                                        .First();
-                
-                    notificacionTaxista notificacion = new notificacionTaxista();
-                    notificacion.idTaxista = t.idTaxista;
-                    notificacion.tramaJson = solicitud.ToString();
+                                            x.carreras.longitudDestino,
+                                            x.carreras.metodopago.metodoPago
+                                        });
 
-                    notificaciones.Add(notificacion);
-                    break;
-                }
-                
+                    if (solicitudesTaxista.Count() > 0)
+                    {
+                        var solicitud = solicitudesTaxista.First();
+                        notificacionTaxista notificacion = new notificacionTaxista();
+                        notificacion.idTaxista = t.idTaxista;
+                        notificacion.metodoPago = solicitud.metodoPago;
+                        notificacion.ubicacionDestino = Utilidades.getAddress(solicitud.latitudDestino, solicitud.longitudDestino);
+                        notificacion.ubicacionOrigen = Utilidades.getAddress(solicitud.latitudOrigen, solicitud.longitudOrigen); ;
+
+                        notificaciones.Add(notificacion);
+                        break;
+                    }                   
+               }                
             }
 
             try
@@ -252,52 +257,6 @@ namespace Cabspot.Models
             }
         }
 
-        public static int getDistance(double oLat, double oLng, double dLat, double dLng)
-        {
-            int distance = 0;
-            string api_key = "AIzaSyAjZNtyj1l5imtnp1v_M_aFCJFKVG_yPdQ";
-           // origen = "Vancouver+BC|Seattle";
-            //destino = "San+Francisco|Victoria+BC";
-           // String url = String.Format("https://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false", oLat, oLng, dLat, dLng);
-            string url = String.Format("http://maps.googleapis.com/maps/api/distancematrix/json?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false&language=es-ES", oLat, oLng, dLat, dLng);
-            string requestUrl = url;
-            string content = fileGetContents(requestUrl);
-            JObject o = JObject.Parse(content);
-
-            try
-            {
-                distance = (int)o.SelectToken("rows[0].elements[0].distance.value");
-                return distance / 1000;  //distancia en kilometros
-            }
-            catch(Exception e)
-            {
-                return distance;
-            }
-        }
-
-        protected static string fileGetContents(string fileName)
-        {
-            string sContents = string.Empty;
-            string me = string.Empty;
-            try
-            {
-                if (fileName.ToLower().IndexOf("http:") > -1)
-                {
-                    System.Net.WebClient wc = new System.Net.WebClient();
-                    byte[] response = wc.DownloadData(fileName);
-                    sContents = System.Text.Encoding.ASCII.GetString(response);
-
-                }
-                else
-                {
-                    System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
-                    sContents = sr.ReadToEnd();
-                    sr.Close();
-                }
-            }
-            catch { sContents = "unable to connect to server "; }
-            return sContents;
-        }
         
     }
 }

@@ -15,6 +15,7 @@ using Cabspot.Controllers.Clases;
 using Twilio;
 using Cabspot.Models;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace Cabspot.Controllers
 {
@@ -428,10 +429,8 @@ namespace Cabspot.Controllers
             if (taxista != null)
             {
                 //buscar notificaciones para ese cliente
-                //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
                 var notificacionesUpdate = from n in db.notificacionTaxista where n.idTaxista == idTaxista && !n.enviada select n;
-                //var notificacionesReturn = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n.tramaJson;
-                List<string> notificacionesReturn = new List<string>();
+                List<notificacionTaxista> notificacionesReturn = new List<notificacionTaxista>();
 
                 if (notificacionesUpdate.Count() > 0)
                 {
@@ -442,7 +441,7 @@ namespace Cabspot.Controllers
                         {
                             n.enviada = true;
                             db.Entry(n).State = EntityState.Modified;
-                            notificacionesReturn.Add(n.tramaJson);
+                            notificacionesReturn.Add(n);
                         }
 
                         db.SaveChanges();
@@ -465,10 +464,6 @@ namespace Cabspot.Controllers
                 return BadRequest("El taxista no existe");
             }
         }
-
-
-
-
 
         public IQueryable<taxistas> Gettaxistas()
         {
