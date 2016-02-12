@@ -465,6 +465,38 @@ namespace Cabspot.Controllers
             }
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("taxistas/notificacionleida/{idNotificacion}")]
+        public IHttpActionResult notificacionLeida(int idNotificacion)
+        {
+            if (idNotificacion > 0)
+            {
+                notificacionTaxista notificacion = db.notificacionTaxista.Find(idNotificacion);
+                if (notificacion != null)
+                {
+                    try
+                    {
+                        db.notificacionTaxista.Remove(notificacion);
+                        db.SaveChanges();
+
+                        return Ok();
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         public IQueryable<taxistas> Gettaxistas()
         {
             return db.taxistas;
