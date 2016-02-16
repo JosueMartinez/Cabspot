@@ -15,10 +15,16 @@ namespace Cabspot.Models
         
         public int idCliente { get; set; }
 
-        public bool enviada { get; set; }
-                
-        public string tramaJson { get; set; }
+        public string nombreTaxista { get; set; }
 
-        public virtual clientes clientes { get; set; }
+        public string codigoTaxista { get; set; }
+
+        public string vehiculo { get; set; }
+
+        public string ubicacionTaxista { get; set; }
+
+        public int tiempoAproximadoRecogida { get; set; }        
+
+        public bool enviada { get; set; } 
     }
 }

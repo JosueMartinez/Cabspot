@@ -387,20 +387,18 @@ namespace Cabspot.Controllers
             {
                 //buscar notificaciones para ese cliente
                 //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
-                var notificacionesUpdate = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n;
+                var notificaciones= from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n;
                 //var notificacionesReturn = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n.tramaJson;
-                List<string> notificacionesReturn = new List<string>();
 
-                if (notificacionesUpdate.Count() > 0)
+                if (notificaciones.Count() > 0)
                 {
                     //marcar notificaciones como leidas
                     try
                     {
-                        foreach (var n in notificacionesUpdate)
+                        foreach (var n in notificaciones)
                         {
                             n.enviada = true;
                             db.Entry(n).State = EntityState.Modified;
-                            notificacionesReturn.Add(n.tramaJson);
                         }
 
                         db.SaveChanges();
@@ -411,7 +409,7 @@ namespace Cabspot.Controllers
                     }
 
                     //devolver las notificaciones
-                    return Ok(notificacionesReturn.ToList());
+                    return Ok(notificaciones.ToList());
                 }
                 else
                 {

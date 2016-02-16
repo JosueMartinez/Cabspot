@@ -404,6 +404,10 @@
     <Compile Include="Migrations\201602120223538_notificacionTaxista.Designer.cs">
       <DependentUpon>201602120223538_notificacionTaxista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602162059262_notificacionCliente.cs" />
+    <Compile Include="Migrations\201602162059262_notificacionCliente.Designer.cs">
+      <DependentUpon>201602162059262_notificacionCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -841,6 +845,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602120223538_notificacionTaxista.resx">
       <DependentUpon>201602120223538_notificacionTaxista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602162059262_notificacionCliente.resx">
+      <DependentUpon>201602162059262_notificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

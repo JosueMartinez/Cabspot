@@ -497,6 +497,11 @@ namespace Cabspot.Controllers
             }
         }
 
+
+
+
+
+
         public IQueryable<taxistas> Gettaxistas()
         {
             return db.taxistas;

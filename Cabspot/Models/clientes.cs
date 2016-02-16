@@ -1,5 +1,6 @@
 namespace Cabspot.Models
 {
+    using Cabspot.Controllers.Clases;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
@@ -102,16 +103,14 @@ namespace Cabspot.Models
             respuesta.ubicacion = taxista.latitudActual + "," + taxista.longitudActual;
             respuesta.vehiculo = vehiculo.marca + " " + vehiculo.modelo + " " + vehiculo.anio;
             respuesta.colorVehiculo = vehiculo.color;
-
-
-
-            //trama json 
-            string carreraJson = JsonConvert.SerializeObject(respuesta);
-
-
+            
             notificacion.idCliente = (int)carrera.idCliente;
-            notificacion.tramaJson = carreraJson;
-
+            notificacion.codigoTaxista = taxista.codigoTaxista;
+            notificacion.nombreTaxista = taxista.personas.nombres + " " + taxista.personas.apellidos;
+            notificacion.ubicacionTaxista = Utilidades.getAddress((double)taxista.latitudActual, (double)taxista.longitudActual);
+            notificacion.vehiculo = vehiculo.marca + " " + vehiculo.modelo + " " + vehiculo.anio + " [" + vehiculo.color + "]";
+            notificacion.tiempoAproximadoRecogida = Utilidades.getTravelTime((double)carrera.latitudOrigen, (double)carrera.longitudOrigen, (double)taxista.latitudActual, (double)taxista.longitudActual);
+            
             try
             {
                 db.notificacionCliente.Add(notificacion);

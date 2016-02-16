@@ -46,6 +46,27 @@ namespace Cabspot.Controllers.Clases
             }
         }
 
+        public static int getTravelTime(double oLat, double oLng, double dLat, double dLng)
+        {
+            int duration = 0;
+
+            string url = String.Format("http://maps.googleapis.com/maps/api/distancematrix/json?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false&language=es-ES", oLat, oLng, dLat, dLng);
+            string requestUrl = url;
+            string content = fileGetContents(requestUrl);
+            JObject o = JObject.Parse(content);
+
+            try
+            {
+                duration = (int)o.SelectToken("rows[0].elements[0].duration.value");
+                return duration / 60;  //duracion en minutos
+            }
+            catch (Exception e)
+            {
+                return duration;
+            }
+        }
+
+
         public static string getAddress(double lat, double lng)
         {
             string address = "";
@@ -67,6 +88,7 @@ namespace Cabspot.Controllers.Clases
                 return address;
             }
         }
+
         public static string fileGetContents(string fileName)
         {
             string sContents = string.Empty;
