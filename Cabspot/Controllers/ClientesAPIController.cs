@@ -389,6 +389,7 @@ namespace Cabspot.Controllers
                 //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
                 var notificaciones= from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n;
                 //var notificacionesReturn = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n.tramaJson;
+                List<notificacionCliente> notificacionesReturn = new List<notificacionCliente>();
 
                 if (notificaciones.Count() > 0)
                 {
@@ -399,6 +400,7 @@ namespace Cabspot.Controllers
                         {
                             n.enviada = true;
                             db.Entry(n).State = EntityState.Modified;
+                            notificacionesReturn.Add(n);
                         }
 
                         db.SaveChanges();
@@ -409,7 +411,7 @@ namespace Cabspot.Controllers
                     }
 
                     //devolver las notificaciones
-                    return Ok(notificaciones.ToList());
+                    return Ok(notificacionesReturn.ToList());
                 }
                 else
                 {
@@ -422,6 +424,37 @@ namespace Cabspot.Controllers
             }
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("clientes/notificacionleida/{idNotificacion}")]
+        public IHttpActionResult notificacionLeida(int idNotificacion)
+        {
+            if (idNotificacion > 0)
+            {
+                notificacionCliente notificacion = db.notificacionCliente.Find(idNotificacion);
+                if (notificacion != null)
+                {
+                    try
+                    {
+                        db.notificacionCliente.Remove(notificacion);
+                        db.SaveChanges();
+
+                        return Ok();
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         // GET: api/ClientesAPI
         public IQueryable<clientes> Getclientes()
