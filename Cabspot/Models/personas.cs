@@ -76,5 +76,13 @@ namespace Cabspot.Models
         public virtual contactos contactos { get; set; }
 
         public virtual direcciones direcciones { get; set; }
+
+        [NotMapped]
+        public string nombreCompleto { get 
+                                        { 
+                                            return nombres + " " + apellidos; 
+                                        }
+            set { this.nombreCompleto = nombres + " " + apellidos; }
+        }
     }
 }

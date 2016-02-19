@@ -5,12 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Cabspot.Models;
 
 namespace Cabspot.Controllers.Clases
 {
     public class Utilidades
     {
-        CabspotDB db = new CabspotDB();
+        public static CabspotDB db = new CabspotDB();
 
         public static string RutaRelativa(string filePath, string referencePath)
         {
@@ -112,6 +122,7 @@ namespace Cabspot.Controllers.Clases
             catch { sContents = "unable to connect to server "; }
             return sContents;
         }
+
         
 
     }

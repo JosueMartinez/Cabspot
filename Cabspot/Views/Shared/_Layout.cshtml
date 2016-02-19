@@ -20,14 +20,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">      
 
-    <!--Imagen alternativa en error-->
-    <script>
-        $(document).ready(function () {
-            $(".profile_img").error(function () {
-                $(this).attr('src', '/Content/images/user.png');
-            });
-        });
-    </script>
+    
+    
 
     <script>
     @* Obteniendo todos los paises via WS *@
@@ -56,7 +50,12 @@
             document.getElementById("municipio").disabled = false;
         });
     });
+
+    
     </script>
+
+    
+
 
 
     @*//car query api*@
@@ -149,11 +148,11 @@
                     {
                         <div class="profile">
                             <div class="profile_pic">
-                                <img src="~/Content/images/user.png" alt="..." class="img-circle profile_img" />
+                                <img id="fotoUsuario" alt="..." class="img-circle profile_img" />
                             </div>
                             <div class="profile_info">
                                 <span>Bienvenido,</span>
-                                <h2>@User.Identity.Name</h2>    
+                                <h2 id="nombreUsuario"> </h2> @*-@User.Identity.Name</h2>    *@
                             </div>
                         </div>
                     }                    
@@ -237,7 +236,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                                    
-                                    <img src="~/Content/images/user.png" />  @User.Identity.Name
+                                    <img id="fotoUsuario2" alt="..."/>  <span id="nombreUsuario2"></span>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -535,7 +534,25 @@
         });
     </script>
     <!-- /select2 -->
+
+    @* Cargando nombre de usuario y foto  *@
+    <script type="text/javascript">
+        $.getJSON('/empleados/getUserData/' + '@User.Identity.Name.ToString()', function (data) {
+            document.getElementById("nombreUsuario").innerHTML = data.nombreCompleto;
+            document.getElementById("nombreUsuario2").innerHTML = data.nombre;
+            document.getElementById("fotoUsuario").src = data.foto;
+            document.getElementById("fotoUsuario2").src = data.foto;
+        });
+    </script>
   
+    <!--Imagen alternativa en error-->
+    <script>
+        $(document).ready(function () {
+            $(".profile_img").error(function () {
+                $(this).attr('src', '/Content/images/user.png');
+            });
+        });
+    </script>
 </body>
 
 </html>

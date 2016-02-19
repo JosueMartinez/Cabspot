@@ -17,6 +17,27 @@ namespace Cabspot.Controllers
     {
         private CabspotDB db = new CabspotDB();
 
+        public  JsonResult getUserData(string id)
+        {
+            List<string> userData = new List<string>();
+            var data = (from u in db.empleados where u.usuario.Equals(id) select new { nombre = u.personas.nombres, nombreCompleto = u.personas.nombres + " " + u.personas.apellidos, foto = u.personas.foto }).First();
+            JsonResult json = Json(new { data.nombreCompleto, data.foto, data.nombre }, JsonRequestBehavior.AllowGet);
+          
+            return json;
+        }
+         
+        public JsonResult ListaMunicipios(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                int codigoProvincia = int.Parse(id);
+                var municipio = from m in db.municipios where m.idProvincia == codigoProvincia orderby m.nombreMunicipio select m;
+                JsonResult json = Json(new SelectList(municipio.ToArray(), "idMunicipio", "nombreMunicipio"), JsonRequestBehavior.AllowGet);
+                return json;
+            }
+            return null;
+        }
+
         // GET: empleados
         public async Task<ActionResult> Index()
         {
