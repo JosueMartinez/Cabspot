@@ -117,7 +117,9 @@ namespace Cabspot.Migrations
                     new roles { rol = "Super Admin" },
                     new roles { rol = "Admin" },
                     new roles { rol = "Power User" },
-                    new roles { rol = "User" }
+                    new roles { rol = "User" },
+                    new roles { rol = "Developer" }
+
                 );
 
                 //tipoVehiculos
