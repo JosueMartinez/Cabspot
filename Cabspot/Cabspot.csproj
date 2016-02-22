@@ -276,11 +276,13 @@
     <Compile Include="Controllers\basesAPIController.cs" />
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
+    <Compile Include="Controllers\Clases\CustomAuthorizeRoleAttribute.cs" />
     <Compile Include="Controllers\Clases\Notifications.cs" />
     <Compile Include="Controllers\Clases\Utilidades.cs" />
     <Compile Include="Controllers\ClientesAPIController.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadosController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\requestSmsController.cs" />
@@ -750,6 +752,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Scripts\maps\us-unemployment.json" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />

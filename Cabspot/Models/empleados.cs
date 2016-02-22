@@ -8,6 +8,7 @@ namespace Cabspot.Models
     using System.Text;
     using System.Web.Helpers;
     using System.Web.Mvc;
+    using System.Linq;
 
     [Table("empleados")]
     public partial class empleados
@@ -81,6 +82,22 @@ namespace Cabspot.Models
         public void SetPassword(string password)
         {
             contrasena = Crypto.Hash(password);
+        }
+
+        public empleados getEmpleado(string username)
+        {
+            var db = new CabspotDB();
+
+            if (username == null)
+            {
+                return null;
+            }
+            var empleados = from e in db.empleados where e.usuario.Equals(username) select e;
+            if (empleados.Count() == 0)
+            {
+                return null;
+            }
+            return empleados.First();
         }
 
         //public bool CheckPassword(string password)
