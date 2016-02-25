@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Cabspot.Models;
 using System.IO;
+using Cabspot.Controllers.Clases;
 
 namespace Cabspot.Controllers
 {
@@ -17,14 +18,13 @@ namespace Cabspot.Controllers
     {
         private CabspotDB db = new CabspotDB();
 
-        public  JsonResult getUserData(string id)
-        {
-            List<string> userData = new List<string>();
+        public JsonResult getUserData(string id)
+        {            
             var data = (from u in db.empleados where u.usuario.Equals(id) select new { nombre = u.personas.nombres, nombreCompleto = u.personas.nombres + " " + u.personas.apellidos, foto = u.personas.foto }).First();
             JsonResult json = Json(new { data.nombreCompleto, data.foto, data.nombre }, JsonRequestBehavior.AllowGet);
-          
+
             return json;
-        }
+        }        
          
         public JsonResult ListaMunicipios(string id)
         {
@@ -41,8 +41,22 @@ namespace Cabspot.Controllers
         // GET: empleados
         public async Task<ActionResult> Index()
         {
-            var empleados = db.empleados.Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles);
-            return View(await empleados.ToListAsync());
+            empleados em = new empleados();
+            em = em.getEmpleado(User.Identity.Name);
+           
+            //mostrar todos los empleados
+            if (em.roles.rol.Equals("Developer"))
+            {
+                var empleadosTodos = db.empleados.Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles);
+                return View(await empleadosTodos.ToListAsync());
+            }
+            //mostrar solo los empleados de la base del empleado loggeado
+            else
+            {
+               var empleados = db.empleados.Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles).Where(e => e.bases.idBase == em.bases.idBase);
+               return View(await empleados.ToListAsync());
+            }           
+            
         }
 
         // GET: empleados/Details/5
@@ -61,6 +75,7 @@ namespace Cabspot.Controllers
         }
 
         // GET: empleados/Create
+        [CustomAuthorizeRole("Super Admin", "Admin", "Developer")]
         public ActionResult Create()
         {
             empleados empleado = new empleados();

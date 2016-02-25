@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Cabspot.Models.empleados
+@{
     
     ViewBag.Title = "Cabspot";
    // var usuario = "Bertoldo Edmundo Melones y Dieta";
@@ -168,17 +169,20 @@
                                     <a href="@Url.Action("Index","Home")"><i class="fa fa-home"></i> Inicio</a>                                    
                                 </li>
                                 @* Bases *@
-                                <li>
-                                    <a><i class="fa fa-building"></i> Bases <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                            <a href="@Url.Action("Index","Bases")">Listado Bases</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Create","Bases")" >Agregar Base</a>
-                                        </li>                                        
-                                    </ul>
-                                </li>
+                                @if (User.IsInRole("Developer"))
+                                {
+                                    <li>
+                                        <a><i class="fa fa-building"></i> Bases <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none">
+                                            <li>
+                                                <a href="@Url.Action("Index","Bases")">Listado Bases</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Create","Bases")">Agregar Base</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
                                 @* Empleados *@
                                 <li>
                                     <a><i class="fa fa-users"></i> Empleados <span class="fa fa-chevron-down"></span></a>

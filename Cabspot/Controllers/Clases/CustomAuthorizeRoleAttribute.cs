@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace Cabspot.Controllers.Clases
 {
     public class CustomAuthorizeRoleAttribute: AuthorizeAttribute
     {
-
-        CabspotDB context = new CabspotDB(); // my entity  
+       CabspotDB context = new CabspotDB(); // my entity  
        private readonly string[] allowedroles;
        public CustomAuthorizeRoleAttribute(params string[] roles)  
        {  
@@ -50,7 +51,39 @@ namespace Cabspot.Controllers.Clases
                base.HandleUnauthorizedRequest(filterContext);
            }
        }
+    }
 
+    public class MyUser :  IPrincipal
+    {
+       
+        public string AuthenticationType
+        {
+            get { return "User"; }
+        }
 
+        public bool IsAuthenticated
+        {
+            get { return true; }
+        }
+
+        //public string Name
+        //{
+        //    get { return _ticket.Name; }
+        //}
+
+        //public string UserId
+        //{
+        //    get { return _ticket.UserData; }
+        //}
+
+        public bool IsInRole(string role)
+        {
+            return Roles.IsUserInRole(role);
+        }
+
+        public IIdentity Identity
+        {
+            get { return (IIdentity)this; }
+        }
     }
 }

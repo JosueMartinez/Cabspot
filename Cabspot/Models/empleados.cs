@@ -88,7 +88,7 @@ namespace Cabspot.Models
         {
             var db = new CabspotDB();
 
-            if (username == null)
+            if (string.IsNullOrEmpty(username))
             {
                 return null;
             }

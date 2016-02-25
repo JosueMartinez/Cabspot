@@ -277,6 +277,7 @@
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
     <Compile Include="Controllers\Clases\CustomAuthorizeRoleAttribute.cs" />
+    <Compile Include="Controllers\Clases\MyRoleProvider.cs" />
     <Compile Include="Controllers\Clases\Notifications.cs" />
     <Compile Include="Controllers\Clases\Utilidades.cs" />
     <Compile Include="Controllers\ClientesAPIController.cs" />
@@ -701,7 +702,9 @@
     <Content Include="Scripts\spin.js" />
     <Content Include="Scripts\validator\validator.js" />
     <Content Include="Scripts\wizard\jquery.smartWizard.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -755,6 +758,8 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Shared\_MenuDeveloper.cshtml" />
+    <Content Include="Views\Shared\_MenuGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\files\" />
