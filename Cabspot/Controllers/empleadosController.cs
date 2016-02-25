@@ -171,6 +171,13 @@ namespace Cabspot.Controllers
                 empleados.personas.foto = path;
                // ModelState.SetModelValue("personas.foto", new ValueProviderResult(path,path, ));
 
+                //agregando la base del usuario loggeado sino es DEVELOPER
+                empleados logeado = db.empleados.Where(e => e.usuario.Equals(User.Identity.Name)).First();
+                if(logeado.roles.rol.Equals("Developer"))
+                {
+                    empleados.idBase = logeado.idBase;
+                }
+
                 //hashing contrasena
                 empleados.SetPassword(empleados.contrasena);
             }
