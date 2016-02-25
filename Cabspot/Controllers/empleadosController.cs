@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Cabspot.Models;
 using System.IO;
+using Cabspot.Controllers.Clases;
 
 namespace Cabspot.Controllers
 {
@@ -41,8 +42,19 @@ namespace Cabspot.Controllers
         // GET: empleados
         public async Task<ActionResult> Index()
         {
-            var empleados = db.empleados.Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles);
-            return View(await empleados.ToListAsync());
+            empleados emp = db.empleados.Where(x => x.usuario.Equals(User.Identity.Name)).First();
+
+            if (emp.roles.rol.Equals("Developer"))
+            {
+                var empleadosTodos = db.empleados.Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles);
+                return View(await empleadosTodos.ToListAsync());
+            }
+            else
+            {
+                var empleadosBase = db.empleados.Where(e => e.bases.idBase == emp.bases.idBase).Include(e => e.bases).Include(e => e.estadoempleados).Include(e => e.roles);
+                return View(await empleadosBase.ToListAsync());
+            }
+            
         }
 
         // GET: empleados/Details/5
@@ -61,6 +73,7 @@ namespace Cabspot.Controllers
         }
 
         // GET: empleados/Create
+        [CustomAuthorizeRole("Admin", "Super Admin", "Developer")]
         public ActionResult Create()
         {
             empleados empleado = new empleados();
@@ -81,6 +94,7 @@ namespace Cabspot.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
+        [CustomAuthorizeRole("Admin", "Super Admin", "Developer")]
         public async Task<ActionResult> Create(empleados empleados, HttpPostedFileBase foto)
         {
             

@@ -277,6 +277,7 @@
     <Compile Include="Controllers\basesController.cs" />
     <Compile Include="Controllers\Clases\Constantes.cs" />
     <Compile Include="Controllers\Clases\CustomAuthorizeRoleAttribute.cs" />
+    <Compile Include="Controllers\Clases\CustomRoleProvider.cs" />
     <Compile Include="Controllers\Clases\Notifications.cs" />
     <Compile Include="Controllers\Clases\Utilidades.cs" />
     <Compile Include="Controllers\ClientesAPIController.cs" />

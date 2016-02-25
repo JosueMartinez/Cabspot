@@ -8,10 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Cabspot.Models;
+using Cabspot.Controllers.Clases;
 
 namespace Cabspot.Controllers
 {
-    [Authorize]
+    [CustomAuthorizeRole("Developer")]
     public class basesController : Controller
     {
         private CabspotDB db = new CabspotDB();
