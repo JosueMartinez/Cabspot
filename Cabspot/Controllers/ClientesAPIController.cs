@@ -15,6 +15,7 @@ using Cabspot.Controllers.Clases;
 using System.Text.RegularExpressions;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Cabspot.Controllers
 {
@@ -166,7 +167,7 @@ namespace Cabspot.Controllers
 
                 persona.nombres = cliente.nombres;
                 persona.apellidos = cliente.apellidos;
-                persona.fechaNacimiento = cliente.fechaNacimiento;
+                persona.fechaNacimiento = DateTime.ParseExact(cliente.fechaNacimiento, "dd/mm/yyyy", CultureInfo.InvariantCulture);
                 persona.identificacion = cliente.identificacion;
                 persona.sexo = cliente.genero;
                 contacto.telefonoMovil = cliente.telefonoMovil;
