@@ -26,8 +26,8 @@ namespace Cabspot.Controllers
 
         //login
         [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("clientes/login/{telefonoMovil}")]
-        public bool loginCliente(string telefonoMovil)
+        [System.Web.Http.Route("clientes/login/{telefonoMovil}/{apikey}")]
+        public bool loginCliente(string telefonoMovil, string apikey)
         {
             //telefono con formato E.164  ej. +1809453123
             string telefonoFormat = "";
@@ -38,7 +38,7 @@ namespace Cabspot.Controllers
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
 
-            if (!string.IsNullOrEmpty(telefonoMovil))
+            if (!string.IsNullOrEmpty(telefonoMovil) && !string.IsNullOrEmpty(apikey))
             {
                 //verificar que es un numero en formato correcto ---------------------
                 telefonoFormat = contactos.FormatearCelular(telefonoMovil);
@@ -54,6 +54,9 @@ namespace Cabspot.Controllers
                         //si existe enviar mensaje de texto
                         clientesMovil cliente = clientes.First();
 
+                        cliente.apikey = apikey;
+                        db.Entry(cliente).State = EntityState.Modified;
+                        db.SaveChanges();
                         //enviar mensaje de texto
                         return clientesMovil.enviarMensajeTexto(cliente);
 
@@ -65,6 +68,7 @@ namespace Cabspot.Controllers
                         clientesMovil clientePrimeraVez = new clientesMovil();
                         clientePrimeraVez.fechaRegistro = DateTime.Now;
                         clientePrimeraVez.telefonoMovil = telefonoMovil;
+                        clientePrimeraVez.apikey = apikey;
 
                         try
                         {
@@ -223,7 +227,9 @@ namespace Cabspot.Controllers
         {
             clientes cliente = db.clientes.Find(idCliente);
 
-            if(cliente != null)
+            Notifications.generarNotificaciones();
+
+            if (cliente != null)
             {
                 var c = from x in db.clientes
                         where x.idCliente == idCliente

@@ -25,8 +25,8 @@ namespace Cabspot.Controllers
 
         //login -------------------------------------------------------------------------
         [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("taxistas/login/{codigoTaxista}")]
-        public bool loginTaxista(string codigoTaxista)
+        [System.Web.Http.Route("taxistas/login/{codigoTaxista}/{apikey}")]
+        public bool loginTaxista(string codigoTaxista, string apikey)
         {
             //variables de twilio
             string AccountSid = Constantes.ACCOUNT_SID_CABSPOT;
@@ -34,9 +34,24 @@ namespace Cabspot.Controllers
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
             //buscar el taxista que tiene ese codigoTaxista
-            if (!string.IsNullOrEmpty(codigoTaxista))
+            if (!string.IsNullOrEmpty(codigoTaxista) && !string.IsNullOrEmpty(apikey))
             {
-                var taxistaLogin = taxistas.BuscarPorCodigo(codigoTaxista);
+                var taxistasCodigo = (from t in db.taxistas where t.codigoTaxista.Equals(codigoTaxista) select t);   //taxistas.BuscarPorCodigo(codigoTaxista);
+                taxistas taxistaLogin = null;
+                if(taxistasCodigo.Count() > 0)
+                {
+                    taxistaLogin = taxistasCodigo.First();
+                    taxistaLogin.apikey = apikey;
+                    db.Entry(taxistaLogin).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return false;
+                }
+                
+
+
                 if (taxistaLogin != null)
                 {
                     //enviar mensaje de texto 
@@ -54,8 +69,25 @@ namespace Cabspot.Controllers
                             }
                             //enviando mensaje
                             var message = twilio.SendMessage(Constantes.PHONE_CABSPOT, numero, Constantes.Mensaje_Codigo + sms.codigo);
+
+                            //guardando apikey
+                            try
+                            {
+                                //actualizar entidad
+                                taxistaLogin.apikey = apikey;
+                                db.Entry(taxistaLogin).State = EntityState.Modified;
+                               
+
+
+
+                                db.SaveChanges();
+                            }
+                            catch (Exception e) { }
+
+
+
                             //respuesta si el mensaje fue enviado o no
-                            if(!string.IsNullOrEmpty(message.Sid))
+                            if (!string.IsNullOrEmpty(message.Sid))
                                 return true;
                             return false;
                         }

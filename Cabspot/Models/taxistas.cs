@@ -58,6 +58,9 @@ namespace Cabspot.Models
 
         public DateTime? ultimaActualizacionPosicion { get; set; }
 
+        [StringLength(255)]
+        public string apikey { get; set; }
+
         public virtual personas personas { get; set; }
 
         public virtual estadodisponibilidad estadodisponibilidad { get; set; }
@@ -121,7 +124,7 @@ namespace Cabspot.Models
         //generar codigo aleatorio para autenticar al taxista
         public static autenticacionsmstaxista generarCodigoTaxista(int idTaxista)
         {
-            if (idTaxista != null)
+            if (idTaxista > 0)
             {
                 taxistas taxista = db.taxistas.Find(idTaxista);
                 if (taxista != null)

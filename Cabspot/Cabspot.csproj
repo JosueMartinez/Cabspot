@@ -295,121 +295,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511111631355_migration.cs" />
-    <Compile Include="Migrations\201511111631355_migration.Designer.cs">
-      <DependentUpon>201511111631355_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511131958093_Emplados_Persona.cs" />
-    <Compile Include="Migrations\201511131958093_Emplados_Persona.Designer.cs">
-      <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511140134176_mig.cs" />
-    <Compile Include="Migrations\201511140134176_mig.Designer.cs">
-      <DependentUpon>201511140134176_mig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511151458281_taxistasVehiculo.cs" />
-    <Compile Include="Migrations\201511151458281_taxistasVehiculo.Designer.cs">
-      <DependentUpon>201511151458281_taxistasVehiculo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511151550186_nc.cs" />
-    <Compile Include="Migrations\201511151550186_nc.Designer.cs">
-      <DependentUpon>201511151550186_nc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511161516496_mig1.cs" />
-    <Compile Include="Migrations\201511161516496_mig1.Designer.cs">
-      <DependentUpon>201511161516496_mig1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511161922352_rename_codigoTaxista.cs" />
-    <Compile Include="Migrations\201511161922352_rename_codigoTaxista.Designer.cs">
-      <DependentUpon>201511161922352_rename_codigoTaxista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511162001240_mi.cs" />
-    <Compile Include="Migrations\201511162001240_mi.Designer.cs">
-      <DependentUpon>201511162001240_mi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511182120547_autenticacionSms.cs" />
-    <Compile Include="Migrations\201511182120547_autenticacionSms.Designer.cs">
-      <DependentUpon>201511182120547_autenticacionSms.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511182130351_migration1.cs" />
-    <Compile Include="Migrations\201511182130351_migration1.Designer.cs">
-      <DependentUpon>201511182130351_migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511202051035_autenticacionSms1.cs" />
-    <Compile Include="Migrations\201511202051035_autenticacionSms1.Designer.cs">
-      <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212112467_generarcontacto.cs" />
-    <Compile Include="Migrations\201511212112467_generarcontacto.Designer.cs">
-      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511212114216_generarcontacto1.cs" />
-    <Compile Include="Migrations\201511212114216_generarcontacto1.Designer.cs">
-      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511220303177_clientesMovil.cs" />
-    <Compile Include="Migrations\201511220303177_clientesMovil.Designer.cs">
-      <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511221548289_generarclientemovil.cs" />
-    <Compile Include="Migrations\201511221548289_generarclientemovil.Designer.cs">
-      <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511270233583_ratingTaxista.cs" />
-    <Compile Include="Migrations\201511270233583_ratingTaxista.Designer.cs">
-      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511270249478_ratingInt.cs" />
-    <Compile Include="Migrations\201511270249478_ratingInt.Designer.cs">
-      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.cs" />
-    <Compile Include="Migrations\201511291848583_estadoDisponibilidad.Designer.cs">
-      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512142002202_autenticacionSmsTaxistas.cs" />
-    <Compile Include="Migrations\201512142002202_autenticacionSmsTaxistas.Designer.cs">
-      <DependentUpon>201512142002202_autenticacionSmsTaxistas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512201535086_vehiculoActivo.cs" />
-    <Compile Include="Migrations\201512201535086_vehiculoActivo.Designer.cs">
-      <DependentUpon>201512201535086_vehiculoActivo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601072032371_costoCarrera.cs" />
-    <Compile Include="Migrations\201601072032371_costoCarrera.Designer.cs">
-      <DependentUpon>201601072032371_costoCarrera.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601190136243_nullablePersonas.cs" />
-    <Compile Include="Migrations\201601190136243_nullablePersonas.Designer.cs">
-      <DependentUpon>201601190136243_nullablePersonas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601250124210_migCarrera.cs" />
-    <Compile Include="Migrations\201601250124210_migCarrera.Designer.cs">
-      <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602011936071_notificaciones.cs" />
-    <Compile Include="Migrations\201602011936071_notificaciones.Designer.cs">
-      <DependentUpon>201602011936071_notificaciones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602011944261_relacionnotificaciontaxista.cs" />
-    <Compile Include="Migrations\201602011944261_relacionnotificaciontaxista.Designer.cs">
-      <DependentUpon>201602011944261_relacionnotificaciontaxista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602011953398_relacionnotificacioncliente.cs" />
-    <Compile Include="Migrations\201602011953398_relacionnotificacioncliente.Designer.cs">
-      <DependentUpon>201602011953398_relacionnotificacioncliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602102059222_notificacionEnviada.cs" />
-    <Compile Include="Migrations\201602102059222_notificacionEnviada.Designer.cs">
-      <DependentUpon>201602102059222_notificacionEnviada.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602120223538_notificacionTaxista.cs" />
-    <Compile Include="Migrations\201602120223538_notificacionTaxista.Designer.cs">
-      <DependentUpon>201602120223538_notificacionTaxista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602162059262_notificacionCliente.cs" />
-    <Compile Include="Migrations\201602162059262_notificacionCliente.Designer.cs">
-      <DependentUpon>201602162059262_notificacionCliente.cs</DependentUpon>
+    <Compile Include="Migrations\201603190156275_akey.cs" />
+    <Compile Include="Migrations\201603190156275_akey.Designer.cs">
+      <DependentUpon>201603190156275_akey.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -643,7 +531,9 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="bin\Cabspot.dll.config" />
     <None Include="Properties\PublishProfiles\cabspot - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\cabspotapi - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\cabspotapi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\cabspotapi - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\cabspotapi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -768,92 +658,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511111631355_migration.resx">
-      <DependentUpon>201511111631355_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511131958093_Emplados_Persona.resx">
-      <DependentUpon>201511131958093_Emplados_Persona.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511140134176_mig.resx">
-      <DependentUpon>201511140134176_mig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511151458281_taxistasVehiculo.resx">
-      <DependentUpon>201511151458281_taxistasVehiculo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511151550186_nc.resx">
-      <DependentUpon>201511151550186_nc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511161516496_mig1.resx">
-      <DependentUpon>201511161516496_mig1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511161922352_rename_codigoTaxista.resx">
-      <DependentUpon>201511161922352_rename_codigoTaxista.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511162001240_mi.resx">
-      <DependentUpon>201511162001240_mi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511182120547_autenticacionSms.resx">
-      <DependentUpon>201511182120547_autenticacionSms.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511182130351_migration1.resx">
-      <DependentUpon>201511182130351_migration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511202051035_autenticacionSms1.resx">
-      <DependentUpon>201511202051035_autenticacionSms1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212112467_generarcontacto.resx">
-      <DependentUpon>201511212112467_generarcontacto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511212114216_generarcontacto1.resx">
-      <DependentUpon>201511212114216_generarcontacto1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511220303177_clientesMovil.resx">
-      <DependentUpon>201511220303177_clientesMovil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511221548289_generarclientemovil.resx">
-      <DependentUpon>201511221548289_generarclientemovil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511270233583_ratingTaxista.resx">
-      <DependentUpon>201511270233583_ratingTaxista.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511270249478_ratingInt.resx">
-      <DependentUpon>201511270249478_ratingInt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511291848583_estadoDisponibilidad.resx">
-      <DependentUpon>201511291848583_estadoDisponibilidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512142002202_autenticacionSmsTaxistas.resx">
-      <DependentUpon>201512142002202_autenticacionSmsTaxistas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512201535086_vehiculoActivo.resx">
-      <DependentUpon>201512201535086_vehiculoActivo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601072032371_costoCarrera.resx">
-      <DependentUpon>201601072032371_costoCarrera.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601190136243_nullablePersonas.resx">
-      <DependentUpon>201601190136243_nullablePersonas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601250124210_migCarrera.resx">
-      <DependentUpon>201601250124210_migCarrera.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602011936071_notificaciones.resx">
-      <DependentUpon>201602011936071_notificaciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602011944261_relacionnotificaciontaxista.resx">
-      <DependentUpon>201602011944261_relacionnotificaciontaxista.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602011953398_relacionnotificacioncliente.resx">
-      <DependentUpon>201602011953398_relacionnotificacioncliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602102059222_notificacionEnviada.resx">
-      <DependentUpon>201602102059222_notificacionEnviada.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602120223538_notificacionTaxista.resx">
-      <DependentUpon>201602120223538_notificacionTaxista.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602162059262_notificacionCliente.resx">
-      <DependentUpon>201602162059262_notificacionCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603190156275_akey.resx">
+      <DependentUpon>201603190156275_akey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
