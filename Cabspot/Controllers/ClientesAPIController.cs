@@ -136,8 +136,17 @@ namespace Cabspot.Controllers
                         {
                             cr.antiguedadCliente = "Nuevo";
                         }
+                        try
+                        {
+                            db.Entry(sms).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return Ok(cr);
 
-                        return Ok(cr);
+                        }catch(Exception e)
+                        {
+                            return BadRequest();
+                        }
+                        
                     }
                     else
                     {

@@ -76,9 +76,6 @@ namespace Cabspot.Controllers
                                 //actualizar entidad
                                 taxistaLogin.apikey = apikey;
                                 db.Entry(taxistaLogin).State = EntityState.Modified;
-                               
-
-
 
                                 db.SaveChanges();
                             }
