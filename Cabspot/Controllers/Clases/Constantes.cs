@@ -15,9 +15,9 @@ namespace Cabspot.Controllers.Clases
         public const string AUTH_TOKEN_JOSUE = "50ffdec68bb08d7829b0449c31f71a20";
         public const string PHONE_JOSUE = "+17402004209";
 
-        public const string ACCOUNT_SID_CABSPOT = "AC292cbe5f78923647eb968069e5c7517a";
-        public const string AUTH_TOKEN_CABSPOT = "4f3a7e5bec9d93975148b472766f6284";
-        public const string PHONE_CABSPOT = "+13215787929";
+        public const string ACCOUNT_SID_CABSPOT = "AC633305967835ff9c9d48c2d892f68b5f";
+        public const string AUTH_TOKEN_CABSPOT = "9675f70e88ead38452fa50e4918e9633";
+        public const string PHONE_CABSPOT = "+18036755455";
 
 
         public const string Mensaje_Codigo = "Cabspot \n Su código es: ";
