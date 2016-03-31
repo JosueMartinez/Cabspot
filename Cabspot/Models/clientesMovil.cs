@@ -125,5 +125,7 @@ namespace Cabspot.Models
         public int idCliente { get; set; }
 
         public string antiguedadCliente { get; set; }
+
+        public string apikey { get; set; }
     }
 }

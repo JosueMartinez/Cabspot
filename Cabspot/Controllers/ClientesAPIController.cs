@@ -121,32 +121,54 @@ namespace Cabspot.Controllers
                     {
                         sms.verificado = true;
                         var clientes = db.clientes.Where(x => x.personas.contactos.telefonoMovil.Equals(sms.clientesMovil.telefonoMovil));
+                        var clientesMovil = db.clientesMovil.Where(x => x.telefonoMovil.Equals(sms.clientesMovil.telefonoMovil));
 
                         clienteRetorno cr = new clienteRetorno();
                         //cr.autenticado = true;
 
-                        //si es un cliente antiguo                        
-                        if (clientes.Count() > 0)
+                           
+                        if(clientesMovil.Count() > 0)
                         {
-                            cr.antiguedadCliente = "Existente";
-                            cr.idCliente = clientes.First().idCliente;
-                        }
-                        //si es un cliente nuevo
-                        else
-                        {
-                            cr.antiguedadCliente = "Nuevo";
-                        }
-                        try
-                        {
-                            db.Entry(sms).State = EntityState.Modified;
-                            db.SaveChanges();
+                            var clienteMovil = clientesMovil.First();
+                            //si es un cliente antiguo 
+                            if (clientes.Count() > 0)
+                            {
+                                var cliente = clientes.First();                               
+
+                                cliente.apikey = clienteMovil.apikey;
+
+                                cr.antiguedadCliente = "Existente";
+                                cr.idCliente = clientes.First().idCliente;
+
+                                try
+                                {
+                                    db.Entry(sms).State = EntityState.Modified;
+                                    db.Entry(cliente).State = EntityState.Modified;
+                                    db.SaveChanges();
+                                    
+
+                                }
+                                catch (Exception e)
+                                {
+                                    return BadRequest();
+                                }
+                            }
+                            //si es un cliente nuevo
+                            else
+                            {
+                                cr.antiguedadCliente = "Nuevo";
+                                cr.apikey = clienteMovil.apikey;
+                            }
+
                             return Ok(cr);
 
-                        }catch(Exception e)
+                        }
+                        else
                         {
                             return BadRequest();
                         }
-                        
+
+
                     }
                     else
                     {
@@ -171,7 +193,8 @@ namespace Cabspot.Controllers
         {
             //verificar ningun elemento sea nulo
             if (!string.IsNullOrEmpty(cliente.nombres) || !string.IsNullOrEmpty(cliente.apellidos) || cliente.fechaNacimiento != null ||
-                !string.IsNullOrEmpty(cliente.telefonoMovil) || !string.IsNullOrEmpty(cliente.identificacion) || !string.IsNullOrEmpty(cliente.email) || !string.IsNullOrEmpty(cliente.genero))
+                !string.IsNullOrEmpty(cliente.telefonoMovil) || !string.IsNullOrEmpty(cliente.identificacion) || !string.IsNullOrEmpty(cliente.email) 
+                || !string.IsNullOrEmpty(cliente.genero) || !string.IsNullOrEmpty(cliente.apikey))
             {
                 //crear objeto cliente y agregar campos
                 clientes clienteAgregar = new clientes();
@@ -192,8 +215,8 @@ namespace Cabspot.Controllers
                 persona.idDireccion = 0;
                 
                 clienteAgregar.personas = persona;        
-                
-                
+                clienteAgregar.apikey = cliente.apikey;
+
 
                 if (!string.IsNullOrEmpty(cliente.nombreUsuario))
                 {

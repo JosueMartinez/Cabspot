@@ -352,7 +352,6 @@ namespace Cabspot.Controllers
            return Ok(carreras);           
         }
 
-
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("taxistas/responderSolicitud")]
         public IHttpActionResult responderSolicitud(RespuestaSolicitud respuesta)

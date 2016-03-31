@@ -136,5 +136,7 @@ namespace Cabspot.Models
         public string email { get; set; }
         public string genero { get; set; }
         public string nombreUsuario { get; set; }
+
+        public string apikey { get; set; }
     }
 }
