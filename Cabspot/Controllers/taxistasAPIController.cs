@@ -386,6 +386,12 @@ namespace Cabspot.Controllers
                                     carrera.fechaInicioCarrera = DateTime.Now;
                                     carrera.idEstado = 71;  //en curso
                                     db.Entry(solicitud).State = EntityState.Modified;
+
+                                    string msj;
+                                    ClientesAPIController clientes = new ClientesAPIController();
+                                    msj = clientes.getNotificacionesCliente((int)carrera.idCliente).ToString();
+                                    Push envios = new Push(msj);
+                                    envios.EnviarClientes((int)carrera.idCliente);
                                 }
                                 else
                                 {

@@ -345,6 +345,10 @@ namespace Cabspot.Controllers
                                 //crear las solicitudes a los taxistas
                                 if (taxistas.solicitudTaxista(carrera))
                                 {
+                                    string msj;
+                                    msj = carrera.ToString();
+                                    Push envios = new Push(msj);
+                                    envios.EnviarTodosTaxistas();
                                     return Ok("Su solicitud esta siendo atendida.  Gracias.");
                                 }
                                 else
