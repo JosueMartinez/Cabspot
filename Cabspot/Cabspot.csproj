@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201603190156275_akey.Designer.cs">
       <DependentUpon>201603190156275_akey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604110012531_EstadoTaxista.cs" />
+    <Compile Include="Migrations\201604110012531_EstadoTaxista.Designer.cs">
+      <DependentUpon>201604110012531_EstadoTaxista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -661,6 +665,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603190156275_akey.resx">
       <DependentUpon>201603190156275_akey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604110012531_EstadoTaxista.resx">
+      <DependentUpon>201604110012531_EstadoTaxista.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

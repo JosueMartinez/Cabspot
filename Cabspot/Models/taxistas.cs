@@ -58,6 +58,8 @@ namespace Cabspot.Models
 
         public DateTime? ultimaActualizacionPosicion { get; set; }
 
+        public DateTime? ultimaActualizacionEstado { get; set; }
+
         [StringLength(255)]
         public string apikey { get; set; }
 

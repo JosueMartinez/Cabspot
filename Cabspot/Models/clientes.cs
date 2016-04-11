@@ -6,9 +6,10 @@ namespace Cabspot.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
-    
+
 
     [Table("cabspotdb.clientes")]
     public partial class clientes
@@ -123,6 +124,54 @@ namespace Cabspot.Models
 
         }
 
+        public static List<notificacionCliente> getNotificaciones(int idCliente)
+        {
+            //buscar cliente
+            CabspotDB db = new CabspotDB();
+            clientes cliente = db.clientes.Find(idCliente);
+
+            if (cliente != null)
+            {
+                //buscar notificaciones para ese cliente
+                //var notificaciones = db.notificacionCliente.Where(x => x.idCliente == cliente.idCliente).ToList();
+                var notificaciones = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n;
+                //var notificacionesReturn = from n in db.notificacionCliente where n.idCliente == idCliente && !n.enviada select n.tramaJson;
+                List<notificacionCliente> notificacionesReturn = new List<notificacionCliente>();
+
+                if (notificaciones.Count() > 0)
+                {
+                    //marcar notificaciones como leidas
+                    try
+                    {
+                        foreach (var n in notificaciones)
+                        {
+                            n.enviada = true;
+                            db.Entry(n).State = EntityState.Modified;
+                            notificacionesReturn.Add(n);
+                        }
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
+
+                    //devolver las notificaciones
+                    return notificacionesReturn.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
     }
 
     [NotMapped]
@@ -139,4 +188,7 @@ namespace Cabspot.Models
 
         public string apikey { get; set; }
     }
+
+
+   
 }

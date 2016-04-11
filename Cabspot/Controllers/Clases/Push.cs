@@ -97,7 +97,7 @@ namespace Cabspot.Controllers.Clases
             WebResponse tResponse = tRequest.GetResponse();
 
             dataStream = tResponse.GetResponseStream();
-
+                
             StreamReader tReader = new StreamReader(dataStream);
 
             String sResponseFromServer = tReader.ReadToEnd();

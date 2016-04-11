@@ -16,6 +16,7 @@ using Twilio;
 using Cabspot.Models;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Cabspot.Controllers
 {
@@ -387,9 +388,12 @@ namespace Cabspot.Controllers
                                     db.Entry(solicitud).State = EntityState.Modified;
 
                                     string msj;
-                                    ClientesAPIController clientes = new ClientesAPIController();
-                                    msj = clientes.getNotificacionesCliente((int)carrera.idCliente).ToString();
-                                    Push envios = new Push(msj);
+                                    //ClientesAPIController clientes = new ClientesAPIController();                                  
+
+                                    //msj = clientes.getNotificacionesCliente((int)carrera.idCliente).ToString();
+                                    List<notificacionCliente> notificaciones = clientes.getNotificaciones((int)carrera.idCliente);
+                                    var json = JsonConvert.SerializeObject(notificaciones);
+                                    Push envios = new Push(json);
                                     envios.EnviarClientes((int)carrera.idCliente);
                                 }
                                 else
