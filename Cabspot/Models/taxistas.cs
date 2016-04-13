@@ -14,7 +14,7 @@ namespace Cabspot.Models
     using System.Net;
     using System.IO;
     using Newtonsoft.Json.Linq;
-
+    using System.Data.Entity;
     [Table("taxistas")]
     public partial class taxistas
     {
@@ -261,7 +261,50 @@ namespace Cabspot.Models
 
             }
         }
+               
+        public static List<notificacionTaxista> getNotificacionesTaxista(int idTaxista)
+        {
+            //buscar taxista
+            taxistas taxista = db.taxistas.Find(idTaxista);
 
-        
+            if (taxista != null)
+            {
+                //buscar notificaciones para ese cliente
+                var notificacionesUpdate = from n in db.notificacionTaxista where n.idTaxista == idTaxista && !n.enviada select n;
+                List<notificacionTaxista> notificacionesReturn = new List<notificacionTaxista>();
+
+                if (notificacionesUpdate.Count() > 0)
+                {
+                    //marcar notificaciones como leidas
+                    try
+                    {
+                        foreach (var n in notificacionesUpdate)
+                        {
+                            n.enviada = true;
+                            db.Entry(n).State = EntityState.Modified;
+                            notificacionesReturn.Add(n);
+                        }
+
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
+
+                    //devolver las notificaciones
+                    return notificacionesReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

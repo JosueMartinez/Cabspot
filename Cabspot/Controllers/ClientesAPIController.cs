@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace Cabspot.Controllers
 {
@@ -368,10 +369,15 @@ namespace Cabspot.Controllers
                                 //crear las solicitudes a los taxistas
                                 if (taxistas.solicitudTaxista(carrera))
                                 {
-                                    string msj;
-                                    msj = carrera.ToString();
-                                    Push envios = new Push(msj);
+                                    //string msj;
+                                    //msj = carrera.ToString();
+                                    //Push envios = new Push(msj);
+                                    //envios.EnviarTodosTaxistas();
+                                    
+                                    var json = JsonConvert.SerializeObject(carrera);
+                                    Push envios = new Push(json);
                                     envios.EnviarTodosTaxistas();
+
                                     return Ok("Su solicitud esta siendo atendida.  Gracias.");
                                 }
                                 else
