@@ -48,7 +48,7 @@ namespace Cabspot.Controllers
             //taxistas.personas.foto = Clases.Utilidades.RutaRelativa(taxistas.personas.foto, "~/Content/Images/");
 
             //ubicacion disponible
-            if (taxistas.idEstadoDisponibilidad == 81 || taxistas.idEstadoDisponibilidad == 101)
+            if (taxistas.idEstadoDisponibilidad == 81 || taxistas.idEstadoDisponibilidad == 91)
             {
                 ubicacionDisponible = true;
             }

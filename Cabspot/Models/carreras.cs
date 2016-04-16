@@ -1,5 +1,6 @@
 namespace Cabspot.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ namespace Cabspot.Models
     using System.Data.Entity.Spatial;
 
     [Table("carreras")]
+    [JsonObject(IsReference = true)]
     public partial class carreras
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -52,6 +54,7 @@ namespace Cabspot.Models
 
         public virtual estadocarreras estadocarreras { get; set; }
 
+        [JsonIgnore]
         public virtual clientes clientes { get; set; }
 
         public virtual viasolicitud viasolicitud { get; set; }

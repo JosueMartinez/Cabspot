@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Cabspot
 {
@@ -36,8 +37,7 @@ namespace Cabspot
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            config.Routes.MapHttpRoute(name: "DefaultApi1", routeTemplate: "api/{controller}/{id}/{name}", defaults: new { });
+            
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Cabspot.Controllers
             if (id != null)
             {
                 var taxistas = from t in db.taxistas where t.idTaxista == id 
-                                                            && (t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 101)
+                                                            && (t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 91)
                                                             && t.vehiculos.Count() > 0
                                                              select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
                                                              t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,

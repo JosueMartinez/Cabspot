@@ -65,7 +65,6 @@ namespace Cabspot.Controllers
                     else
                     {
                         //sino existe crear el clienteMovil
-
                         clientesMovil clientePrimeraVez = new clientesMovil();
                         clientePrimeraVez.fechaRegistro = DateTime.Now;
                         clientePrimeraVez.telefonoMovil = telefonoMovil;
@@ -204,7 +203,7 @@ namespace Cabspot.Controllers
 
                 persona.nombres = cliente.nombres;
                 persona.apellidos = cliente.apellidos;
-                persona.fechaNacimiento = DateTime.ParseExact(cliente.fechaNacimiento, "dd/mm/yyyy", CultureInfo.InvariantCulture);
+                persona.fechaNacimiento = DateTime.ParseExact(cliente.fechaNacimiento, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 persona.identificacion = cliente.identificacion;
                 persona.sexo = cliente.genero;
                 contacto.telefonoMovil = cliente.telefonoMovil;
@@ -373,8 +372,9 @@ namespace Cabspot.Controllers
                                     //msj = carrera.ToString();
                                     //Push envios = new Push(msj);
                                     //envios.EnviarTodosTaxistas();
-                                    
+
                                     var json = JsonConvert.SerializeObject(carrera);
+                                   
                                     Push envios = new Push(json);
                                     envios.EnviarTodosTaxistas();
 

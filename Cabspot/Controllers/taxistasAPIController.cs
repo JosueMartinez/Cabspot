@@ -241,7 +241,38 @@ namespace Cabspot.Controllers
             
 //            return true;
         }
-        
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("taxistas/actualizarEstado")]
+        public void actualizarEstado(taxistas taxista)
+        {
+            if(taxista.idTaxista > 0)
+            {
+                taxistas taxistaBD = db.taxistas.Find(taxista.idTaxista);
+                if (taxistaBD != null)   //si el taxista esta activo
+                {
+                    List<estadodisponibilidad> estados = db.estadodisponibilidad.ToList();
+                    estadodisponibilidad est = db.estadodisponibilidad.Find(taxista.idEstadoDisponibilidad);
+
+                    if(est != null)
+                    {
+                        taxistaBD.estadodisponibilidad = est;
+                        taxistaBD.idEstadoDisponibilidad = est.idEstadoDisponibilidad;
+                        taxistaBD.ultimaActualizacionEstado = DateTime.Now;
+                        try
+                        {
+                            //actualizar entidad
+                            db.Entry(taxistaBD).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        catch (Exception e) { }
+
+                    }
+                }
+            }
+        }
+
+
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("taxistas/actualizarUbicacion")]
         public void actualizarUbicacion(taxistas taxistas)
@@ -281,6 +312,8 @@ namespace Cabspot.Controllers
                 }
             }           
         }
+
+
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("taxistas/getDatos/{idTaxista}")]

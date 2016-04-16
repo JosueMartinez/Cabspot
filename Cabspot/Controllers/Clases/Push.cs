@@ -22,7 +22,7 @@ namespace Cabspot.Controllers.Clases
         public void EnviarTodosTaxistas()
         {
             //todo
-            taxistas taxista = db.taxistas.Find();
+            //taxistas taxista = db.taxistas.Find();
             var t = from x in db.taxistas
                     select new { x.idTaxista, x.codigoTaxista, x.apikey };
             foreach (var a in t)
@@ -33,7 +33,7 @@ namespace Cabspot.Controllers.Clases
         }
         public void EnviarTodosClientes()
         {
-            clientes Clientes = db.clientes.Find();
+            //clientes Clientes = db.clientes.Find();
             var t = from x in db.clientes
                     select new { x.apikey, x.idCliente };
             foreach (var a in t)
@@ -44,7 +44,7 @@ namespace Cabspot.Controllers.Clases
         }
         public void EnviarClientes(int Id)
         {
-            clientes Clientes = db.clientes.Find(Id);
+            //clientes Clientes = db.clientes.Find(Id);
 
 
             var t = from x in db.clientes
@@ -57,7 +57,7 @@ namespace Cabspot.Controllers.Clases
         public void EnviarTAxista(int Id)
         {
 
-            taxistas taxista = db.taxistas.Find(Id);
+            //taxistas taxista = db.taxistas.Find(Id);
             var t = from x in db.taxistas
                     where x.idTaxista == Id
                     select new { x.apikey };
@@ -84,7 +84,7 @@ namespace Cabspot.Controllers.Clases
 
             tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
 
-            string postDataToServer = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message="
+            string postDataToServer = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.m="
                                + varMessage + "&message_id=" + 123 + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + regId + "";
 
             Byte[] byteArray = Encoding.UTF8.GetBytes(postDataToServer);
