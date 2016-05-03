@@ -29,8 +29,6 @@ namespace Cabspot.Controllers
             return null;
         }
 
-
-
         // GET: bases
         public async Task<ActionResult> Index()
         {

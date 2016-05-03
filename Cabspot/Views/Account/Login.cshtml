@@ -13,7 +13,8 @@
                     @Html.AntiForgeryToken()
                         
                         //LOGO
-                        <h1 style="color: #34495E"><i class="fa fa-circle" style="font-size: 26px;"></i> Cabspot</h1>
+                        @*<h1 style="color: #34495E"><i class="fa fa-circle" style="font-size: 26px;"></i> Cabspot</h1>*@
+                        <img src="~/Content/images/logologin.png" style="margin-bottom: 20px"/>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div>
                             @Html.TextBoxFor(m => m.usuario, new { @class = "form-control", placeholder = "Usuario" } )

@@ -13,8 +13,7 @@ using Cabspot.Models;
 using System.Web.Security;
 
 namespace Cabspot.Controllers
-{
-    
+{    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

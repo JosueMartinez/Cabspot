@@ -449,6 +449,8 @@
     <Content Include="Content\icheck\flat\yellow.css" />
     <Content Include="Content\icheck\flat\yellow.png" />
     <Content Include="Content\icheck\flat\_all.css" />
+    <Content Include="Content\images\logodashboard.png" />
+    <Content Include="Content\images\logologin.png" />
     <Content Include="Content\images\taxiDisponible.png" />
     <Content Include="Content\images\taxiOcupado.png" />
     <Content Include="Content\images\ubicacion-no-disponible.jpg" />
@@ -535,6 +537,7 @@
     <Content Include="obj\Debug\Cabspot.csprojResolveAssemblyReference.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="bin\Cabspot.dll.config" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\cabspot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\cabspotapi - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\cabspotapi - FTP.pubxml" />

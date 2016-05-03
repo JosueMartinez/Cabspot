@@ -16,7 +16,7 @@ namespace Cabspot.Controllers
         public JsonResult ubicacionTaxistas()
         {
             //obteniendo todos los taxistas activos(disponible u ocupado) y con por lo menos un vehiculo activo
-            var taxistas = from t in db.taxistas where (t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 101) && t.vehiculos.Count() > 0
+            var taxistas = from t in db.taxistas where (t.idEstadoDisponibilidad == 81 || t.idEstadoDisponibilidad == 91) && t.vehiculos.Count() > 0
                                                             select new {t.codigoTaxista, t.personas.nombres,t.personas.apellidos, t.idTaxista,
                                                              t.longitudActual, t.latitudActual, t.estadodisponibilidad.estadoDisponibilidad,
                                                              t.personas.contactos.telefonoMovil, t.rating, t.personas.foto};
